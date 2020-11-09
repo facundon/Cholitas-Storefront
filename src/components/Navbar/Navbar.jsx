@@ -5,7 +5,7 @@ import NavLink from "./NavLink.jsx";
 
 class Navbar extends Component {
   get_items() {
-    return this.props.children.map(item => <NavLink item={item} />);
+    return this.props.children.map(item => <NavLink key={item} item={item} />);
   }
 
   render() {

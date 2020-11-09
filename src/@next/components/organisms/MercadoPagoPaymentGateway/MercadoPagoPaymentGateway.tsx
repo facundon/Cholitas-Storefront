@@ -85,7 +85,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const allErrors = [...errors, ...submitErrors];
 
   const handleSubmit = async (formData: ICardInputs) => {
-    let $form = document.getElementById('paymentForm');
     console.log(formData)
     window.Mercadopago.createToken(formData, setCardTokenAndPay);
     return false;

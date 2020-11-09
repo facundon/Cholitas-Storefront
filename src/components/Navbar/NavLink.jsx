@@ -23,14 +23,14 @@ class NavLink extends React.Component {
   getDropdownItems(props) {
     function link(url, subitem) {
       return (
-        <Link to={url}>
+        <Link to={url} key={subitem.id} {...props}>
           <Dropdown.Item>{subitem.name}</Dropdown.Item>
         </Link>
       );
     }
     const subitems = this.children.map(subitem => {
       if (subitem.url) {
-        return <Dropdown.Item href={subitem.url}>{subitem.name}</Dropdown.Item>;
+        return <Dropdown.Item key={subitem.name} href={subitem.url}>{subitem.name}</Dropdown.Item>;
       }
       if (subitem.category) {
         return link(
@@ -50,41 +50,11 @@ class NavLink extends React.Component {
 
       return <Dropdown.Item>{subitem.name}</Dropdown.Item>;
     });
-    return this.getDropdown(subitems, props);
-  }
-
-  getDropdown(subitems, props) {
-    const link = url => (
-      <Link to={url} {...props}>
-        <Dropdown title={this.name} trigger="hover">
-          {subitems}
-        </Dropdown>
-      </Link>
-    );
-    if (this.url) {
-      return (
-        <Dropdown title={this.name} trigger="hover" href={this.url} {...props}>
-          {subitems}
-        </Dropdown>
-      );
-    }
-    if (this.category) {
-      return link(generateCategoryUrl(this.category.id, this.category.name));
-    }
-    if (this.collection) {
-      return link(
-        generateCollectionUrl(this.collection.id, this.collection.name)
-      );
-    }
-    if (this.page) {
-      return link(generatePageUrl(this.page.slug));
-    }
-
     return (
       <Dropdown title={this.name} trigger="hover" {...props}>
         {subitems}
       </Dropdown>
-    );
+    )
   }
 
   getNavItem(props) {
@@ -94,11 +64,7 @@ class NavLink extends React.Component {
       </Link>
     );
     if (this.url) {
-      return (
-        <Nav.Item href={this.url} {...props}>
-          {this.name}
-        </Nav.Item>
-      );
+      return link(this.url);
     }
     if (this.category) {
       return link(generateCategoryUrl(this.category.id, this.category.name));
@@ -111,7 +77,6 @@ class NavLink extends React.Component {
     if (this.page) {
       return link(generatePageUrl(this.page.slug));
     }
-
     return <Nav.Item {...props}>{this.name}</Nav.Item>;
   }
 
