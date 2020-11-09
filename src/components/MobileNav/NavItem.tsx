@@ -5,20 +5,20 @@ import ReactSVG from "react-svg";
 import { NavLink } from "..";
 import { MainMenuSubItem } from "../MainMenu/gqlTypes/MainMenuSubItem";
 
-import subcategoriesImg from "../../images/subcategories.svg";
+import subcategoriesImg from "../../images/subcategories.svg";;
 
 export interface INavItem extends MainMenuSubItem {
   children?: INavItem[];
 }
 
 interface NavItemProps extends INavItem {
-  hideOverlay(): void;
   showSubItems(item: INavItem): void;
+  closeMenu(): void;
 }
 
 const NavItem: React.FC<NavItemProps> = ({
-  hideOverlay,
   showSubItems,
+  closeMenu,
   ...item
 }) => {
   const hasSubNavigation = item.children && !!item.children.length;
@@ -33,7 +33,7 @@ const NavItem: React.FC<NavItemProps> = ({
       <NavLink
         item={item}
         className="side-nav__menu-item-link"
-        onClick={hideOverlay}
+        onClick={() => closeMenu()}
       />
       {hasSubNavigation && (
         <ReactSVG

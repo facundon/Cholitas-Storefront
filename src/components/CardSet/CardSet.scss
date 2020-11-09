@@ -1,0 +1,37 @@
+@import "../../globalStyles/scss/variables.scss";
+
+.menu-item {
+  padding: 0 30px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+
+  &-panel{
+    display: inline-block;
+    width: 310px;
+
+    @media (max-width: $medium-screen){
+      width: 180px;
+    }
+  }
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+}
+
+img{
+  object-fit: cover;
+  min-width: 100%;
+  min-width: -moz-available;          /* WebKit-based browsers will ignore this. */
+  min-width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  min-width: fill-available;
+  height: 310px;
+
+  @media (max-width: $medium-screen){
+    height: 180px;
+  }
+}

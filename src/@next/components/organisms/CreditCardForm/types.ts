@@ -5,9 +5,16 @@ import {
 } from "src/core/payments/braintree";
 
 interface ILabelsText {
-  ccCsc: string;
-  ccExp: string;
-  ccNumber: string;
+  email: string;
+  docType: string;
+  docNumber: string;
+  cardholderName: string;
+  cardExpirationMonth: string;
+  cardExpirationYear: string;
+  cardNumber: string;
+  securityCode: string;
+  issuer: string;
+  installments: string;
 }
 export interface IFormikProps {
   handleChange: (e: React.ChangeEvent) => void;

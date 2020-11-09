@@ -12,6 +12,7 @@ import {
 } from "../components";
 import ShopProvider from "../components/ShopProvider";
 import "../globalStyles/scss/index.scss";
+import "rsuite/dist/styles/rsuite-default.css";
 import { Routes } from "./routes";
 import Notifications from "./Notifications";
 

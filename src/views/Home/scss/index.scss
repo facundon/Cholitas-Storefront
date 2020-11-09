@@ -2,12 +2,13 @@
 
 .home-page {
   &__hero {
-    background-color: $blue-overlay;
+    background-color: $white;
     background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
     text-align: center;
-    padding: 12rem 0;
+    padding: 0rem 0;
+    padding-bottom: 6rem;
 
     &-text {
       overflow: hidden;
@@ -17,7 +18,7 @@
       align-items: center;
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 56px);
+      //height: calc(100vh - 56px);
       justify-content: space-between;
       padding: $spacer;
 
@@ -64,13 +65,20 @@
     }
   }
 
-  &__categories {
+  &__destacados {
     margin-bottom: 2rem;
 
     h3 {
-      text-transform: uppercase;
       font-weight: $bold-font-weight;
-      margin-bottom: 1rem;
+      //margin-bottom: 1rem;
+      font-size: x-large;
+      text-align: center;
+      margin: 50px,;
+
+      @media (max-width: $medium-screen){
+        font-size: large;
+        margin-bottom: 20px;
+      }
     }
 
     &__list {

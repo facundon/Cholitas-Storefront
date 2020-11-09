@@ -6,6 +6,13 @@ export const BASE_URL = "/";
 export const PRODUCTS_PER_PAGE = 6;
 export const SUPPORT_EMAIL = "support@example.com";
 export const PROVIDERS = {
+  MERCADOPAGO: {
+    label: "Mercado Pago",
+    script: {
+      src: "../../mercadopago.js",
+      crossOrigin: "anonymous",
+    }
+  },
   BRAINTREE: {
     label: "Braintree",
   },

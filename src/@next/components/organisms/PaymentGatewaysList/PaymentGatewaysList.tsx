@@ -4,6 +4,7 @@ import { ErrorMessage, Radio } from "@components/atoms";
 import { PROVIDERS } from "@temp/core/config";
 
 import {
+  MercadoPagoPaymentGateway,
   BraintreePaymentGateway,
   DummyPaymentGateway,
   StripePaymentGateway,
@@ -27,6 +28,8 @@ const PaymentGatewaysList: React.FC<IProps> = ({
   submitPaymentSuccess,
   errors,
   onError,
+  items,
+  total,
 }: IProps) => {
   return (
     <S.Wrapper>
@@ -34,6 +37,43 @@ const PaymentGatewaysList: React.FC<IProps> = ({
         const checked = selectedPaymentGateway === id;
 
         switch (name) {
+          case PROVIDERS.MERCADOPAGO.label:
+            return (
+              <div key={index}>
+                <S.Tile checked={checked}>
+                <Radio
+                    data-test="checkoutPaymentGatewayMercadoPagoInput"
+                    name="payment-method"
+                    value="credit-card"
+                    checked={checked}
+                    onChange={() =>
+                      selectPaymentGateway && selectPaymentGateway(id)
+                    }
+                    customLabel
+                  >
+                    <span data-test="checkoutPaymentGatewayMercadoPagoName">
+                      {name}
+                    </span>
+                  </Radio>
+                </S.Tile>
+                {checked && (
+                  <MercadoPagoPaymentGateway
+                    config={config}
+                    formRef={formRef}
+                    formId={formId}
+                    scriptConfig={PROVIDERS.MERCADOPAGO.script}
+                    processPayment={(token, cardData) =>
+                      processPayment(id, token, cardData)
+                    }
+                    errors={errors}
+                    onError={onError}
+                    items={items}
+                    total={total}
+                  />
+                )}
+              </div>
+            );
+
           case PROVIDERS.BRAINTREE.label:
             return (
               <div key={index}>

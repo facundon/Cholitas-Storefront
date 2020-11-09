@@ -1,14 +1,60 @@
 @import "../../../globalStyles/scss/variables.scss";
 
+.topbar {
+  text-align: center;
+  background-color: #040404;
+  color: #ffffff;
+  fill: #ffffff;
+  font-size: 12px;
+  padding: 3px 0;
+  line-height: 20px;
+}
+
+.navbar {
+  text-align: center;
+  background-color: #ffffff;
+  padding: 4px 0;
+  line-height: 20px;
+  z-index: 0;
+
+  @media (max-width: $medium-screen) {
+    padding: 0px;
+  }
+}
+
 .main-menu {
   align-items: center;
   align-items: stretch;
-  background-color: $white;
+  background-color: $cholitas-base;
   border-bottom: 1px solid $gray-light;
   display: flex;
   flex-direction: row;
-  height: 3.55rem;
+  height: 3.9rem;
   position: relative;
+
+  &-sticky {
+    align-items: center;
+    align-items: stretch;
+    background-color: $cholitas-base;
+    border-bottom: 1px solid $gray-light;
+    display: flex;
+    flex-direction: row;
+    height: 3.9rem;
+  }
+
+  &-wrapper {
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &-wrapper-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    animation: moveDown 0.5s ease-out;
+  }
 
   &__left {
     flex-basis: calc(50% - 2rem);
@@ -26,6 +72,7 @@
 
   &__right {
     flex-basis: calc(50% - 2rem);
+    align-self: center;
 
     @media (min-width: $small-screen) {
       flex-basis: calc(50% - 4rem);
@@ -40,12 +87,19 @@
 
   &__center {
     align-self: center;
+    padding-top: 5px;
 
     svg {
-      width: 4rem;
+      fill-opacity: 1;
+    }
 
-      @media (min-width: $small-screen) {
-        width: 6rem;
+    &-sticky {
+      align-self: center;
+      padding-top: 5px;
+
+      svg {
+        // height: 3.8rem;
+        fill-opacity: 1;
       }
     }
   }
@@ -70,7 +124,7 @@
   &__hamburger {
     border-right: 1px solid $gray-light;
     cursor: pointer;
-    padding: $spacer;
+    // padding: $spacer;
 
     &--hover {
       display: none;
@@ -286,5 +340,14 @@
         }
       }
     }
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(-4rem);
+  }
+  to {
+    transform: translateY(0rem);
   }
 }

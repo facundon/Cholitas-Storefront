@@ -80,4 +80,35 @@ export interface ProductsList {
    * List of the shop's categories.
    */
   categories: ProductsList_categories | null;
+  products: ProductsList_products | null;
+}
+
+export interface  ProductsList_products{
+  __typename: "ProductCountableConnection";
+  edges: ProductsList_products_edges[];
+}
+
+export interface ProductsList_products_edges {
+  __typename: "ProductCountableEdge";
+  /**
+   * The item at the end of the edge.
+   */
+  node: ProductsList_products_edges_node;
+}
+
+export interface ProductsList_products_edges_node{ 
+  __typename: "Product";
+  /**
+   * The ID of the object.
+   */
+  name: string;
+  thumbnail: ProductsList_products_edges_node_thumbnail | null;
+}
+
+export interface ProductsList_products_edges_node_thumbnail {
+  __typename: "Image";
+  /**
+   * The URL of the image.
+   */
+  url: string;
 }

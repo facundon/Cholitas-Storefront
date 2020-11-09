@@ -358,6 +358,8 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
       selectPaymentGateway={setSelectedPaymentGateway}
       onError={handlePaymentGatewayError}
       errors={paymentGatewayErrors}
+      items={items}
+      total={totalPrice}
     />
   );
 
