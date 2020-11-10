@@ -71,7 +71,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
       return `Adyen payments`;
     }
     if (payment?.creditCard) {
-      return `Ending in ${payment?.creditCard.lastDigits}`;
+      return `Tarjeta terminada en ${payment?.creditCard.lastDigits}`;
     }
     return ``;
   };
@@ -87,6 +87,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
         );
       } else {
         const response = await completeCheckout();
+        console.log(response)
         data = response.data;
         dataError = response.dataError;
         changeSubmitProgress(false);

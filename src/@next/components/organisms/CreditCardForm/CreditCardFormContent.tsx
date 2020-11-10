@@ -1,8 +1,8 @@
 import { compact } from "lodash";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import NumberFormat from "react-number-format";
 
-import { TextField } from "@components/molecules";
+import { TextField, Select } from "@components/molecules";
 import * as S from "./styles";
 
 import { CardErrors, PropsWithFormik } from "./types";
@@ -47,6 +47,29 @@ export const CreditCardFormContent: React.FC<PropsWithFormik> = ({
     handleChange,
   ]);
 
+  const selectStyle = {
+    padding: "0.8rem 1rem",
+    width: "100%", 
+    fontSize: "1rem", 
+    border: "1px solid #323232",
+  }
+
+  const [idType, setIdType] = useState("DNI")
+  const [issuer, setIssuer] = useState()
+  const [installments, setInstallments] = useState("1")
+
+  const handdleSelectChange = (e: any) => {
+    if (e.target.name == "docType") {
+      setIdType(e.target.value)
+    }
+    else if (e.target.name == "installments") {
+      setInstallments(e.target.value)
+    }
+    else if (e.target.name == "issuer") {
+      setIssuer(e.target.value)
+    }
+  }
+
   return (
     <S.PaymentForm
       ref={formRef}
@@ -70,12 +93,14 @@ export const CreditCardFormContent: React.FC<PropsWithFormik> = ({
 
       <S.Grid>
         <S.PaymentInput>
-          <select
+          <Select
             id="docType"
             name="docType"
             data-checkout="docType" 
-            value={values.docType}
-            style={{padding: "0.8rem 1rem", width: "100%", fontSize: "1rem", border: "1px solid #323232"}} />
+            value={values.docType = idType}
+            onChange={handdleSelectChange}
+            errors={cardTipoDocError}
+            style={selectStyle} />
         </S.PaymentInput>
 
         <S.PaymentInput>
@@ -144,7 +169,6 @@ export const CreditCardFormContent: React.FC<PropsWithFormik> = ({
 
         <S.PaymentInput>
           <NumberFormat
-            autoComplete="cc-exp"
             format="##"
             name="cardExpirationYear"
             id="cardExpirationYear"
@@ -160,22 +184,28 @@ export const CreditCardFormContent: React.FC<PropsWithFormik> = ({
 
       <S.Grid>
         <S.PaymentInput>
-          <select 
+          <Select 
+            value={values.installments = installments}
+            onChange={handdleSelectChange}
+            errors={cardCuotasError}
             id="installments" 
             name="installments" 
-            style={{padding: "0.8rem 1rem", width: "100%", fontSize: "1rem", border: "1px solid #323232"}}>
+            style={selectStyle}>
               <option disabled selected value>{ccCuotasText}</option>
-          </select>
+          </Select>
         </S.PaymentInput>
 
         <S.PaymentInput>
-          <select 
+          <Select 
+            value={values.issuer = issuer}
+            onChange={handdleSelectChange}
+            errors={cardBancoEmisorError}
             id="issuer" 
             name="issuer" 
             data-checkout="issuer" 
-            style={{padding: "0.8rem 1rem", width: "100%", fontSize: "1rem", border: "1px solid #323232"}}>
+            style={selectStyle}>
               <option disabled selected value>{ccBancoText}</option>
-          </select>
+          </Select>
         </S.PaymentInput>
       </S.Grid>
 

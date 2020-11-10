@@ -4,6 +4,7 @@ export * from "./CreditCardNumberWithIcon";
 export * from "./CreditCardTile";
 export * from "./FormFooter";
 export * from "./TextField";
+export * from "./Select";
 export * from "./Thumbnail";
 export * from "./AddressTile";
 export * from "./OverlayItem";

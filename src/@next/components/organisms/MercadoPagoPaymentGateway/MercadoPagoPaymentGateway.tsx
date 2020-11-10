@@ -5,17 +5,14 @@ import { CreditCardForm } from "@components/organisms";
 import { IFormError } from "@types";
 
 import {
-  braintreePayment,
   ErrorData,
   ICardInputs,
-  ICardPaymentInput,
-  IPaymentCardError,
-  PaymentData,
 } from "../../../../core/payments/braintree";
 import { maybe, removeEmptySpaces } from "../../../../core/utils";
 
 import * as S from "./styles";
 import { IProps } from "./types";
+import * as MpErrors from "./errors.json"
 
 const INITIAL_CARD_ERROR_STATE = {
   fieldErrors: {
@@ -47,61 +44,46 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
 }: IProps) => {
   const [submitErrors, setSubmitErrors] = useState<IFormError[]>([]);
 
-  const clientToken = config.find(({ field }) => field === "client_token")
-    ?.value;
-
   const [cardErrors, setCardErrors] = React.useState<ErrorData>(
     INITIAL_CARD_ERROR_STATE
   );
-  
-  // const handleSubmit = async (formData: ICardInputs) => {
-  //   setSubmitErrors([]);
-  //   const creditCard: ICardPaymentInput = {
-  //     billingAddress: { postalCode },
-  //     cvv: removeEmptySpaces(maybe(() => formData.codigo_seguridad, "") || ""),
-  //     number: removeEmptySpaces(maybe(() => formData.nro_tarjeta, "") || ""),
-  //   };
-  //   const payment = await tokenizeCcCard(creditCard);
-  //   if (payment?.token) {
-  //     processPayment(payment?.token, {
-  //       brand: payment?.ccType,
-  //       firstDigits: null,
-  //       lastDigits: payment?.lastDigits,
-  //       expMonth: null,
-  //       expYear: null,
-  //     });
-  //   } else {
-  //     const braintreePayloadErrors = [
-  //       {
-  //         message:
-  //           "Payment submission error. Braintree gateway returned no token in payload.",
-  //       },
-  //     ];
-  //     setSubmitErrors(braintreePayloadErrors);
-  //     onError(braintreePayloadErrors);
-  //   }
-  // };
+
+  const setCardErrorsHelper = (errors: IPaymentCardError[]) =>
+    errors.map(({ field, message }: IPaymentCardError) =>
+      setCardErrors(({ fieldErrors }) => ({
+        fieldErrors: {
+          ...fieldErrors,
+          [field]: { field, message },
+        },
+      }))
+    );
 
   const allErrors = [...errors, ...submitErrors];
 
   const handleSubmit = async (formData: ICardInputs) => {
-    console.log(formData)
-    window.Mercadopago.createToken(formData, setCardTokenAndPay);
+    setCardErrors(INITIAL_CARD_ERROR_STATE);
+    window.Mercadopago.createToken(formData, setCardToken)
     return false;
   }
   
-  function setCardTokenAndPay(status, response) {
+  function setCardToken(status: any, response: any) {
     if (status == 200 || status == 201) {
-        let form = document.getElementById('paymentForm');
-        let card = document.createElement('input');
-        card.setAttribute('name', 'token');
-        card.setAttribute('type', 'hidden');
-        card.setAttribute('value', response.id);
-        form.appendChild(card);
-        doSubmit=true;
-        form.submit();
+        let cardToken = document.createElement('input');
+        cardToken.setAttribute('name', 'token');
+        cardToken.setAttribute('type', 'hidden');
+        cardToken.setAttribute('value', response.id);
+        const checkoutForm = {
+          brand: "",
+          firstDigits: response.first_six_digits,
+          lastDigits: response.last_four_digits,
+          expMonth: response.expiration_month,
+          expYear: response.expiration_year,
+        }
+        processPayment(response.id, checkoutForm)
+
     } else {
-        alert("Verify filled data!\n"+JSON.stringify(response, null, 4));
+        const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
+        setCardErrorsHelper(formatedResponse)
     }
  };
 
@@ -144,7 +126,13 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
             );
         }
     } else {
-        alert(`payment method info error: ${response}`);
+        const mpPaymentError = [
+          {
+            message: response,
+          },
+        ];
+        setSubmitErrors(mpPaymentError)
+        onError(mpPaymentError)
     }
  }
 
@@ -171,7 +159,13 @@ function setIssuers(status: any, response: any) {
           issuerSelect.value
       );
   } else {
-      alert(`issuers method info error: ${response}`);
+      const mpIssuersError = [
+        {
+          message: response,
+        },
+      ];
+      setSubmitErrors(mpIssuersError);
+      onError(mpIssuersError);
   }
 }
 
@@ -193,7 +187,13 @@ function setInstallments(status: any, response: any){
           document.getElementById('installments').appendChild(opt);
       });
   } else {
-      alert(`installments method info error: ${response}`);
+      const mpInstallmentError = [
+        {
+          message: response,
+        },
+      ];
+      setSubmitErrors(mpInstallmentError);
+      onError(mpInstallmentError);
   }
 }
 

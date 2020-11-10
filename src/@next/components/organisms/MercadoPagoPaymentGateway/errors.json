@@ -1,0 +1,70 @@
+{
+    "205": {	
+        "field":"number",
+        "message":"Ingresa el número de tu tarjeta."
+    },
+    "208":	{
+        "field":"expirationMonth",
+        "message":"Elige un mes."
+    },
+    "209":	{
+        "field":"expirationYear",
+        "message":"Elige un año."
+    },
+    "212": {
+        "field":"tipo_doc",
+        "message":"Ingresa tu tipo de documento."
+    },
+    "213":	{
+        "field":"nro_doc",
+        "message":"Ingresa tu documento."
+    },
+    "214":	{
+        "field":"nro_doc",
+        "message":"Ingresa tu documento."
+    },
+    "220":	{
+        "field":"banco_emisor",
+        "message":"Ingresa tu banco."
+    },
+    "221": {
+        "field":"titular",
+        "message":"Ingresa el nombre y apellido."
+    },
+    "224": {
+        "field":"cvv",
+        "message":"Ingresa el código de seguridad."
+    },
+    "E301": {
+        "field":"number",
+        "message":"Ingresa un número de tarjeta válido."
+    },
+    "E302": {
+        "field":"cvv",
+        "message":"Revisa el código de seguridad."
+    },
+    "316": {
+        "field":"titular",
+        "message":"Ingresa un nombre válido."
+    },
+    "322": {
+        "field":"tipo_doc",
+        "message":"El tipo de documento es inválido."
+    },
+    "323": {
+        "field":"nro_doc",
+        "message":"Revisa tu documento."
+    },
+    "324": {
+        "field":"nro_doc",
+        "message":"El documento es inválido."
+    },
+    "325": {
+        "field":"expirationMonth",
+        "message":"El mes es inválido"
+    },
+    "326": {
+        "field":"expirationYear",
+        "message":"El año es inválido"
+    }
+}
