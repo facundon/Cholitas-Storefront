@@ -33,6 +33,9 @@ export interface IProps {
   /**
    * Method called after the form is submitted. Passed gateway id and token attribute will be used to create payment.
    */
+  items: any;
+  total: any;
+  
   processPayment: (
     gateway: string,
     token?: string,

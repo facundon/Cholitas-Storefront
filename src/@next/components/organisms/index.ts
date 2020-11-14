@@ -1,4 +1,3 @@
-export * from "./CreditCardForm";
 export * from "./CreditCardGrid";
 export * from "./Overlay";
 export * from "./Modal";
@@ -17,6 +16,7 @@ export * from "./CartSummary";
 export * from "./CartRow";
 export * from "./AddressGridSelector";
 export * from "./StripeCreditCardForm";
+export * from "./MercadoPagoCreditCardForm";
 export * from "./MercadoPagoPaymentGateway";
 export * from "./BraintreePaymentGateway";
 export * from "./DummyPaymentGateway";

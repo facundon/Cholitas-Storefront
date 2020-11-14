@@ -1,5 +1,5 @@
 import { shallow } from "enzyme";
-import "jest-styled-components";
+import "@components/organisms/MercadoPagoCreditCardForm/node_modules/jest-styled-components";
 import React from "react";
 
 import { NavLink } from ".";

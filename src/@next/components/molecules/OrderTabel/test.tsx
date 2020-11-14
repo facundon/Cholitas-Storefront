@@ -1,6 +1,6 @@
 import { mount, shallow } from "enzyme";
 import { createBrowserHistory } from "history";
-import "jest-styled-components";
+import "@components/organisms/MercadoPagoCreditCardForm/node_modules/jest-styled-components";
 import React from "react";
 import { IntlProvider } from "react-intl";
 

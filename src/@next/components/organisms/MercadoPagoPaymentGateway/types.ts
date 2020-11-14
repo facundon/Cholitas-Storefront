@@ -30,4 +30,8 @@ export interface IProps {
    * Method called when gateway error occured.
    */
   onError: (errors: IFormError[]) => void;
+
+  items: any;
+
+  total: any;
 }

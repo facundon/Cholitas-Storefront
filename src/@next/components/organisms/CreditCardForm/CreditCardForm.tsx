@@ -5,18 +5,9 @@ import { CreditCardFormContent } from "./CreditCardFormContent";
 import { IProps } from "./types";
 
 const INITIAL_CARD_VALUES_STATE = {
-  email: "",
-  docType: "",
-  docNumber: "",
-  cardholderName: "",
-  cardExpirationMonth: "",
-  cardExpirationYear: "",
-  cardNumber: "",
-  securityCode: "",
-  issuer: "",
-  installments: "",
-  transactionAmount: "",
-  description: "",
+  ccCsc: "",
+  ccExp: "",
+  ccNumber: "",
 };
 
 export const CreditCardForm: React.FC<IProps> = ({

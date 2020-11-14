@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
 
 import { ErrorMessage } from "@components/atoms";
-import { CreditCardForm } from "@components/organisms";
+import { MercadoPagoCreditCardForm } from "@components/organisms";
 import { IFormError } from "@types";
 
 import {
   ErrorData,
   ICardInputs,
-} from "../../../../core/payments/braintree";
+  IPaymentCardError,
+} from "../../../../core/payments/mercadopago";
 import { maybe, removeEmptySpaces } from "../../../../core/utils";
 
 import * as S from "./styles";
 import { IProps } from "./types";
 import * as MpErrors from "./errors.json"
+
+declare global {
+  interface Window {
+    Mercadopago: any;
+  }
+}
 
 const INITIAL_CARD_ERROR_STATE = {
   fieldErrors: {
@@ -42,8 +49,12 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   items,
   total,
 }: IProps) => {
+  const apiKey = config.find(({ field }) => field === "api_key")?.value;
+  const [paymentMethodId, setPaymentMethodId] = useState("visa")
+  const [installmentsOptions, setInstallmentsOptions] = useState()
+  const [issuerOptions, setIssuerOptions] = useState()
+  const [formDataRaw, setFormData] = useState()
   const [submitErrors, setSubmitErrors] = useState<IFormError[]>([]);
-
   const [cardErrors, setCardErrors] = React.useState<ErrorData>(
     INITIAL_CARD_ERROR_STATE
   );
@@ -62,25 +73,33 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
 
   const handleSubmit = async (formData: ICardInputs) => {
     setCardErrors(INITIAL_CARD_ERROR_STATE);
-    window.Mercadopago.createToken(formData, setCardToken)
-    return false;
+    if (formData) {
+      setFormData(formData)
+      window.Mercadopago.createToken(formData, setCardToken)
+    } else {
+      const mpFormError = [
+        {
+          message: "Ocurrio un error con la carga del formulario de pago.",
+        },
+      ];
+      setSubmitErrors(mpFormError)
+      onError(mpFormError)
+    }
   }
-  
+
   function setCardToken(status: any, response: any) {
     if (status == 200 || status == 201) {
-        let cardToken = document.createElement('input');
-        cardToken.setAttribute('name', 'token');
-        cardToken.setAttribute('type', 'hidden');
-        cardToken.setAttribute('value', response.id);
-        const checkoutForm = {
-          brand: "",
-          firstDigits: response.first_six_digits,
-          lastDigits: response.last_four_digits,
-          expMonth: response.expiration_month,
-          expYear: response.expiration_year,
-        }
-        processPayment(response.id, checkoutForm)
-
+      const checkoutForm = {
+        brand: paymentMethodId,
+        firstDigits: response.first_six_digits,
+        lastDigits: response.last_four_digits,
+        expMonth: response.expiration_month,
+        expYear: response.expiration_year,
+        payer: response.cardholder,
+        email: formDataRaw?.email,
+        installments: formDataRaw?.installments,
+      }
+      processPayment(response.id, checkoutForm)
     } else {
         const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
         setCardErrorsHelper(formatedResponse)
@@ -97,34 +116,42 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   })
 
   const initMP = () => {
-    window.Mercadopago.setPublishableKey("TEST-47dcfc8f-19da-4845-8fc3-733232878f7c");
+    if (apiKey) {
+      window.Mercadopago.setPublishableKey(apiKey)
+    } else {
+      const mpApiKeyError = [
+        {
+          message: "Fallo en la configuración de la API de Mercado Pago. Proveer una clave pública",
+        },
+      ];
+      setSubmitErrors(mpApiKeyError)
+      onError(mpApiKeyError)
+      return false
+    }
     window.Mercadopago.getIdentificationTypes();
-    document.getElementById('cardNumber').addEventListener('keyup', guessPaymentMethod);
   }
 
   function guessPaymentMethod(event: any) {
-    let cardnumber = removeEmptySpaces(maybe(() => document.getElementById("cardNumber").value, "") || "");
+    let cardnumber = removeEmptySpaces(maybe(() => event.target.value, "") || "");
     if (cardnumber.length >= 6) {
         let bin = cardnumber.substring(0,6);
         window.Mercadopago.getPaymentMethod({
             "bin": bin
         }, setPaymentMethod);
     }
- };
+  };
  
  function setPaymentMethod(status: any, response: any) {
     if (status == 200) {
-        let paymentMethod = response[0];
-        document.getElementById('paymentMethodId').value = paymentMethod.id;
- 
-        if(paymentMethod.additional_info_needed.includes("issuer_id")){
-            getIssuers(paymentMethod.id);
-        } else {
-            getInstallments(
-                paymentMethod.id,
-                document.getElementById('transactionAmount').value
-            );
-        }
+      setPaymentMethodId(response[0].id)
+      if(response[0].additional_info_needed.includes("issuer_id")){
+          getIssuers(paymentMethodId);
+      } else {
+          getInstallments(
+              paymentMethodId,
+              total.gross.amount
+          );
+      }
     } else {
         const mpPaymentError = [
           {
@@ -138,26 +165,19 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
 
  function getIssuers(paymentMethodId: any) {
   window.Mercadopago.getIssuers(
-      paymentMethodId,
-      setIssuers
+    paymentMethodId,
+    setIssuers
   );
 }
 
 function setIssuers(status: any, response: any) {
   if (status == 200) {
-      let issuerSelect = document.getElementById('issuer');
-      response.forEach( (issuer: any) => {
-          let opt = document.createElement('option');
-          opt.text = issuer.name;
-          opt.value = issuer.id;
-          issuerSelect.appendChild(opt);
-      });
-
-      getInstallments(
-          document.getElementById('paymentMethodId').value,
-          document.getElementById('transactionAmount').value,
-          issuerSelect.value
-      );
+    setIssuerOptions(response)
+    getInstallments(
+        paymentMethodId,
+        total.gross.amount,
+        document.getElementById("issuer").value
+    );
   } else {
       const mpIssuersError = [
         {
@@ -169,7 +189,7 @@ function setIssuers(status: any, response: any) {
   }
 }
 
-function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId: any){
+function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any){
   window.Mercadopago.getInstallments({
       "payment_method_id": paymentMethodId,
       "amount": parseFloat(transactionAmount),
@@ -179,13 +199,7 @@ function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId:
 
 function setInstallments(status: any, response: any){
   if (status == 200) {
-      document.getElementById('installments').options.length = 0;
-      response[0].payer_costs.forEach( (payerCost: any) => {
-          let opt = document.createElement('option');
-          opt.text = payerCost.recommended_message;
-          opt.value = payerCost.installments;
-          document.getElementById('installments').appendChild(opt);
-      });
+    setInstallmentsOptions(response[0].payer_costs)
   } else {
       const mpInstallmentError = [
         {
@@ -194,12 +208,12 @@ function setInstallments(status: any, response: any){
       ];
       setSubmitErrors(mpInstallmentError);
       onError(mpInstallmentError);
-  }
+    }
 }
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">
-      <CreditCardForm
+      <MercadoPagoCreditCardForm
         formRef={formRef}
         formId={formId}
         cardErrors={cardErrors.fieldErrors}
@@ -219,6 +233,10 @@ function setInstallments(status: any, response: any){
         handleSubmit={handleSubmit}
         items={items}
         total={total}
+        paymentMethodId={paymentMethodId}
+        handleKeyPress={guessPaymentMethod}
+        installmentsOptions={installmentsOptions}
+        issuerOptions={issuerOptions}
       />
       <ErrorMessage errors={allErrors} />
     </S.Wrapper>

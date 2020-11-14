@@ -7,9 +7,19 @@ export interface PaymentData {
 }
 
 export interface ICardInputs {
-  ccCsc: string;
-  ccExp: string;
-  ccNumber: string;
+  email: string;
+  docType: string;
+  docNumber: string;
+  cardholderName: string;
+  cardExpirationMonth: string;
+  cardExpirationYear: string;
+  cardNumber: string;
+  securityCode: string;
+  issuer: string;
+  installments: string;
+  transactionAmount: string;
+  description: string;
+  paymentMethodId: string;
 }
 
 export type CardError = { field?: string; message: string } | null;
@@ -24,10 +34,16 @@ export interface ICardPaymentInput {
 }
 
 export interface ICardErrors {
-  cvv: CardError;
-  expirationMonth: CardError;
-  expirationYear: CardError;
-  number: CardError;
+  titular: CardError,
+  nro_doc: CardError,
+  tipo_doc: CardError,
+  email: CardError,
+  number: CardError,
+  cvv: CardError,
+  expirationMonth: CardError,
+  expirationYear: CardError,
+  banco_emisor: CardError,
+  cuotas: CardError,
 }
 
 export interface ErrorData {

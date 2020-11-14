@@ -87,7 +87,6 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
         );
       } else {
         const response = await completeCheckout();
-        console.log(response)
         data = response.data;
         dataError = response.dataError;
         changeSubmitProgress(false);

@@ -1,6 +1,6 @@
 import { defaultTheme } from "@styles";
 import { mount, shallow } from "enzyme";
-import "jest-styled-components";
+import "@components/organisms/MercadoPagoCreditCardForm/node_modules/jest-styled-components";
 import React from "react";
 
 import { Button } from ".";

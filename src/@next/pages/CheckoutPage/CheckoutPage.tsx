@@ -294,7 +294,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   const handleProcessPayment = async (
     gateway: string,
     token?: string,
-    cardData?: ICardData
+    cardData?: ICardData,
   ) => {
     const paymentConfirmStepLink = CHECKOUT_STEPS.find(
       step => step.step === CheckoutStep.PaymentConfirm

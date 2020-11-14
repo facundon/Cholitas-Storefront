@@ -4,7 +4,7 @@ import React from "react";
 import NumberFormat, { NumberFormatProps } from "react-number-format";
 
 import { TextField } from "@components/molecules";
-import { CreditCardFormContent as CreditCardForm } from "./CreditCardFormContent";
+import { CreditCardFormContent as CreditCardForm } from "./MercadoPagoCreditCardFormContent";
 import * as S from "./styles";
 import { ICustomInputProps, PropsWithFormik } from "./types";
 
