@@ -104,7 +104,7 @@ export const commonMessages = defineMessages({
     defaultMessage: "Telefono",
   },
   phoneNumber: {
-    defaultMessage: "Numero de Teléfono: {phone}",
+    defaultMessage: "Teléfono: {phone}",
   },
   showEmail: {
     defaultMessage: "Email: {email}",
@@ -206,19 +206,19 @@ export const prodListHeaderCommonMsg = defineMessages({
 
 export const paymentStatusMessages = defineMessages({
   notCharged: {
-    defaultMessage: "Sin Cobrar",
+    defaultMessage: "Sin Pagar",
   },
   partiallyCharged: {
-    defaultMessage: "Parcialmente Cobrado",
+    defaultMessage: "Parcialmente Pagada",
   },
   fullyCharged: {
-    defaultMessage: "Cobrado",
+    defaultMessage: "Pagada",
   },
   partiallyRefunded: {
-    defaultMessage: "Parcialmente Reembolsado",
+    defaultMessage: "Parcialmente Reembolsada",
   },
   fullyRefunded: {
-    defaultMessage: "Reembolsado",
+    defaultMessage: "Reembolsada",
   },
 });
 
@@ -245,15 +245,15 @@ export function translatePaymentStatus(
   intl: IntlShape
 ): string {
   switch (status) {
-    case "Sin Cobrar":
+    case "Sin Pagar":
       return intl.formatMessage(paymentStatusMessages.notCharged);
-    case "Parcialmente Cobrado":
+    case "Parcialmente Pagada":
       return intl.formatMessage(paymentStatusMessages.partiallyCharged);
-    case "Cobrado":
+    case "Pagada":
       return intl.formatMessage(paymentStatusMessages.fullyCharged);
-    case "Parcialmente Reembolsado":
+    case "Parcialmente Reembolsada":
       return intl.formatMessage(paymentStatusMessages.partiallyRefunded);
-    case "Reembolsado":
+    case "Reembolsada":
       return intl.formatMessage(paymentStatusMessages.fullyRefunded);
     default:
       return status;

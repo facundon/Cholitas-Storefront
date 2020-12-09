@@ -39,14 +39,14 @@ const Page: React.FC<{
     <>
       {!guest && (
         <Link className="order-details__link" to={orderHistoryUrl}>
-          <FormattedMessage defaultMessage="Go back to Order History" />
+          <FormattedMessage defaultMessage="Volver a Mis Ordenes" />
         </Link>
       )}
       <div className="order-details__header">
         <div>
           <h3>
             <FormattedMessage
-              defaultMessage="Your order no.: {orderNum}"
+              defaultMessage="Tu Orden Nro.: {orderNum}"
               values={{ orderNum: order.number }}
             />
           </h3>
@@ -72,7 +72,7 @@ const Page: React.FC<{
                   content: (
                     <span>
                       <FormattedMessage
-                        defaultMessage="Download invoice"
+                        defaultMessage="Descargar Email"
                         description="action in popup menu in order view"
                       />
                     </span>

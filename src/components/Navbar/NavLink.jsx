@@ -21,13 +21,10 @@ class NavLink extends React.Component {
   }
 
   getDropdownItems(props) {
-    function link(url, subitem) {
-      return (
-        <Link to={url} key={subitem.id} {...props}>
-          <Dropdown.Item>{subitem.name}</Dropdown.Item>
-        </Link>
-      );
-    }
+    const link = (url, subitem) => (
+      <Dropdown.Item key={subitem.id} componentClass={this.routerLink} url={url} {...props}>{subitem.name}</Dropdown.Item>
+    )
+    
     const subitems = this.children.map(subitem => {
       if (subitem.url) {
         return <Dropdown.Item key={subitem.name} href={subitem.url}>{subitem.name}</Dropdown.Item>;
@@ -57,12 +54,15 @@ class NavLink extends React.Component {
     )
   }
 
+  routerLink(props){
+    return <Link to={props.url} {...props}></Link>
+  }
+
   getNavItem(props) {
     const link = url => (
-      <Link to={url} {...props}>
-        <Nav.Item>{this.name}</Nav.Item>
-      </Link>
+        <Nav.Item componentClass={this.routerLink} url={url} {...props}>{this.name}</Nav.Item>
     );
+    
     if (this.url) {
       return link(this.url);
     }
