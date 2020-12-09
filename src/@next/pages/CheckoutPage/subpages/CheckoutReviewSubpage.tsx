@@ -86,7 +86,9 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
           new Event("submitComplete", { cancelable: true })
         );
       } else {
-        const response = await completeCheckout();
+        const paymentData = payment?.creditCard
+        console.log(paymentData)
+        const response = await completeCheckout({ paymentData });
         data = response.data;
         dataError = response.dataError;
         changeSubmitProgress(false);
@@ -104,7 +106,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
       }
     },
   }));
-
+  
   return (
     <CheckoutReview
       {...props}

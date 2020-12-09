@@ -15,18 +15,18 @@ import { IProps } from "./types";
 const header = (matches: boolean) => (
   <S.HeaderRow>
     <S.IndexNumber>
-      <FormattedMessage defaultMessage="Index Number" />
+      <FormattedMessage defaultMessage="#" />
     </S.IndexNumber>
     {matches && (
       <>
         <S.ProductsOrdered>
-          <FormattedMessage defaultMessage="Products Ordered" />
+          <FormattedMessage defaultMessage="Productos Comprados" />
         </S.ProductsOrdered>
         <S.DateOfOrder>
-          <FormattedMessage defaultMessage="Date of Order" />
+          <FormattedMessage defaultMessage="Fecha de Compra" />
         </S.DateOfOrder>
         <S.Value>
-          <FormattedMessage defaultMessage="Value" />
+          <FormattedMessage defaultMessage="Valor" />
         </S.Value>
       </>
     )}

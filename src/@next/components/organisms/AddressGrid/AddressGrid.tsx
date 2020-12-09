@@ -13,7 +13,7 @@ export const AddressGrid: React.FC<IProps> = ({
   addNewAddress,
 }: IProps) => {
   const addNewTile = (
-    <AddNewTile key="newTile" type="address" onClick={addNewAddress} />
+    <AddNewTile key="newTile" type="domicilio" onClick={addNewAddress} />
   );
 
   const addressTiles = addresses.reduce(

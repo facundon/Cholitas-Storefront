@@ -38,7 +38,7 @@ export const commonMessages = defineMessages({
     defaultMessage: "Mis Ordenes",
   },
   addressBook: {
-    defaultMessage: "Mis Direcciones",
+    defaultMessage: "Mis Domimcilios",
   },
   logOut: {
     defaultMessage: "Salir",
@@ -104,7 +104,7 @@ export const commonMessages = defineMessages({
     defaultMessage: "Telefono",
   },
   phoneNumber: {
-    defaultMessage: "Numero de Telefono: {phone}",
+    defaultMessage: "Numero de Teléfono: {phone}",
   },
   showEmail: {
     defaultMessage: "Email: {email}",
@@ -134,7 +134,7 @@ export const commonMessages = defineMessages({
 
 export const checkoutMessages = defineMessages({
   stepNameAddress: {
-    defaultMessage: "Dirección",
+    defaultMessage: "Domicilio",
   },
   stepNameShipping: {
     defaultMessage: "Envío",
@@ -158,13 +158,13 @@ export const checkoutMessages = defineMessages({
     defaultMessage: "Comprar!",
   },
   addNewAddress: {
-    defaultMessage: "Agregar nueva dirección",
+    defaultMessage: "Agregar nuevo domicilio",
   },
   shippingMethod: {
     defaultMessage: "Tipo de Envío",
   },
   billingAddress: {
-    defaultMessage: "Dirección de Facturación",
+    defaultMessage: "Domicilio de Facturación",
   },
   paymentMethod: {
     defaultMessage: "Método de Pago",
@@ -173,7 +173,7 @@ export const checkoutMessages = defineMessages({
     defaultMessage: "Revisar Orden",
   },
   shippingAddress: {
-    defaultMessage: "Dirección de Envío",
+    defaultMessage: "Domicilio de Envío",
   },
   continueShopping: {
     defaultMessage: "CONTINUAR COMPRANDO",

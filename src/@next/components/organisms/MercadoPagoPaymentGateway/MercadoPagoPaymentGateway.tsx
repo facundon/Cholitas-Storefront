@@ -75,7 +75,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     setCardErrors(INITIAL_CARD_ERROR_STATE);
     if (formData) {
       setFormData(formData)
-      window.Mercadopago.createToken(formData, setCardToken)
+      await window.Mercadopago.createToken(formData, setCardToken)
     } else {
       const mpFormError = [
         {
@@ -91,10 +91,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     if (status == 200 || status == 201) {
       const checkoutForm = {
         brand: paymentMethodId,
-        firstDigits: response.first_six_digits,
+        firstDigits: null,
         lastDigits: response.last_four_digits,
-        expMonth: response.expiration_month,
-        expYear: response.expiration_year,
         payer: response.cardholder,
         email: formDataRaw?.email,
         installments: formDataRaw?.installments,
