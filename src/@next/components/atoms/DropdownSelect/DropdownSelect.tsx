@@ -26,7 +26,7 @@ export const DropdownSelect: React.FC<IProps> = ({
     Control: () => (
       <S.SortLine onClick={() => setMenuIsOpen(!menuIsOpen)}>
         <Label>
-          <FormattedMessage defaultMessage="Sort by:" />{" "}
+          <FormattedMessage defaultMessage="Ordenar por:" />{" "}
         </Label>
         <S.Value>{` ${value ? value.label : ""}`}</S.Value>
         <S.Indicator rotate={String(menuIsOpen)}>
