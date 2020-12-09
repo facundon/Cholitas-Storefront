@@ -76,7 +76,7 @@ const CartSummary: React.FC<IProps> = ({
         data-test="cartSummaryTitle"
         onClick={() => setMobileCartOpened(!mobileCartOpened)}
       >
-        <FormattedMessage defaultMessage="Cart Summary" />
+        <FormattedMessage defaultMessage="Resumen de Bolsa" />
         <S.ArrowUp mobileCartOpened={mobileCartOpened}>
           <Icon name="arrow_up" size={24} />
         </S.ArrowUp>

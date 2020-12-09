@@ -154,7 +154,7 @@ class Search extends React.Component<SearchProps, SearchState> {
                                     btnRef={this.submitBtnRef}
                                     type="submit"
                                   >
-                                    <FormattedMessage defaultMessage="Show all results" />
+                                    <FormattedMessage defaultMessage="Mostrar Todos" />
                                   </Button>
                                 )}
                               </div>

@@ -43,7 +43,7 @@ const ProductList: React.SFC<{
               <span>{line.variant.name}</span>
               <span data-test="quantity">
                 <FormattedMessage
-                  defaultMessage="Qty: {quantity}"
+                  defaultMessage="Cant.: {quantity}"
                   values={{ quantity: line.quantity }}
                 />
               </span>

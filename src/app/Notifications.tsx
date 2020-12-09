@@ -18,10 +18,10 @@ const Notifications: React.FC = () => {
           actionText: intl.formatMessage({ defaultMessage: "Refresh" }),
           content: intl.formatMessage({
             defaultMessage:
-              "To update the application to the latest version, please refresh the page!",
+              "Para actualizar la aplicación a la ultima versión, por favor refresca la página!",
           }),
           title: intl.formatMessage({
-            defaultMessage: "New version is available!",
+            defaultMessage: "Nueva versión disponible!",
           }),
         },
         {
@@ -46,7 +46,7 @@ const Notifications: React.FC = () => {
         alert.show(
           {
             title: intl.formatMessage({
-              defaultMessage: "You are now logged in",
+              defaultMessage: "Ingresaste a tu cuenta",
             }),
           },
           { type: "success" }
@@ -55,7 +55,7 @@ const Notifications: React.FC = () => {
         alert.show(
           {
             title: intl.formatMessage({
-              defaultMessage: "You are now logged out",
+              defaultMessage: "Saliste de tu cuenta",
             }),
           },
           { type: "success" }

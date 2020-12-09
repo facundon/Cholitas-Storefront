@@ -81,7 +81,7 @@ export const DiscountForm: React.FC<IProps> = ({
                     testingContext="applyPromoCodeButton"
                     onClick={() => handleApplyBtnClick(values.inputCode)}
                   >
-                    <FormattedMessage defaultMessage="Apply" />
+                    <FormattedMessage defaultMessage="Aplicar" />
                   </Button>
                 </S.ButtonWrapper>
               </S.InputWithButton>

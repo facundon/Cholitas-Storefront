@@ -48,7 +48,7 @@ class Login extends React.Component<
           <Online>
             <div className="overlay__header">
               <p className="overlay__header-text">
-                <FormattedMessage defaultMessage="Saleor account" />
+                <FormattedMessage defaultMessage="Cuenta de usuario - Cholitas Deco" />
               </p>
               <ReactSVG
                 path={closeImg}
@@ -62,14 +62,14 @@ class Login extends React.Component<
                 onClick={() => this.changeActiveTab("login")}
                 className={this.state.active === "login" ? "active-tab" : ""}
               >
-                <FormattedMessage defaultMessage="Sign in to account" />
+                <FormattedMessage defaultMessage="Ingresar a tu cuenta" />
               </span>
               <span
                 data-test="registerTab"
                 onClick={() => this.changeActiveTab("register")}
                 className={this.state.active === "register" ? "active-tab" : ""}
               >
-                <FormattedMessage defaultMessage="Register new account" />
+                <FormattedMessage defaultMessage="Registrar cuenta" />
               </span>
             </div>
             <div className="login__content">
