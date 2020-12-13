@@ -11,25 +11,25 @@ const CheckoutAsGuest: React.FC<{
 }> = ({ overlay, checkoutUrl }) => (
   <div className="checkout-login__guest">
     <h3 className="checkout__header">
-      <FormattedMessage defaultMessage="Continue as a guest" />
+      <FormattedMessage defaultMessage="Continuar como Invitado" />
     </h3>
     <p>
-      <FormattedMessage defaultMessage="If you don’t wish to register an account, don’t worry. You can checkout as a guest. We care about you just as much as any registered user." />
+      <FormattedMessage defaultMessage="Si no queres registrar una cuenta, no te preocupes. Podes realizar compras como invitado. Te vamos a tratar igual que a un usuario registrado!" />
     </p>
     <Link to={checkoutUrl}>
       <Button testingContext="continueAsGuestButton">
-        <FormattedMessage defaultMessage="Continue as a guest" />
+        <FormattedMessage defaultMessage="Continuar como invitado" />
       </Button>
     </Link>
 
     <p>
-      <FormattedMessage defaultMessage="or you can" />{" "}
+      <FormattedMessage defaultMessage="o podes" />{" "}
       <span
         data-test="showRegisterOverlay"
         className="u-link"
         onClick={() => overlay.show(OverlayType.register, OverlayTheme.right)}
       >
-        <FormattedMessage defaultMessage="create an account" />
+        <FormattedMessage defaultMessage="crear una cuenta" />
       </span>
     </p>
   </div>

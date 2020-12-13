@@ -50,7 +50,7 @@ const Page: React.FC<{
       <script className="structured-data-list" type="application/ld+json">
         {structuredData(shop)}
       </script>
-      <div className="home-page__hero">
+      <div id="home-page__hero" className="home-page__hero">
         <AutoSlider>{getCategoriesImgs()}</AutoSlider>
       </div>
       {productsExist() &&

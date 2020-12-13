@@ -53,7 +53,7 @@
     top: 0;
     width: 100%;
     z-index: 1;
-    animation: moveDown 0.5s ease-out;
+    animation: moveDown 0.6s ease-out;
   }
 
   &__left {
@@ -345,7 +345,7 @@
 
 @keyframes moveDown {
   from {
-    transform: translateY(-4rem);
+    transform: translateY(-6rem);
   }
   to {
     transform: translateY(0rem);

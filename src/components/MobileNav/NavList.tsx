@@ -41,7 +41,7 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
   }
 
   handleShowSubItems = (item: INavItem) => {
-    this.setState({ parent: item, displayedItems: item.children, transInactive: true });
+    this.setState({ parent: item, displayedItems: item.children, transInactive: false });
   };
 
   handleGoBack = () => {
@@ -76,7 +76,8 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
 
     return (
       <Menu
-        noTransition={this.state.transInactive}
+        // noTransition={this.state.transInactive}
+        width={320}
         isOpen={this.state.menuOpen}
         onClose={this.closeMenu}
         onStateChange={state => this.handleStateChange(state)}
@@ -95,12 +96,12 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
               className="side-nav__menu-item-logo"
               onClick={this.closeMenu}
             >
-              <ReactSVG path={logoImg} />
+              <ReactSVG path={logoImg} style={{textAlign: "center"}} />
             </Link>
 
             <Link
               to={baseUrl}
-              className="side-nav__menu-item-link"
+              className="side-nav__menu-item-link__home"
               onClick={this.closeMenu}
             >
               <FormattedMessage {...commonMessages.home} />

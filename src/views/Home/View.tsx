@@ -7,7 +7,7 @@ import Page from "./Page";
 import { TypedHomePageQuery } from "./queries";
 
 const View: React.FC = () => (
-  <div className="home-page">
+  <div id="home-page" className="home-page">
     <TypedHomePageQuery alwaysRender displayLoader={false} errorPolicy="all">
       {({ data, loading }) => {
         return (

@@ -2,13 +2,14 @@
 
 .side-nav {
   $item-height: 3.7rem;
-  max-width: calc(100vw - 5rem);
+  // max-width: calc(100vw - 5rem);
   // width: 30rem;
 
   &__menu-item {
-    border-bottom: 1px solid $gray-light;
+    border-bottom: 1px solid tomato;
     display: grid;
-    //height: $item-height;
+    // height: $item-height;
+    margin-right: 2rem;
 
     &-link,
     &-back span {
@@ -17,12 +18,33 @@
       display: flex;
       font-weight: 600;
       padding: $spacer;
+      padding-left: 0.5rem;
       text-decoration: none;
       text-transform: uppercase;
       transition: 0.4s;
 
       svg * {
         fill: currentColor;
+      }
+
+      &__home{
+        border-bottom: 2px solid white;
+        justify-content: center;
+        font-weight: normal;
+        font-style: italic;
+        font-size: 80%;
+        align-items: center;
+        color: $base-font-color;
+        display: flex;
+        text-decoration: none;
+        text-transform: uppercase;
+        transition: 0.4s;
+        padding-bottom: $spacer;
+        margin-bottom: 1rem;
+
+        &:hover {
+          color: $turquoise;
+        }
       }
     }
 
@@ -39,7 +61,7 @@
     &-more,
     &-back,
     &-close {
-      transition: 0.3s;
+      transition: 0.4s;
 
       &:hover {
         color: $turquoise;
@@ -59,8 +81,8 @@
     }
 
     &-more {
+      justify-self: right;
       align-self: center;
-      padding: 1.25rem 1.75rem;
     }
 
     &-back {
@@ -100,6 +122,12 @@
       }
     }
   }
+}
+
+/* Style the go back text*/
+.side-nav__menu-item.side-nav__menu-item-back {
+  padding-bottom: 1.2rem;
+  border-bottom: none;
 }
 
 /* Position and sizing of burger button */
@@ -144,8 +172,8 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: $cholitas-base;
-  // padding: 2.5em 1.5em 0;
+  background: none;
+  padding: 1.5em 0.5em 0;
   font-size: 1.15em;
 }
 
@@ -157,7 +185,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Wrapper for item list */
 .bm-item-list {
   color: #b8b7ad;
-  padding: 0.8em;
+  padding-left: 0.8em;
 }
 
 /* Individual item */

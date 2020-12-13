@@ -74,10 +74,11 @@ const MainMenu: React.FC = () => {
                           query={{ maxWidth: mediumScreen }}
                           render={() => (
                             <div className="main-menu__hamburger">
-                            <MobileNavList
+                              <MobileNavList
                               data-test="toggleSideMenuLink"
                               items={items}
-                            /> </div>
+                              />
+                            </div>
                           )}
                         />
                         <Online>
@@ -243,7 +244,7 @@ const MainMenu: React.FC = () => {
                         query={{ minWidth: mediumScreen }}
                         render={() => (
                           <span>
-                            <FormattedMessage defaultMessage="Offline" />
+                            <FormattedMessage defaultMessage="Desconecatdo" />
                           </span>
                         )}
                       />

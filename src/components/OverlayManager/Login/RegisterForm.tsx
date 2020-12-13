@@ -76,7 +76,7 @@ const RegisterForm: React.FC<{ hide: () => void }> = ({ hide }) => {
               >
                 {loading
                   ? intl.formatMessage(commonMessages.loading)
-                  : intl.formatMessage({ defaultMessage: "Register" })}
+                  : intl.formatMessage({ defaultMessage: "Registrar" })}
               </Button>
             </div>
           </Form>
