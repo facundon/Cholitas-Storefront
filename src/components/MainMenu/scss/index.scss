@@ -82,6 +82,7 @@
       display: flex;
       justify-content: flex-end;
       align-items: center;
+      margin-bottom: 0px;
     }
   }
 
@@ -202,7 +203,6 @@
   &__dropdown {
     text-transform: uppercase;
     font-weight: $bold-font-weight;
-
     li {
       cursor: pointer;
       margin: 0 auto;

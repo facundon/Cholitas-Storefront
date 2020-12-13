@@ -94,7 +94,7 @@ class Search extends React.Component<SearchProps, SearchState> {
         className="overlay--no-background"
       >
         <form
-          className={classNames("search", {
+          className={classNames(`search${this.props.overlay.context.data ? " sticky" : ""}`, {
             "search--has-results": this.hasSearchPhrase,
           })}
           onClick={e => e.stopPropagation()}

@@ -10,6 +10,10 @@ $drawer-width: 25rem;
     width: $drawer-width;
   }
 
+  &.sticky {
+    padding-top: 0;
+  }
+
   &--has-results {
     min-height: 100vh;
   }

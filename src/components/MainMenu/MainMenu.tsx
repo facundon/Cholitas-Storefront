@@ -254,7 +254,7 @@ const MainMenu: React.FC = () => {
                     data-test="menuSearchOverlayLink"
                     className="main-menu__search"
                     onClick={() =>
-                      overlayContext.show(OverlayType.search, OverlayTheme.right)
+                      overlayContext.show(OverlayType.search, OverlayTheme.right, { data: isSticky })
                     }
                   >
                     <Media

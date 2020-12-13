@@ -8,12 +8,12 @@ import { IProps } from "./types";
 
 const defaultShippingAddress = (
   <S.MenuItem>
-    <FormattedMessage defaultMessage="Set as default shipping address" />
+    <FormattedMessage defaultMessage="Usar domicilio de envío predeterminado" />
   </S.MenuItem>
 );
 const defaultBillingAddress = (
   <S.MenuItem>
-    <FormattedMessage defaultMessage="Set as default billing address" />
+    <FormattedMessage defaultMessage="Usar domicilio de facturación predeterminado" />
   </S.MenuItem>
 );
 

@@ -102,7 +102,7 @@ const CheckoutAddressSubpageWithRef: RefForwardingComponent<
       setShippingErrors([
         {
           message: intl.formatMessage({
-            defaultMessage: "Please provide shipping address.",
+            defaultMessage: "Por favor seleccione un domicilio de envío.",
           }),
         },
       ]);
@@ -154,7 +154,7 @@ const CheckoutAddressSubpageWithRef: RefForwardingComponent<
       setBillingErrors([
         {
           message: intl.formatMessage({
-            defaultMessage: "Please provide billing address.",
+            defaultMessage: "Por favor seleccione un domicilio de facturación.",
           }),
         },
       ]);
