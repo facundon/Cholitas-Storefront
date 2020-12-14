@@ -125,7 +125,8 @@
   &__hamburger {
     border-right: 1px solid $gray-light;
     cursor: pointer;
-    // padding: $spacer;
+    padding-top: 8px;
+    padding-bottom: 8px;
 
     &--hover {
       display: none;
@@ -203,6 +204,7 @@
   &__dropdown {
     text-transform: uppercase;
     font-weight: $bold-font-weight;
+    border-left: 1px solid hotpink;
     li {
       cursor: pointer;
       margin: 0 auto;
@@ -230,6 +232,8 @@
 
   &__search {
     padding: $spacer;
+    padding-top: 8px;
+    padding-bottom: 8px;
     cursor: pointer;
     line-height: 24px;
     transition: 0.3s;

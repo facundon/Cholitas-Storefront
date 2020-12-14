@@ -7,6 +7,19 @@
     justify-content: center;
   }
 
+  &__mp {
+    display: flex;
+    justify-content: center;
+
+    
+    img {
+      height: 40px;
+      width: 785px;
+      object-fit: contain;
+    }
+  
+  }
+
   &__menu {
     background-color: $gray-light;
     padding: $spacer * 3 0 $spacer * 2;
