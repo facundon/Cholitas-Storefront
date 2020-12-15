@@ -53,7 +53,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const [paymentMethodId, setPaymentMethodId] = useState("visa")
   const [installmentsOptions, setInstallmentsOptions] = useState()
   const [issuerOptions, setIssuerOptions] = useState()
-  const [formDataRaw, setFormData] = useState()
   const [submitErrors, setSubmitErrors] = useState<IFormError[]>([]);
   const [cardErrors, setCardErrors] = React.useState<ErrorData>(
     INITIAL_CARD_ERROR_STATE
@@ -74,8 +73,23 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const handleSubmit = async (formData: ICardInputs) => {
     setCardErrors(INITIAL_CARD_ERROR_STATE);
     if (formData) {
-      setFormData(formData)
-      await window.Mercadopago.createToken(formData, setCardToken)
+      await window.Mercadopago.createToken(formData, (status: any, response: any) => {
+        if (status == 200 || status == 201) {
+          const checkoutForm = {
+            brand: paymentMethodId,
+            firstDigits: null,
+            lastDigits: response.last_four_digits,
+            payer: response.cardholder,
+            email: formData.email,
+            installments: formData.installments,
+            description: items[0]?.variant?.product?.name
+          }
+          processPayment(response.id, checkoutForm)
+        } else {
+            const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
+            setCardErrorsHelper(formatedResponse)
+        }
+      })
     } else {
       const mpFormError = [
         {
@@ -87,26 +101,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     }
   }
 
-  useEffect(()=>{console.log(formDataRaw)}, [formDataRaw]) 
-
-  function setCardToken(status: any, response: any) {
-    if (status == 200 || status == 201) {
-      const checkoutForm = {
-        brand: paymentMethodId,
-        firstDigits: null,
-        lastDigits: response.last_four_digits,
-        payer: response.cardholder,
-        email: formDataRaw?.email,
-        installments: formDataRaw?.installments,
-        description: items[0]?.variant?.product?.name
-      }
-      console.log(checkoutForm)
-      processPayment(response.id, checkoutForm)
-    } else {
-        const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
-        setCardErrorsHelper(formatedResponse)
-    }
- };
 
   useEffect(() => {
       const script = document.createElement("script");
