@@ -1,5 +1,5 @@
 import { compact } from "lodash";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import NumberFormat from "react-number-format";
 
 import { TextField, Select } from "@components/molecules";
@@ -191,9 +191,10 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             id="installments" 
             name="installments" 
             style={selectStyle}>
-              <option disabled selected value>{ccCuotasText}</option>
+              <option disabled selected>{ccCuotasText}</option>
               {installmentsOptions?.map((installment: any) => 
               <option 
+                key={installment.installments}
                 value={installment.installments} 
                 id={installment.installments}>
                   {installment.recommended_message}
@@ -210,8 +211,8 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="issuer" 
             data-checkout="issuer" 
             style={selectStyle}>
-              <option disabled selected value>{ccBancoText}</option>
-              {issuerOptions?.map((issuer: any) => <option id={issuer.id}>{issuer.name}</option>)}
+              <option disabled selected>{ccBancoText}</option>
+              {issuerOptions?.map((issuer: any) => <option key={issuer.name} id={issuer.id}>{issuer.name}</option>)}
           </Select>
         </S.PaymentInput>
       </S.Grid>

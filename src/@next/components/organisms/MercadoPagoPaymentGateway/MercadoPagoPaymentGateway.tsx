@@ -87,6 +87,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     }
   }
 
+  useEffect(()=>{console.log(formDataRaw)}, [formDataRaw]) 
+
   function setCardToken(status: any, response: any) {
     if (status == 200 || status == 201) {
       const checkoutForm = {
@@ -96,7 +98,9 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
         payer: response.cardholder,
         email: formDataRaw?.email,
         installments: formDataRaw?.installments,
+        description: items[0]?.variant?.product?.name
       }
+      console.log(checkoutForm)
       processPayment(response.id, checkoutForm)
     } else {
         const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
@@ -111,7 +115,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
       script.async = true;
       script.onload = initMP
       document.body.appendChild(script);
-  })
+  }, [])
 
   const initMP = () => {
     if (apiKey) {
