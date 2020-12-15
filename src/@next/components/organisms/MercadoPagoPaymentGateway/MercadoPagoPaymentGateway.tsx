@@ -73,6 +73,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const handleSubmit = async (formData: ICardInputs) => {
     setCardErrors(INITIAL_CARD_ERROR_STATE);
     if (formData) {
+      console.log(formData)
       await window.Mercadopago.createToken(formData, (status: any, response: any) => {
         if (status == 200 || status == 201) {
           const checkoutForm = {

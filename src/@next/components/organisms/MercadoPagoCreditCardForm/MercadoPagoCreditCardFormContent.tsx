@@ -169,6 +169,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
         <S.PaymentInput>
           <NumberFormat
+            autoComplete="cc-exp"
             format="##"
             name="cardExpirationYear"
             id="cardExpirationYear"
