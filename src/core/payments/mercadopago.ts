@@ -20,6 +20,16 @@ export interface ICardInputs {
   paymentMethodId: string;
 }
 
+export interface IOtherInputs {
+  email: string;
+  docType: string;
+  docNumber: string;
+  name: string;
+  transactionAmount: string;
+  description: string;
+  paymentMethodId: string;
+}
+
 export type CardError = { field?: string; message: string } | null;
 
 export interface ICardPaymentInput {
@@ -42,6 +52,13 @@ export interface ICardErrors {
   expirationYear: CardError,
   banco_emisor: CardError,
   cuotas: CardError,
+}
+
+export interface IOtherErrors {
+  name: CardError,
+  nro_doc: CardError,
+  tipo_doc: CardError,
+  email: CardError,
 }
 
 export interface ErrorData {
