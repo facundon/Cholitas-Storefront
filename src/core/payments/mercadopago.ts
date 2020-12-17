@@ -56,8 +56,8 @@ export interface ICardErrors {
 
 export interface IOtherErrors {
   name: CardError,
-  nro_doc: CardError,
-  tipo_doc: CardError,
+  docNumber: CardError,
+  paymentMethodId: CardError,
   email: CardError,
 }
 

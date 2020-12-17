@@ -24,8 +24,8 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
   formId,
   otherErrors: {
     name: cardTitularError,
-    nro_doc: cardNroDocError,
-    tipo_doc: cardTipoDocError,
+    docNumber: cardNroDocError,
+    paymentMethodId: cardTipoDocError,
     email: cardEmailError,
   },
   disabled,
@@ -71,10 +71,11 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
           data-checkout="paymentMethodId" 
           value={values.paymentMethodId}
           onChange={handleChange}
+          errors={cardTipoDocError}
           style={selectStyle}>
             <option hidden selected>Selecciona una opción</option>
             {Object.entries(otherPaymentMethods).map(
-              option => <option value={option[1]}>{option[0]}</option>
+              option => <option key={option[1]} value={option[1]}>{option[0]}</option>
             )}
         </Select>
       </S.PaymentInput>

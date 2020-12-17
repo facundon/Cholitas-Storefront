@@ -8,7 +8,7 @@
   "browserslist": "last 2 versions",
   "dependencies": {
     "@babel/runtime": "^7.5.5",
-    "@lhci/cli": "^0.4.1",
+    "@lhci/cli": "^0.6.1",
     "@rsuite/responsive-nav": "0.0.10",
     "@saleor/sdk": "^0.1.5",
     "@sentry/apm": "^5.15.5",
@@ -71,10 +71,10 @@
     "typeface-montserrat": "0.0.54",
     "url-join": "^4.0.0",
     "use-query-params": "^0.4.1",
-    "yup": "^0.28.0"
+    "yup": "^0.28.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
+    "@babel/cli": "^7.12.10",
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.5.5",

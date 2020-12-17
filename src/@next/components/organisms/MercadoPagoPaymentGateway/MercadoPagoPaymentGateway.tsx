@@ -15,6 +15,7 @@ import { maybe, removeEmptySpaces } from "../../../../core/utils";
 import * as S from "./styles";
 import { IProps } from "./types";
 import * as MpErrors from "./errors.json"
+import * as yup from 'yup';
 
 
 declare global {
@@ -22,6 +23,15 @@ declare global {
     Mercadopago: any;
   }
 }
+
+
+let schema = yup.object().shape({
+  name: yup.string().required("Campo obligatorio").matches(/^[A-Za-z]+$/, "Ingrese solo letras"),
+  docNumber: yup.string().required("Campo obligatorio"),
+  email: yup.string().required("Campo obligatorio").email("Ingrese un Email válido"),
+  paymentMethodId: yup.string().required("Seleccione el medio de pago")
+});
+
 
 const other_payment_methods = {
   "Rapipago": "rapipago",
@@ -50,7 +60,7 @@ const INITIAL_OTROS_MEDIOS_ERROR_STATE = {
   fieldErrors: {
     name: null,
     nro_doc: null,
-    tipo_doc: null,
+    paymentMethodId: null,
     email: null,
   },
   nonFieldError: "",
@@ -91,14 +101,13 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           },
         }))
       )} else {
-        errors.map(({ field, message }: IPaymentCardError) =>
-          setOtherErrors(({ fieldErrors } : any) => ({
-            fieldErrors: {
-              ...fieldErrors,
-              [field]: { field, message },
-            },
-          }))
-        )
+        errors.map(({ path: field, message }: IPaymentCardError) =>
+        setOtherErrors(({ fieldErrors } : any) => ({
+          fieldErrors: {
+            ...fieldErrors,
+            [field]: { field, message },
+          },
+        })))
     }
   }
 
@@ -127,19 +136,28 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           }
         })
       } else {
-        if ()
-        const checkoutForm = {
-          brand: formData.paymentMethodId,
-          firstDigits: null,
-          lastDigits: null,
-          payer: formData.name,
-          docType: formData.docType,
-          docNumber: formData.docNumber,
-          email: formData.email,
-          description: items[0]?.variant?.product?.name
-        }
-        console.log(checkoutForm)
-        // processPayment(null, checkoutForm)
+        schema.validate({
+            name: formData.name,
+            docNumber: formData.docNumber,
+            email: formData.email,
+            paymentMethodId: formData.paymentMethodId
+          })
+          .then(function (valid) {
+            const checkoutForm = {
+              brand: formData.paymentMethodId,
+              firstDigits: null,
+              lastDigits: null,
+              payer: formData.name,
+              docType: formData.docType,
+              docNumber: formData.docNumber,
+              email: formData.email,
+              description: items[0]?.variant?.product?.name
+            }
+            console.log(checkoutForm)
+          })
+          .catch( err => {
+            setCardErrorsHelper([err])
+          })
       }
     } else {
       const mpFormError = [
