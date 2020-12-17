@@ -70,8 +70,10 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
     if (payment?.gateway === "mirumee.payments.adyen") {
       return `Adyen payments`;
     }
-    if (payment?.creditCard) {
+    if (payment?.creditCard && payment?.creditCard?.extra_data == null ) {
       return `Tarjeta terminada en ${payment?.creditCard.lastDigits}`;
+    } else {
+      return `Mercado Pago: ${payment?.creditCard?.extra_data?.readable_method}`
     }
     return ``;
   };

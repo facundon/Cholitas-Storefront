@@ -26,7 +26,7 @@ declare global {
 
 
 let schema = yup.object().shape({
-  name: yup.string().required("Campo obligatorio").matches(/^[A-Za-z]+$/, "Ingrese solo letras"),
+  name: yup.string().required("Campo obligatorio").matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
   docNumber: yup.string().required("Campo obligatorio"),
   email: yup.string().required("Campo obligatorio").email("Ingrese un Email válido"),
   paymentMethodId: yup.string().required("Seleccione el medio de pago")
@@ -127,7 +127,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
               payer: response.cardholder,
               email: formData.email,
               installments: formData.installments,
-              description: items[0]?.variant?.product?.name
+              description: items[0]?.variant?.product?.name,
+              extra_data: null
             }
             processPayment(response.id, checkoutForm)
           } else {
@@ -143,6 +144,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
             paymentMethodId: formData.paymentMethodId
           })
           .then(function (valid) {
+            const readable_method = Object.keys(other_payment_methods).find(key => other_payment_methods[key] === formData.paymentMethodId)
             const checkoutForm = {
               brand: formData.paymentMethodId,
               firstDigits: null,
@@ -151,9 +153,12 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
               docType: formData.docType,
               docNumber: formData.docNumber,
               email: formData.email,
-              description: items[0]?.variant?.product?.name
+              description: items[0]?.variant?.product?.name,
+              extra_data: {
+                readable_method: readable_method
+              },
             }
-            console.log(checkoutForm)
+            processPayment("111111111", checkoutForm)
           })
           .catch( err => {
             setCardErrorsHelper([err])

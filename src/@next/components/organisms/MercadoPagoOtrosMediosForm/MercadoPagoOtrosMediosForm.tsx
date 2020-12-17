@@ -11,7 +11,7 @@ const INITIAL_CARD_VALUES_STATE = {
   name: "",
   transactionAmount: "",
   description: "",
-  paymentMethodId: "",
+  paymentMethodId: "rapipago",
 };
 
 export const MercadoPagoOtrosMediosForm: React.FC<IProps> = ({

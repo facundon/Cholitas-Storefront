@@ -73,7 +73,6 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
           onChange={handleChange}
           errors={cardTipoDocError}
           style={selectStyle}>
-            <option hidden selected>Selecciona una opción</option>
             {Object.entries(otherPaymentMethods).map(
               option => <option key={option[1]} value={option[1]}>{option[0]}</option>
             )}
