@@ -192,7 +192,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             id="installments" 
             name="installments" 
             style={selectStyle}>
-              <option disabled selected>{ccCuotasText}</option>
+              <option hidden selected>{ccCuotasText}</option>
               {installmentsOptions?.map((installment: any) => 
               <option 
                 key={installment.installments}
@@ -212,7 +212,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="issuer" 
             data-checkout="issuer" 
             style={selectStyle}>
-              <option disabled selected>{ccBancoText}</option>
+              <option hidden selected>{ccBancoText}</option>
               {issuerOptions?.map((issuer: any) => <option key={issuer.name} id={issuer.id}>{issuer.name}</option>)}
           </Select>
         </S.PaymentInput>

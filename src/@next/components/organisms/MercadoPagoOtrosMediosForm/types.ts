@@ -19,7 +19,7 @@ export interface IFormikProps {
 export interface IProps {
   formRef?: React.RefObject<HTMLFormElement>;
   formId?: string;
-  cardErrors: IOtherErrors;
+  otherErrors: IOtherErrors;
   labelsText: ILabelsText;
   handleSubmit: (formData: IOtherInputs) => void;
   disabled: boolean;

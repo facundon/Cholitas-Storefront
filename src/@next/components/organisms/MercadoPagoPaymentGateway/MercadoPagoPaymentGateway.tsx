@@ -47,12 +47,13 @@ const INITIAL_CARD_ERROR_STATE = {
 };
 
 const INITIAL_OTROS_MEDIOS_ERROR_STATE = {
-  fieldserrors: {
+  fieldErrors: {
     name: null,
     nro_doc: null,
     tipo_doc: null,
     email: null,
-  }
+  },
+  nonFieldError: "",
 }
 
 const MercadoPagoPaymentGateway: React.FC<IProps> = ({
@@ -91,12 +92,13 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
         }))
       )} else {
         errors.map(({ field, message }: IPaymentCardError) =>
-        setOtherErrors(({ fieldErrors }) => ({
-          fieldErrors: {
-            ...fieldErrors,
-            [field]: { field, message },
-          },
-        })))
+          setOtherErrors(({ fieldErrors } : any) => ({
+            fieldErrors: {
+              ...fieldErrors,
+              [field]: { field, message },
+            },
+          }))
+        )
     }
   }
 
@@ -125,8 +127,9 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           }
         })
       } else {
+        if ()
         const checkoutForm = {
-          brand: paymentMethodId,
+          brand: formData.paymentMethodId,
           firstDigits: null,
           lastDigits: null,
           payer: formData.name,
@@ -135,7 +138,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           email: formData.email,
           description: items[0]?.variant?.product?.name
         }
-        processPayment(null, checkoutForm)
+        console.log(checkoutForm)
+        // processPayment(null, checkoutForm)
       }
     } else {
       const mpFormError = [
@@ -260,9 +264,9 @@ const handleSelect = (activeKey: any) => {
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">
-      <Nav appearance="tabs" onSelect={handleSelect} activeKey={method} style={{marginBottom: 20}}>
+      <Nav justified appearance="tabs" onSelect={handleSelect} activeKey={method} style={{marginBottom: 20, textAlign: "center"}}>
         <Nav.Item eventKey="card" icon={<Icon icon="credit-card"/>}>Tarjeta</Nav.Item>
-        <Nav.Item eventKey="other" icon={<Icon icon="money"/>}>Otros Medios de Pago</Nav.Item>
+        <Nav.Item eventKey="other" icon={<Icon icon="money"/>}>Efectivo</Nav.Item>
       </Nav>
       {method == "card" ?
         <MercadoPagoCreditCardForm

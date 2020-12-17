@@ -61,27 +61,30 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
       onSubmit={handleSubmit}
       data-test="OtrosMediosForm"
     >
-      <h4>Detalles del Comprador</h4>
+      <h4>Medio de Pago</h4>
       <br />
 
       <S.PaymentInput>
         <Select
-          id="paymentMethod"
-          name="paymentMethod"
-          data-checkout="paymentMethod" 
+          id="paymentMethodId"
+          name="paymentMethodId"
+          data-checkout="paymentMethodId" 
           value={values.paymentMethodId}
           onChange={handleChange}
           style={selectStyle}>
+            <option hidden selected>Selecciona una opción</option>
             {Object.entries(otherPaymentMethods).map(
-              option => console.log(option)
+              option => <option value={option[1]}>{option[0]}</option>
             )}
-            <option>Selecione un medio de pago</option>
-            <option value="--PaymentTypeId--">--PaymentTypeName--</option>
         </Select>
       </S.PaymentInput>
 
+      <h4>Detalles del Comprador</h4>
+      <br />
+
       <S.PaymentInput>
         <TextField
+          autoFocus
           name="name"
           autoComplete="given-name"
           id="name" 
@@ -93,7 +96,6 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
 
       <S.PaymentInput>
         <TextField
-          autoFocus
           name="email"
           autoComplete="email"
           id="email" 
@@ -110,7 +112,6 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
             data-checkout="docType" 
             value={values.docType}
             onChange={handleChange}
-            errors={cardTipoDocError}
             style={selectStyle} />
         </S.PaymentInput>
 
