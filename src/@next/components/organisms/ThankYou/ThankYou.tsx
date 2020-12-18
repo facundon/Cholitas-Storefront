@@ -15,6 +15,7 @@ const ThankYou: React.FC<IProps> = ({
   orderNumber,
   continueShopping,
   orderDetails,
+  orderStatus,
 }: IProps) => {
   return (
     <Container data-test="thankYouView">
@@ -27,12 +28,22 @@ const ThankYou: React.FC<IProps> = ({
           </span>
         </S.ThankYouHeader>
         <S.Paragraph>
-          <FormattedMessage defaultMessage="Tu número de orden es" />{" "}
+          <FormattedMessage defaultMessage="El número de orden es" />{" "}
           <span>{orderNumber}</span>
         </S.Paragraph>
-        <S.Paragraph>
-          <FormattedMessage defaultMessage="Te enviamos un email de confirmación de orden. Vamos a avisarte cuando tu orden se encuentre en camino!" />
-        </S.Paragraph>
+        {orderStatus == "PENDING" ?
+          <>
+            <S.Paragraph>
+              <FormattedMessage defaultMessage="Estamos procesando tu pago. No te preocupes, en menos de 2 días hábiles te avisaremos por email si se acreditó." /> 
+            </S.Paragraph>
+            <S.Paragraph>
+              <FormattedMessage defaultMessage="Igualmente te envíamos un email con el detalle de tu compra!" /> 
+            </S.Paragraph>
+          </> :
+          <S.Paragraph>
+            <FormattedMessage defaultMessage="Te enviamos un email con el detalle de tu compra. Te avisaremos cuando tu orden se encuentre en camino!" />
+          </S.Paragraph>
+        }
         <S.Buttons>
           <Button
             testingContext="continueShoppingButton"

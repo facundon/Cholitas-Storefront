@@ -102,7 +102,9 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
             id: data?.order?.id,
             orderNumber: data?.order?.number,
             token: data?.order?.token,
+            orderStatus: data?.order?.paymentStatus
           });
+          console.log(response)
         }
       }
     },
