@@ -14,14 +14,14 @@ const CartEmpty: React.FC<IProps> = ({ button }: IProps) => {
     <Container>
       <S.Wrapper>
         <S.TitleFirstLine>
-          <FormattedMessage defaultMessage="Your Cart" />
+          <FormattedMessage defaultMessage="Tu bolsa" />
         </S.TitleFirstLine>
         <S.TitleSecondLine>
-          <FormattedMessage defaultMessage="looks empty" />
+          <FormattedMessage defaultMessage="se ve vacía" />
         </S.TitleSecondLine>
         <S.HR />
         <S.Subtitle>
-          <FormattedMessage defaultMessage="Maybe you haven’t made your choices yet" />
+          <FormattedMessage defaultMessage="Todavía no elegiste nada para llevar!" />
         </S.Subtitle>
         <S.ContinueButton>{button}</S.ContinueButton>
       </S.Wrapper>

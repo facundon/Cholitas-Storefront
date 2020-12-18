@@ -96,7 +96,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
         const errors = dataError?.error;
         if (errors) {
           setErrors(errors);
-        } else {
+        } else { 
           setErrors([]);
           onSubmitSuccess({
             id: data?.order?.id,

@@ -1,11 +1,13 @@
 import { compact } from "lodash";
-import React, { useCallback } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 
 import { TextField, Select } from "@components/molecules";
 import * as S from "./styles";
 
 import { CardErrors, PropsWithFormik } from "./types";
+import Cards from 'react-credit-cards';
+import 'react-credit-cards/lib/styles.scss'
 
 const getInputProps = (
   disabled: boolean,
@@ -69,6 +71,26 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     border: "1px solid #323232",
   }
 
+  const [focus, setFocus] = useState("cardholderName")
+  const [expiry, setExpiry] = useState("--/--")
+
+  const focus_map = {
+    cardholderName: "name",
+    cardNumber: "number",
+    securityCode: "cvc",
+    cardExpirationMonth: "expiry"
+  }
+
+  useEffect(() => {
+    const expiry_arr = [values.cardExpirationMonth, values.cardExpirationYear]
+    setExpiry(expiry_arr.join("/"))
+  }, [values.cardExpirationMonth, values.cardExpirationYear])
+
+  const handleFocus = (e) => {
+    const mapped_focus = focus_map[e.target.name]
+    setFocus(mapped_focus)
+  }
+
   return (
     <S.PaymentForm
       ref={formRef}
@@ -124,6 +146,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           id="cardholderName" 
           data-checkout="cardholderName"
           type="text"
+          onFocus={handleFocus}
           {...basicInputProps(ccTitularText, [cardTitularError], values.cardholderName)}
         />
       </S.PaymentInput>
@@ -136,6 +159,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           name="cardNumber"
           id="cardNumber"
           data-checkout="cardNumber"
+          onFocus={handleFocus}
           {...basicInputProps(ccNumberText, [cardNumberError], values.cardNumber)}
         />
       </S.PaymentInput>
@@ -148,6 +172,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="securityCode"
             id="securityCode"
             data-checkout="securityCode"
+            onFocus={handleFocus}
             {...basicInputProps(ccCscText, [ccCscError], values.securityCode)}
           />
         </S.PaymentInput>
@@ -159,6 +184,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="cardExpirationMonth"
             id="cardExpirationMonth"
             data-checkout="cardExpirationMonth"
+            onFocus={handleFocus}
             {...basicInputProps(
               ccExpMonthText,
               [expirationMonthError],
@@ -174,6 +200,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="cardExpirationYear"
             id="cardExpirationYear"
             data-checkout="cardExpirationYear"
+            onFocus={handleFocus}
             {...basicInputProps(
               ccExpYearText,
               [expirationYearError],
@@ -217,6 +244,16 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           </Select>
         </S.PaymentInput>
       </S.Grid>
+
+      <Cards
+        cvc={values.securityCode}
+        expiry={expiry}
+        focused={focus}
+        name={values.cardholderName}
+        number={values.cardNumber}
+        placeholders={{name: "Nombre y Apellido"}}
+        locale={{valid: "Fecha vto."}}
+      />
 
       <input 
         type="hidden" 
