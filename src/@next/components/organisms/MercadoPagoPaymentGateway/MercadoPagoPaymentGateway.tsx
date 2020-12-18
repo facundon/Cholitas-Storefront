@@ -26,9 +26,9 @@ declare global {
 
 
 let schema = yup.object().shape({
-  name: yup.string().required("Campo obligatorio").matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
-  docNumber: yup.string().required("Campo obligatorio"),
-  email: yup.string().required("Campo obligatorio").email("Ingrese un Email válido"),
+  name: yup.string().required("Ingresa el nombre y apellido.").matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
+  docNumber: yup.string().required("Ingresa tu documento"),
+  email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
   paymentMethodId: yup.string().required("Seleccione el medio de pago")
 });
 
@@ -211,8 +211,9 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     }
   };
  
- function setPaymentMethod(status: any, response: any) {
+  function setPaymentMethod (status: any, response: any) {
     if (status == 200) {
+      setSubmitErrors([{message: ""}])
       setPaymentMethodId(response[0].id)
       if(response[0].additional_info_needed.includes("issuer_id")){
           getIssuers(paymentMethodId);
@@ -225,69 +226,68 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     } else {
         const mpPaymentError = [
           {
-            message: response,
+            message: "Número de tarjeta inválido",
           },
         ];
         setSubmitErrors(mpPaymentError)
-        onError(mpPaymentError)
     }
- }
-
- function getIssuers(paymentMethodId: any) {
-  window.Mercadopago.getIssuers(
-    paymentMethodId,
-    setIssuers
-  );
-}
-
-function setIssuers(status: any, response: any) {
-  if (status == 200) {
-    setIssuerOptions(response)
-    getInstallments(
-        paymentMethodId,
-        total.gross.amount,
-        document.getElementById("issuer").value
-    );
-  } else {
-      const mpIssuersError = [
-        {
-          message: response,
-        },
-      ];
-      setSubmitErrors(mpIssuersError);
-      onError(mpIssuersError);
   }
-}
 
-function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any){
-  window.Mercadopago.getInstallments({
-      "payment_method_id": paymentMethodId,
-      "amount": parseFloat(transactionAmount),
-      "issuer_id": issuerId ? parseInt(issuerId) : undefined
-  }, setInstallments);
-}
+  function getIssuers(paymentMethodId: any) {
+    window.Mercadopago.getIssuers(
+      paymentMethodId,
+      setIssuers
+    );
+  }
 
-function setInstallments(status: any, response: any){
-  if (status == 200) {
-    setInstallmentsOptions(response[0].payer_costs)
-  } else {
-      const mpInstallmentError = [
-        {
-          message: response,
-        },
-      ];
-      setSubmitErrors(mpInstallmentError);
-      onError(mpInstallmentError);
+  function setIssuers(status: any, response: any) {
+    if (status == 200) {
+      setIssuerOptions(response)
+      getInstallments(
+          paymentMethodId,
+          total.gross.amount,
+          document.getElementById("issuer").value
+      );
+    } else {
+        const mpIssuersError = [
+          {
+            message: response.message,
+          },
+        ];
+        setSubmitErrors(mpIssuersError);
+        onError(mpIssuersError);
     }
-}
+  }
 
-const handleSelect = (activeKey: any) => {
-  setMethod(activeKey)
-}
+  function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any){
+    window.Mercadopago.getInstallments({
+        "payment_method_id": paymentMethodId,
+        "amount": parseFloat(transactionAmount),
+        "issuer_id": issuerId ? parseInt(issuerId) : undefined
+    }, setInstallments);
+  }
+
+  function setInstallments(status: any, response: any){
+    if (status == 200) {
+      setInstallmentsOptions(response[0].payer_costs)
+    } else {
+        const mpInstallmentError = [
+          {
+            message: response.message,
+          },
+        ];
+        setSubmitErrors(mpInstallmentError);
+        onError(mpInstallmentError);
+    }
+  }
+
+  const handleSelect = (activeKey: any) => {
+    setMethod(activeKey)
+  }
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">
-      <Nav justified appearance="tabs" onSelect={handleSelect} activeKey={method} style={{marginBottom: 20, textAlign: "center"}}>
+      <Nav justified appearance="tabs" onSelect={handleSelect} activeKey={method} style={{marginBottom: 20, textAlign: "center", zIndex: 0}}>
         <Nav.Item eventKey="card" icon={<Icon icon="credit-card"/>}>Tarjeta</Nav.Item>
         <Nav.Item eventKey="other" icon={<Icon icon="money"/>}>Efectivo</Nav.Item>
       </Nav>
