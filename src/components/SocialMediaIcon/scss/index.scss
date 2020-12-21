@@ -1,10 +1,20 @@
 @import "../../../globalStyles/scss/variables.scss";
 
+a {
+  &:link{
+    text-decoration: none!important;
+  }
+}
+
 .social-icon {
   padding: $spacer $spacer / 2;
+  padding-bottom: $spacer /2;
+  display: inline-block;
+  vertical-align: middle;
 
   svg * {
-    transition: 0.3s;
+    fill: $cholitas-base;
+    transition: 0.4s;
   }
 
   &:hover {
@@ -12,4 +22,24 @@
       fill: $turquoise;
     }
   }
+}
+
+.brand {
+  color: $cholitas-base;
+  padding: $spacer 0;
+  vertical-align: middle;
+  align-self: center;
+  font-size: 2rem;
+  font-weight: 600;
+  transition: 0.4s;
+
+  &:hover {
+    color: $turquoise
+  }
+
+  @media (max-width: $small-screen) {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
 }

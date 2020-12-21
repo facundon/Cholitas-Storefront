@@ -56,6 +56,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   total,
   paymentMethodId,
   handleKeyPress,
+  handleOnInput,
   issuerOptions,
   installmentsOptions,
 }: PropsWithFormik) => {
@@ -234,6 +235,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select 
             value={values.issuer}
             onChange={handleChange}
+            onInput={handleOnInput}
             errors={cardBancoEmisorError}
             id="issuer" 
             name="issuer" 

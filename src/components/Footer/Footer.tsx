@@ -9,9 +9,9 @@ import Nav from "./Nav";
 const Footer: React.FC = () => (
   <div className="footer" id="footer">
     <div className="footer__favicons container">
-      {/* {SOCIAL_MEDIA.map(medium => (
+      {SOCIAL_MEDIA.map(medium => (
         <SocialMediaIcon medium={medium} key={medium.ariaLabel} />
-      ))} */}
+      ))}
     </div>
     <Nav />
     <div className="footer__mp container">

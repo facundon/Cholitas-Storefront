@@ -32,11 +32,12 @@ export const MercadoPagoCreditCardForm: React.FC<IProps> = ({
         setSubmitting(false);
       }}
     >
-      {({ handleChange, handleSubmit, handleKeyPress, values }) => (
+      {({ handleChange, handleSubmit, handleKeyPress, handleOnInput, values }) => (
         <MercadoPagoCreditCardFormContent
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           handleKeyPress={handleKeyPress}
+          handleOnInput={handleOnInput}
           values={values}
           {...props}
         />

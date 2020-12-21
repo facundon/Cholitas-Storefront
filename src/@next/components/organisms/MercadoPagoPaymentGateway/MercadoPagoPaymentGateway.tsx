@@ -269,6 +269,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
 
   function setInstallments(status: any, response: any){
     if (status == 200) {
+      console.log(response)
       setInstallmentsOptions(response[0].payer_costs)
     } else {
         const mpInstallmentError = [
@@ -314,6 +315,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           total={total}
           paymentMethodId={paymentMethodId}
           handleKeyPress={guessPaymentMethod}
+          handleOnInput={() => getInstallments(paymentMethodId, total.gross.amount, document.getElementById("issuer").value )}
           installmentsOptions={installmentsOptions}
           issuerOptions={issuerOptions}
         /> : 

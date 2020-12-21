@@ -8,12 +8,16 @@
   border: none;
   text-align: center;
 
+  @media (max-width: $medium-screen){
+    padding: 0 5px;
+  }
+
   &-panel{
     display: inline-block;
     width: 310px;
 
     @media (max-width: $medium-screen){
-      width: 180px;
+      width: 130px;
     }
   }
 }
@@ -32,6 +36,6 @@ img{
   height: 310px;
 
   @media (max-width: $medium-screen){
-    height: 180px;
+    height: 130px;
   }
 }

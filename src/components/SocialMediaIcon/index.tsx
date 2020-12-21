@@ -20,6 +20,7 @@ const SocialMediaIcon: React.FC<IconProps> = ({ medium, target }) => (
     aria-label={medium.ariaLabel}
   >
     <ReactSVG path={medium.path} className="social-icon" />
+    <span className="brand">cholitas.deco</span>
   </a>
 );
 
