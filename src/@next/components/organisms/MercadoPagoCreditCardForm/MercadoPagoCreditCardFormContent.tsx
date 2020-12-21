@@ -4,10 +4,18 @@ import NumberFormat from "react-number-format";
 
 import { TextField, Select } from "@components/molecules";
 import * as S from "./styles";
+import { maybe, removeEmptySpaces } from "../../../../core/utils";
 
 import { CardErrors, PropsWithFormik } from "./types";
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/lib/styles.scss'
+
+declare global {
+  interface Window {
+    Mercadopago: any;
+  }
+}
+
 
 const getInputProps = (
   disabled: boolean,
@@ -51,14 +59,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
    },
   handleSubmit,
   handleChange,
+  onError,
   values,
   items,
   total,
-  paymentMethodId,
-  handleKeyPress,
-  handleOnInput,
-  issuerOptions,
-  installmentsOptions,
+  handleInstallments,
 }: PropsWithFormik) => {
   const basicInputProps = useCallback(getInputProps(disabled, handleChange), [
     disabled,
@@ -74,12 +79,16 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
   const [focus, setFocus] = useState("cardholderName")
   const [expiry, setExpiry] = useState("--/--")
+  const [issuerOptions, setIssuerOptions] = useState()
+  const [installmentsOptions, setInstallmentsOptions] = useState()
+  const [paymentMethodId, setPaymentMethodId] = useState()
 
   const focus_map = {
     cardholderName: "name",
     cardNumber: "number",
     securityCode: "cvc",
-    cardExpirationMonth: "expiry"
+    cardExpirationMonth: "expiry",
+    cardExpirationYear: "expiry"
   }
 
   useEffect(() => {
@@ -87,9 +96,76 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     setExpiry(expiry_arr.join("/"))
   }, [values.cardExpirationMonth, values.cardExpirationYear])
 
-  const handleFocus = (e) => {
+  const handleFocus = (e: any) => {
     const mapped_focus = focus_map[e.target.name]
     setFocus(mapped_focus)
+  }
+
+  function guessPaymentMethod(event: any) {
+    let cardnumber = removeEmptySpaces(maybe(() => event.target.value, "") || "");
+    if (cardnumber.length >= 6) {
+        let bin = cardnumber.substring(0,6);
+        window.Mercadopago.getPaymentMethod({
+            "bin": bin
+        }, setPaymentMethod);
+    }
+  };
+ 
+  function setPaymentMethod (status: any, response: any) {
+    if (status == 200) {
+      setPaymentMethodId(response[0].id)
+      const paymentMethodId = response[0].id
+      window.Mercadopago.getIssuers(
+        response[0].id,
+        (status: any, response: any) => {
+          if (status == 200) {
+            setIssuerOptions(response)
+            getInstallments(
+              paymentMethodId,
+              total.gross.amount,
+              values.issuer
+            );
+          } else {
+              const mpIssuersError = [
+                {
+                  message: response.message,
+                },
+              ];
+              onError(mpIssuersError);
+          }
+        }
+      );
+    } else {
+        const mpPaymentError = [
+          {
+            message: "Número de tarjeta inválido",
+          },
+        ];
+        onError(mpPaymentError)
+    }
+  }    
+
+  function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any){
+    console.log(issuerId)
+    window.Mercadopago.getInstallments({
+        "payment_method_id": paymentMethodId,
+        "amount": parseFloat(transactionAmount),
+        "issuer_id": issuerId ? parseInt(issuerId) : undefined
+    }, setInstallments);
+  }
+
+  function setInstallments(status: any, response: any){
+    if (status == 200) {
+      const filtered_response = response.filter((data: any) => data.issuer.name == values.issuer)
+      setInstallmentsOptions(filtered_response[0]?.payer_costs)
+    } else {
+        const mpInstallmentError = [
+          {
+            message: response.message,
+          },
+        ];
+        onError(mpInstallmentError);
+    }
   }
 
   return (
@@ -154,7 +230,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
       
       <S.PaymentInput>
         <NumberFormat
-          onKeyPress={handleKeyPress}
+          onKeyPress={guessPaymentMethod}
           autoComplete="cc-number"
           format="#### #### #### ####"
           name="cardNumber"
@@ -216,14 +292,15 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select 
             value={values.installments}
             onChange={handleChange}
+            onInput={handleInstallments}
             errors={cardCuotasError}
             id="installments" 
             name="installments" 
             style={selectStyle}>
-              <option hidden selected>{ccCuotasText}</option>
-              {installmentsOptions?.map((installment: any) => 
+              <option hidden>{ccCuotasText}</option>
+              {installmentsOptions?.map((installment: any, index: any) => 
               <option 
-                key={installment.installments}
+                key={index}
                 value={installment.installments} 
                 id={installment.installments}>
                   {installment.recommended_message}
@@ -235,14 +312,14 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select 
             value={values.issuer}
             onChange={handleChange}
-            onInput={handleOnInput}
+            onInput={() => getInstallments(paymentMethodId, total.gross.amount, values.issuer)}
             errors={cardBancoEmisorError}
             id="issuer" 
             name="issuer" 
             data-checkout="issuer" 
             style={selectStyle}>
-              <option hidden selected>{ccBancoText}</option>
-              {issuerOptions?.map((issuer: any) => <option key={issuer.id} id={issuer.id}>{issuer.name}</option>)}
+              <option hidden>{ccBancoText}</option>
+              {issuerOptions?.map((issuer: any, index: any) => <option key={index} id={issuer.id}>{issuer.name}</option>)}
           </Select>
         </S.PaymentInput>
       </S.Grid>
@@ -261,19 +338,25 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
         type="hidden" 
         name="transactionAmount" 
         id="transactionAmount" 
-        value={values.transactionAmount = total.gross.amount} />
+        // value={values.transactionAmount = total.gross.amount}
+        value={total.gross.amount}
+        />
 
       <input 
         type="hidden"
         name="paymentMethodId" 
         id="paymentMethodId"
-        value={values.paymentMethodId = paymentMethodId} />
+        // value={values.paymentMethodId = paymentMethodId}
+        value={paymentMethodId}
+        />
 
       <input 
         type="hidden" 
         name="description" 
         id="description" 
-        value={values.description = items[0].variant.product.name}/>
+        // value={values.description = items[0].variant.product.name}
+        value={items[0].variant.product.name}
+        />
     </S.PaymentForm>
   );
 };
