@@ -110,14 +110,16 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const allErrors = [...errors, ...submitErrors];
 
   const handleSubmit = async (formData: any) => {
+    console.log(formData)
     setCardErrors(INITIAL_CARD_ERROR_STATE)
     setOtherErrors(INITIAL_OTROS_MEDIOS_ERROR_STATE)
     if (formData) {
       if (method == "card") {
         await window.Mercadopago.createToken(formData, (status: any, response: any) => {
+          
           if (status == 200 || status == 201) {
             const checkoutForm = {
-              brand: paymentMethodId,
+              brand: formData.paymentMethodId,
               firstDigits: null,
               lastDigits: response.last_four_digits,
               payer: response.cardholder,

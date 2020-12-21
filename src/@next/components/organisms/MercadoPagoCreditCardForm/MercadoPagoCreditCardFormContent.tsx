@@ -63,7 +63,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   values,
   items,
   total,
-  handleInstallments,
 }: PropsWithFormik) => {
   const basicInputProps = useCallback(getInputProps(disabled, handleChange), [
     disabled,
@@ -95,6 +94,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     const expiry_arr = [values.cardExpirationMonth, values.cardExpirationYear]
     setExpiry(expiry_arr.join("/"))
   }, [values.cardExpirationMonth, values.cardExpirationYear])
+
+  useEffect(() => {
+    values.issuer &&
+      getInstallments(paymentMethodId, total.gross.amount, values.issuer)
+  }, [values.issuer])
 
   const handleFocus = (e: any) => {
     const mapped_focus = focus_map[e.target.name]
@@ -146,7 +150,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   }    
 
   function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any){
-    console.log(issuerId)
     window.Mercadopago.getInstallments({
         "payment_method_id": paymentMethodId,
         "amount": parseFloat(transactionAmount),
@@ -292,7 +295,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select 
             value={values.installments}
             onChange={handleChange}
-            onInput={handleInstallments}
             errors={cardCuotasError}
             id="installments" 
             name="installments" 
@@ -312,7 +314,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select 
             value={values.issuer}
             onChange={handleChange}
-            onInput={() => getInstallments(paymentMethodId, total.gross.amount, values.issuer)}
             errors={cardBancoEmisorError}
             id="issuer" 
             name="issuer" 
@@ -338,24 +339,24 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
         type="hidden" 
         name="transactionAmount" 
         id="transactionAmount" 
-        // value={values.transactionAmount = total.gross.amount}
-        value={total.gross.amount}
+        value={values.transactionAmount = total.gross.amount}
+        
         />
 
       <input 
         type="hidden"
         name="paymentMethodId" 
         id="paymentMethodId"
-        // value={values.paymentMethodId = paymentMethodId}
-        value={paymentMethodId}
+        value={values.paymentMethodId = paymentMethodId}
+        
         />
 
       <input 
         type="hidden" 
         name="description" 
         id="description" 
-        // value={values.description = items[0].variant.product.name}
-        value={items[0].variant.product.name}
+        value={values.description = items[0].variant.product.name}
+
         />
     </S.PaymentForm>
   );
