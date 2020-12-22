@@ -24,13 +24,18 @@ declare global {
 }
 
 
-let schema = yup.object().shape({
+let card_schema = yup.object().shape({
+  email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
+  cuotas: yup.string().required("Ingresa la cantidad de cuotas"),
+  banco_emisor: yup.string().required("Ingresa el banco emisor"),
+})
+
+let other_schema = yup.object().shape({
   name: yup.string().required("Ingresa el nombre y apellido.").matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
   docNumber: yup.string().required("Ingresa tu documento"),
   email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
   paymentMethodId: yup.string().required("Seleccione el medio de pago")
 });
-
 
 const other_payment_methods = {
   "Rapipago": "rapipago",
@@ -117,24 +122,35 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
       if (method == "card") {
         await window.Mercadopago.createToken(formData, (status: any, response: any) => {       
           if (status == 200 || status == 201) {
-            const checkoutForm = {
-              brand: formData.paymentMethodId,
-              firstDigits: null,
-              lastDigits: null,
-              payer: response.cardholder,
+            card_schema.validate({
               email: formData.email,
-              installments: formData.installments,
-              description: items[0]?.variant?.product?.name,
-              extra_data: null
-            }
-            processPayment(response.id, checkoutForm)
+              banco_emisor: formData.issuer,
+              cuotas: formData.installments
+            })     
+            .then(function(valid) {
+              const checkoutForm = {
+                brand: formData.paymentMethodId,
+                firstDigits: null,
+                lastDigits: response.last_four_digits,
+                payer: response.cardholder,
+                email: formData.email,
+                installments: formData.installments,
+                description: items[0]?.variant?.product?.name,
+                extra_data: null
+              }
+              processPayment(response.id, checkoutForm)
+            })
+            .catch( err => {
+              const formated_err: any = [{field: err.path, message: err.message}]
+              setCardErrorsHelper(formated_err)
+            })
           } else {
               const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
               setCardErrorsHelper(formatedResponse)
           }
         })
       } else {
-        schema.validate({
+        other_schema.validate({
             name: formData.name,
             docNumber: formData.docNumber,
             email: formData.email,
@@ -210,7 +226,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           formRef={formRef}
           formId={formId}
           cardErrors={cardErrors.fieldErrors}
-          onError={onError}
           labelsText={{
             email: "Email",
             docType: "Tipo Doc",

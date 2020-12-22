@@ -14,7 +14,7 @@ const INITIAL_CARD_VALUES_STATE = {
   cardNumber: "",
   securityCode: "",
   issuer: "",
-  installments: "1",
+  installments: "",
   transactionAmount: "",
   description: "",
   paymentMethodId: "",
