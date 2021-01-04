@@ -22,7 +22,8 @@ export const Thumbnail = styled.div<{ activeThumbnail: boolean }>`
   overflow: hidden;
   img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    block-size: auto;
   }
 
   margin-top: 20px;
