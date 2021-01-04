@@ -6,7 +6,7 @@ export const Wrapper = styled.div<{ mobileCartOpened: boolean }>`
     width: 100%;
     height: 100%;
     position: fixed;
-    top: calc(100% - 86px);
+    top: calc(100% - 60px);
     left: 0%;
     transition: all 0.5s ease;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.15);
@@ -40,7 +40,7 @@ export const HR = styled.hr`
 `;
 
 export const Title = styled.div`
-  padding: 30px 20px;
+  padding: 20px 20px;
   display: flex;
   justify-content: space-between;
   margin: 0;
@@ -85,3 +85,21 @@ export const Costs = styled.div`
     }
   }
 `;
+
+export const CFT = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0px;
+  font-size: 27px;
+  text-transform: uppercase;
+  font-weight: 400;
+`
+
+export const TEA = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 400;
+`

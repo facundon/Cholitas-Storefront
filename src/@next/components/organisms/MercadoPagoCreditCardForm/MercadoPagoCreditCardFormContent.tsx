@@ -60,6 +60,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
    },
   handleSubmit,
   handleChange,
+  handleRechargeInstallment,
   values,
   items,
   total,
@@ -91,6 +92,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   const [paymentMethodId, setPaymentMethodId] = useState()
   const [totalAmount, setTotalAmount] = useState(total.gross.amount)
   const [submitErrors, setSubmitErrors] = useState([{message:""}])
+  const [installmentsCosts, setInstallmentsCosts] = useState({})
 
   const focus_map = {
     cardholderName: "name",
@@ -138,6 +140,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     if (installmentsOptions) {
       const current_installment = installmentsOptions.find((option: any) => option.installments == values.installments) 
       setTotalAmount(current_installment?.total_amount ? current_installment.total_amount : total.gross.amount)
+      setInstallmentsCosts(current_installment)
     }
     paymentMethodId &&
       window.Mercadopago.getIssuers(
@@ -184,6 +187,10 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
       });
     }
   }, [values.issuer, values.installments, paymentMethodId, installmentsOptions])
+
+  useEffect(()=>{
+    handleRechargeInstallment(totalAmount, installmentsCosts)
+  }, [totalAmount, installmentsCosts]) 
 
   const handleFocus = (e: any) => {
     const mapped_focus = focus_map[e.target.name]

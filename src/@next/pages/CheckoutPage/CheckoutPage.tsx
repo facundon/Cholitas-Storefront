@@ -37,7 +37,9 @@ const prepareCartSummary = (
   subtotalPrice?: ITaxedMoney | null,
   shippingTaxedPrice?: ITaxedMoney | null,
   promoTaxedPrice?: ITaxedMoney | null,
-  items?: IItems
+  items?: IItems,
+  totalWithRecharge?: any,
+  installmentsCosts?: any,
 ) => {
   const products = items?.map(({ id, variant, totalPrice, quantity }) => ({
     id: id || "",
@@ -68,9 +70,12 @@ const prepareCartSummary = (
       promoCode={promoTaxedPrice}
       total={totalPrice}
       products={products}
+      totalWithRecharge={totalWithRecharge}
+      installmentsCosts={installmentsCosts}
     />
   );
 };
+
 
 const getCheckoutProgress = (
   loaded: boolean,
@@ -117,6 +122,8 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     createPayment,
     completeCheckout,
   } = useCheckout();
+  const [totalWithRecharge, setTotalWithRecharge] = useState()
+  const [installmentsCosts, setInstallmentsCosts] = useState()
   const intl = useIntl();
 
   if (cartLoaded && (!items || !items?.length)) {
@@ -345,6 +352,11 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     }
   };
 
+  const handleRechargeInstallment = (totalWithRecharge: any, installmentsCosts: any) => {
+    setTotalWithRecharge(totalWithRecharge)
+    setInstallmentsCosts(installmentsCosts)
+  }
+
   const paymentGatewaysView = availablePaymentGateways && (
     <PaymentGatewaysList
       paymentGateways={availablePaymentGateways}
@@ -356,6 +368,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
       selectedPaymentGateway={selectedPaymentGateway}
       selectedPaymentGatewayToken={selectedPaymentGatewayToken}
       selectPaymentGateway={setSelectedPaymentGateway}
+      handleRechargeInstallment={handleRechargeInstallment}
       onError={handlePaymentGatewayError}
       errors={paymentGatewayErrors}
       items={items}
@@ -474,7 +487,9 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
         subtotalPrice,
         shippingTaxedPrice,
         promoTaxedPrice,
-        items
+        items,
+        totalWithRecharge,
+        installmentsCosts,
       )}
       checkout={checkoutView}
       paymentGateways={paymentGatewaysView}

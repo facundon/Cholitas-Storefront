@@ -77,7 +77,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   formRef,
   formId,
   errors = [],
-  postalCode,
+  handleRechargeInstallment,
   onError,
   items,
   total,
@@ -115,7 +115,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const allErrors = [...errors, ...submitErrors];
 
   const handleSubmit = async (formData: any) => {
-    console.log(formData)
     setCardErrors(INITIAL_CARD_ERROR_STATE)
     setOtherErrors(INITIAL_OTROS_MEDIOS_ERROR_STATE)
     if (formData) {
@@ -240,6 +239,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           }}
           disabled={false}
           handleSubmit={handleSubmit}
+          handleRechargeInstallment={handleRechargeInstallment}
           items={items}
           total={total}
         /> : 

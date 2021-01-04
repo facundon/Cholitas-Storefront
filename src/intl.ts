@@ -1,6 +1,9 @@
 import { defineMessages, IntlShape } from "react-intl";
 
 export const commonMessages = defineMessages({
+  recharge: {
+    defaultMessage: "Recargo Cuotas"
+  },
   search: {
     defaultMessage: "buscar",
   },
