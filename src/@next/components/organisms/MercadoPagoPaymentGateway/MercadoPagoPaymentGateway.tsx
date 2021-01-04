@@ -78,6 +78,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   formId,
   errors = [],
   handleRechargeInstallment,
+  handleChangeMethod,
   onError,
   items,
   total,
@@ -213,6 +214,10 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const handleSelect = (activeKey: any) => {
     setMethod(activeKey)
   }
+
+  useEffect(()=>{
+    handleChangeMethod(method)
+  }, [method])
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">

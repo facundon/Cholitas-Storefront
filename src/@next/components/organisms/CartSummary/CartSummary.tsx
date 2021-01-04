@@ -24,7 +24,7 @@ const CostLine = ({
   </S.CostLine>
 );
 
-const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts }: ICosts) => {
+const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts, method }: ICosts) => {
   const recharge = {
     gross: {
       amount: totalWithRecharge - total?.gross.amount,
@@ -56,7 +56,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
           cost={subtotal}
         />
       )}     
-      {totalWithRecharge != total?.gross.amount && (
+      {totalWithRecharge != total?.gross.amount && method == "card" && (
         <CostLine
           name={intl.formatMessage(commonMessages.recharge)}
           cost={recharge}
@@ -75,7 +75,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
           negative
         />
       )}
-      {installmentsCosts && (
+      {installmentsCosts && method == "card" &&(
         <S.CostLine last={true}>
          <span>{intl.formatMessage(commonMessages.total)}</span>
          <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
@@ -83,11 +83,18 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
          </span>
        </S.CostLine>
       )}
-      {total && (
+      {total && method == "card" && (
         <CostLine
           name={installmentsCosts ? "" : "Total"}
           cost={totalAmount}
           last={installmentsCosts ? false : true}
+        />
+      )}
+      {total && method == "other" && (
+        <CostLine
+          name={intl.formatMessage(commonMessages.total)}
+          cost={total}
+          last
         />
       )}
     </S.Costs>
@@ -105,6 +112,7 @@ const CartSummary: React.FC<IProps> = ({
   products,
   totalWithRecharge,
   installmentsCosts,
+  method,
 }: IProps) => {
   const [mobileCartOpened, setMobileCartOpened] = useState(false);
   const [installmentRate, setInstallmentRate] = useState({TEA: "", CFT: ""})
@@ -112,13 +120,14 @@ const CartSummary: React.FC<IProps> = ({
   useEffect(()=>{
     if (installmentsCosts && Object.keys(installmentsCosts).length != 0) {
       const installmentRate = installmentsCosts?.labels?.find((e: any) => e.includes("CFT")).split('|')
-      console.log(installmentsCosts)
       setInstallmentRate(
         {
           TEA: installmentRate[1]?.replace("TEA_", ""),
           CFT: installmentRate[0]?.replace("CFT_", ""),
         }
       )
+    } else {
+      setInstallmentRate({TEA: "", CFT: ""})
     }
   }, [installmentsCosts])
 
@@ -159,17 +168,22 @@ const CartSummary: React.FC<IProps> = ({
           promoCode={promoCode}
           totalWithRecharge={totalWithRecharge}
           installmentsCosts={installmentsCosts}
+          method={method}
         />
-        <S.TEA>
-          {installmentRate?.TEA != "" &&
-            <span>TEA: {installmentRate?.TEA}</span>
-          }
-        </S.TEA>
-        <S.CFT>
-          {installmentRate?.CFT != "" &&
+        {method == "card" && ( 
+        <>
+        {installmentRate?.TEA != "" &&
+          <S.TEA>
+              <span>TEA: {installmentRate?.TEA}</span>
+          </S.TEA>
+        }
+        {installmentRate?.CFT != "" &&
+          <S.CFT>
             <span>CFT: {installmentRate?.CFT}</span>
-          }
-        </S.CFT>
+          </S.CFT>
+        }
+        </>
+        )}
       </S.Content>
     </S.Wrapper>
   );

@@ -27,6 +27,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
   submitPayment,
   submitPaymentSuccess,
   handleRechargeInstallment,
+  handleChangeMethod,
   errors,
   onError,
   items,
@@ -68,6 +69,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                       processPayment(id, token, cardData)
                     }
                     handleRechargeInstallment={handleRechargeInstallment}
+                    handleChangeMethod={handleChangeMethod}
                     errors={errors}
                     onError={onError}
                     items={items}

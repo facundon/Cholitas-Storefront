@@ -40,6 +40,7 @@ const prepareCartSummary = (
   items?: IItems,
   totalWithRecharge?: any,
   installmentsCosts?: any,
+  method?: any,
 ) => {
   const products = items?.map(({ id, variant, totalPrice, quantity }) => ({
     id: id || "",
@@ -72,6 +73,7 @@ const prepareCartSummary = (
       products={products}
       totalWithRecharge={totalWithRecharge}
       installmentsCosts={installmentsCosts}
+      method={method}
     />
   );
 };
@@ -132,7 +134,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
 
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState(false);
-
+  const [method, setMethod] = useState("card")
   const [selectedPaymentGateway, setSelectedPaymentGateway] = useState<
     string | undefined
   >(payment?.gateway);
@@ -357,6 +359,10 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     setInstallmentsCosts(installmentsCosts)
   }
 
+  const handleChangeMethod = (method: any) => {
+    setMethod(method)
+  }
+
   const paymentGatewaysView = availablePaymentGateways && (
     <PaymentGatewaysList
       paymentGateways={availablePaymentGateways}
@@ -369,6 +375,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
       selectedPaymentGatewayToken={selectedPaymentGatewayToken}
       selectPaymentGateway={setSelectedPaymentGateway}
       handleRechargeInstallment={handleRechargeInstallment}
+      handleChangeMethod={handleChangeMethod}
       onError={handlePaymentGatewayError}
       errors={paymentGatewayErrors}
       items={items}
@@ -490,6 +497,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
         items,
         totalWithRecharge,
         installmentsCosts,
+        method,
       )}
       checkout={checkoutView}
       paymentGateways={paymentGatewaysView}
