@@ -123,10 +123,15 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     createPayment,
     completeCheckout,
   } = useCheckout();
+  const intl = useIntl();
+
+  if (cartLoaded && (!items || !items?.length)) {
+    return <Redirect to="/cart/" />;
+  }
+
   const [totalWithRecharge, setTotalWithRecharge] = useState()
   const [installmentsCosts, setInstallmentsCosts] = useState()
   const [method, setMethod] = useState("card")
-  const intl = useIntl();
 
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState(false);
@@ -147,10 +152,6 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   useEffect(() => {
     setSelectedPaymentGatewayToken(payment?.token);
   }, [payment?.token]);
-
-  if (cartLoaded && (!items || !items?.length)) {
-    return <Redirect to="/cart/" />;
-  }
 
   const isShippingRequiredForProducts =
     items &&
