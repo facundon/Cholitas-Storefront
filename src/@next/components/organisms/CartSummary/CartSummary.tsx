@@ -36,17 +36,6 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
     }
   }
 
-  const totalAmount = {
-    gross: {
-      amount: totalWithRecharge || total?.gross.amount,
-      currency: "ARS"
-    },
-    net:{
-      amount: totalWithRecharge || total?.gross.amount,
-      currency: "ARS"
-    }
-  }
-
   const intl = useIntl();
   return (
     <S.Costs>
@@ -56,7 +45,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
           cost={subtotal}
         />
       )}     
-      {totalWithRecharge != total?.gross.amount && method == "card" && (
+      {totalWithRecharge != total?.gross.amount && method == "card" && recharge?.gross.amount != 0 && (
         <CostLine
           name={intl.formatMessage(commonMessages.recharge)}
           cost={recharge}
@@ -84,11 +73,12 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
        </S.CostLine>
       )}
       {total && method == "card" && (
-        <CostLine
-          name={installmentsCosts ? "" : "Total"}
-          cost={totalAmount}
-          last={installmentsCosts ? false : true}
-        />
+        <S.CostLine last={installmentsCosts ? false : true}>
+          <span>{installmentsCosts ? "" : "Total"}</span>
+          <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
+            {`${installmentsCosts ? '(' : ""}${installmentsCosts ? totalWithRecharge.toFixed(2) : total.gross.amount} ARS${installmentsCosts ? ')' : ""}`}
+          </span>
+        </S.CostLine>
       )}
       {total && method == "other" && (
         <CostLine

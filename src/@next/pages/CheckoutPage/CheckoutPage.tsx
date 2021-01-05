@@ -78,7 +78,6 @@ const prepareCartSummary = (
   );
 };
 
-
 const getCheckoutProgress = (
   loaded: boolean,
   activeStepIndex: number,
@@ -126,15 +125,11 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   } = useCheckout();
   const [totalWithRecharge, setTotalWithRecharge] = useState()
   const [installmentsCosts, setInstallmentsCosts] = useState()
+  const [method, setMethod] = useState("card")
   const intl = useIntl();
-
-  if (cartLoaded && (!items || !items?.length)) {
-    return <Redirect to="/cart/" />;
-  }
 
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState(false);
-  const [method, setMethod] = useState("card")
   const [selectedPaymentGateway, setSelectedPaymentGateway] = useState<
     string | undefined
   >(payment?.gateway);
@@ -152,6 +147,10 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   useEffect(() => {
     setSelectedPaymentGatewayToken(payment?.token);
   }, [payment?.token]);
+
+  if (cartLoaded && (!items || !items?.length)) {
+    return <Redirect to="/cart/" />;
+  }
 
   const isShippingRequiredForProducts =
     items &&

@@ -194,6 +194,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
       script.async = true;
       script.onload = initMP
       document.body.appendChild(script);
+      handleChangeMethod(method)
   }, [method])
 
   const initMP = () => {
@@ -214,10 +215,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   const handleSelect = (activeKey: any) => {
     setMethod(activeKey)
   }
-
-  useEffect(()=>{
-    handleChangeMethod(method)
-  }, [method])
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">
