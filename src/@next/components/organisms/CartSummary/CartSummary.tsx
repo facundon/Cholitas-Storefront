@@ -27,22 +27,22 @@ const CostLine = ({
 const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts, method }: ICosts) => {
   const recharge = {
     gross: {
-      amount: totalWithRecharge - total?.gross.amount,
+      amount: installmentsCosts?.installment_amount || 0,
       currency: "ARS"
     },
     net:{
-      amount: totalWithRecharge - total?.gross.amount,
+      amount: installmentsCosts?.installment_amount || 0,
       currency: "ARS"
     }
   }
 
   const totalAmount = {
     gross: {
-      amount: totalWithRecharge || total,
+      amount: totalWithRecharge || total?.gross.amount,
       currency: "ARS"
     },
     net:{
-      amount: totalWithRecharge || total,
+      amount: totalWithRecharge || total?.gross.amount,
       currency: "ARS"
     }
   }
