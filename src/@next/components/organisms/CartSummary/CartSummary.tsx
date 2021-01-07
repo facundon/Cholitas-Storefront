@@ -76,7 +76,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
         <S.CostLine last={installmentsCosts ? false : true}>
           <span>{installmentsCosts ? "" : "Total"}</span>
           <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
-            {`${installmentsCosts ? '(' : ""}${installmentsCosts ? totalWithRecharge.toFixed(2) : total.gross.amount} ARS${installmentsCosts ? ')' : ""}`}
+            {`${installmentsCosts ? '(' : ""}${installmentsCosts ? totalWithRecharge.toFixed(2) : total.gross.amount.toFixed(2)} ARS${installmentsCosts ? ')' : ""}`}
           </span>
         </S.CostLine>
       )}

@@ -73,7 +73,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
     if (payment?.creditCard && payment?.creditCard?.extra_data == null ) {
       return `Tarjeta terminada en ${payment?.creditCard.lastDigits}`;
     } else {
-      return `Mercado Pago: ${payment?.creditCard?.extra_data?.readable_method}`
+      return `${payment?.creditCard?.extra_data?.readable_method}`
     }
   };
 
@@ -102,7 +102,8 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
             id: data?.order?.id,
             orderNumber: data?.order?.number,
             token: data?.order?.token,
-            orderStatus: data?.order?.paymentStatus
+            orderStatus: data?.order?.paymentStatus,
+            externalResource: data?.confirmationData
           });
         }
       }
