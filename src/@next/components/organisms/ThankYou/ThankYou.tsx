@@ -16,7 +16,9 @@ const ThankYou: React.FC<IProps> = ({
   continueShopping,
   orderDetails,
   orderStatus,
+  externalResource
 }: IProps) => {
+  console.log(JSON.parse(externalResource).externalResource)
   return (
     <Container data-test="thankYouView">
       <S.Wrapper>

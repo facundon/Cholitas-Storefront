@@ -41,8 +41,8 @@ const Page: React.FC<{
   };
 
   const getCategoriesImgs = () =>
-   categories.edges.map(cat =>
-     cat.node.backgroundImage ? cat.node.backgroundImage.url : null
+   categories?.edges?.map(cat =>
+     cat?.node.backgroundImage ? cat.node.backgroundImage.url : null
    );
 
   return (

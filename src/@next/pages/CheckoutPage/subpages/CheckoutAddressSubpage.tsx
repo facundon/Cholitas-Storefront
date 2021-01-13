@@ -158,6 +158,7 @@ const CheckoutAddressSubpageWithRef: RefForwardingComponent<
           }),
         },
       ]);
+      changeSubmitProgress(false)
       return;
     }
 

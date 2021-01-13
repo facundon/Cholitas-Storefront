@@ -27,9 +27,9 @@ const showSuccessNotification = (
         title: data.accountRegister.requiresConfirmation
           ? intl.formatMessage({
               defaultMessage:
-                "Please check your e-mail for further instructions",
+                "Revisa tu Email para y sigue las instrucciones",
             })
-          : intl.formatMessage({ defaultMessage: "New user has been created" }),
+          : intl.formatMessage({ defaultMessage: "Nuevo usuario creado" }),
       },
       { type: "success", timeout: 5000 }
     );
