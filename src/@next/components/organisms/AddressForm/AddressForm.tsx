@@ -35,7 +35,6 @@ export const AddressForm: React.FC<IProps> = ({
   if (defaultValue) {
     addressWithPickedFields.country = defaultValue;
   }
-  defaultValue = "Argentina"
   return (
     <Formik
       initialValues={addressWithPickedFields}

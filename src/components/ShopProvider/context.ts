@@ -3,8 +3,8 @@ import { createContext } from "react";
 
 export const defaultCountry = {
   __typename: "CountryDisplay" as "CountryDisplay",
-  code: "US",
-  country: "United States of America",
+  code: "AR",
+  country: "Argentina",
 };
 
 export const defaultContext: GetShop_shop = {

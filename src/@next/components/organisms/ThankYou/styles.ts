@@ -29,12 +29,23 @@ export const ThankYouHeader = styled.p`
 export const Paragraph = styled.p`
   font-size: ${props => props.theme.typography.h4FontSize};
   margin: 0;
+  padding: 7px;
   line-height: 170%;
 
   span {
     font-weight: ${props => props.theme.typography.boldFontWeight};
   }
 `;
+
+export const Anchor = styled.a`
+  font-size: ${props => props.theme.typography.h4FontSize};
+  font-weight: ${props => props.theme.typography.boldFontWeight};
+  color: ${props=> props.theme.colors.primaryDark};
+  
+  &:hover {
+    color: ${props=>props.theme.colors.primaryLight};
+  }
+     `;
 
 export const Buttons = styled.div`
   width: 50%;

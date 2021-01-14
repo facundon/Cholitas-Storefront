@@ -18,7 +18,7 @@ const ThankYou: React.FC<IProps> = ({
   orderStatus,
   externalResource
 }: IProps) => {
-  console.log(JSON.parse(externalResource).externalResource)
+  const parsed_externalResource = JSON.parse(externalResource).externalResource
   return (
     <Container data-test="thankYouView">
       <S.Wrapper>
@@ -33,18 +33,27 @@ const ThankYou: React.FC<IProps> = ({
           <FormattedMessage defaultMessage="El número de orden es" />{" "}
           <span>{orderNumber}</span>
         </S.Paragraph>
-        {orderStatus == "PENDING" ?
+        {parsed_externalResource != "" ? 
           <>
-            <S.Paragraph>
-              <FormattedMessage defaultMessage="Estamos procesando tu pago. No te preocupes, en menos de 2 días hábiles te avisaremos por email si se acreditó." /> 
-            </S.Paragraph>
-            <S.Paragraph>
-              <FormattedMessage defaultMessage="Igualmente te envíamos un email con el detalle de tu compra!" /> 
-            </S.Paragraph>
-          </> :
           <S.Paragraph>
-            <FormattedMessage defaultMessage="Te enviamos un email con el detalle de tu compra. Te avisaremos cuando tu orden se encuentre en camino!" />
+            Por favor, ingresá al siguiente <S.Anchor href={parsed_externalResource}>Link</S.Anchor> donde se encuentra el ticket de pago junto a las instrucciones para realizar el mismo
           </S.Paragraph>
+          <S.Paragraph>
+            <FormattedMessage defaultMessage="Una vez que se haya acreditado, te enviaremos un email para avisarte" />
+          </S.Paragraph>
+          </> : 
+          orderStatus == "PENDING" ?
+            <>
+              <S.Paragraph>
+                <FormattedMessage defaultMessage="Estamos procesando tu pago. No te preocupes, en menos de 2 días hábiles te avisaremos por email si se acreditó." /> 
+              </S.Paragraph>
+              <S.Paragraph>
+                <FormattedMessage defaultMessage="Igualmente te envíamos un email con el detalle de tu compra!" /> 
+              </S.Paragraph>
+            </> :
+            <S.Paragraph>
+              <FormattedMessage defaultMessage="Te enviamos un email con el detalle de tu compra. Te avisaremos cuando tu orden se encuentre en camino!" />
+            </S.Paragraph>
         }
         <S.Buttons>
           <Button
