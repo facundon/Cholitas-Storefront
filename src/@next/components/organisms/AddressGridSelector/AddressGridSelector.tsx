@@ -100,7 +100,7 @@ const AddressGridSelector: React.FC<IProps> = ({
           hideModal={() => {
             setDisplayNewModal(false);
           }}
-          submitBtnText="Add"
+          submitBtnText="Agregar"
           title={intl.formatMessage(checkoutMessages.addNewAddress)}
           countriesOptions={countriesOptions}
           formId={newAddressFormId}

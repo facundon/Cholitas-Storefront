@@ -89,7 +89,6 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
       } else {
         const paymentData = payment?.creditCard
         const response = await completeCheckout({ paymentData });
-        console.log(response)
         data = response.data;
         dataError = response.dataError;
         changeSubmitProgress(false);

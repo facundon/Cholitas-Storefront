@@ -21,15 +21,15 @@ export const ResetPasswordForm: React.FC<IProps> = ({
   return (
     <S.Wrapper>
       <h3>
-        <FormattedMessage defaultMessage="Reset your password" />
+        <FormattedMessage defaultMessage="Restablecer tu contraseña" />
       </h3>
 
       <p>
-        <FormattedMessage defaultMessage="Please provide new password" />
+        <FormattedMessage defaultMessage="Por favor ingresa una nueva contraseña" />
       </p>
       {tokenError && (
         <S.GeneralError>
-          <FormattedMessage defaultMessage="It seems that token for password reset is not valid anymore." />
+          <FormattedMessage defaultMessage="Parece ser que el token para la operación expiró." />
         </S.GeneralError>
       )}
       <form onSubmit={handleSubmit}>
@@ -53,7 +53,7 @@ export const ResetPasswordForm: React.FC<IProps> = ({
             }
           />
           <TextField
-            label={intl.formatMessage({ defaultMessage: "Retype password" })}
+            label={intl.formatMessage({ defaultMessage: "Volver a escribir contraseña" })}
             onBlur={handleBlur}
             name="retypedPassword"
             onChange={handleChange}
@@ -73,7 +73,7 @@ export const ResetPasswordForm: React.FC<IProps> = ({
         </S.InputFields>
 
         <Button testingContext="submit" type="submit" fullWidth>
-          <FormattedMessage defaultMessage="SET NEW PASSWORD" />
+          <FormattedMessage defaultMessage="RESTABLECER" />
         </Button>
       </form>
     </S.Wrapper>

@@ -21,15 +21,15 @@ const PasswordResetRequestForm: React.FC = () => {
       return intl.formatMessage(commonMessages.loading);
     }
     if (data?.requestPasswordReset.errors.length === 0) {
-      return intl.formatMessage({ defaultMessage: "Check your inbox" });
+      return intl.formatMessage({ defaultMessage: "Mirá tu email" });
     }
-    return intl.formatMessage({ defaultMessage: "Reset password" });
+    return intl.formatMessage({ defaultMessage: "Restablecer" });
   };
 
   return (
     <div className="password-reset-form">
       <p>
-        <FormattedMessage defaultMessage="Please provide us your email address so we can share you a link to reset your password" />
+        <FormattedMessage defaultMessage="Por favor, ingresa tu email asi podremos enviarte un link para restablecer tu contraseña" />
       </p>
       <TypedPasswordResetRequestMutation>
         {(passwordReset, { loading, data }) => {

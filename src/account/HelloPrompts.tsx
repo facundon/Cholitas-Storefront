@@ -9,8 +9,8 @@ export interface HelloPromptProps {
 const HelloPrompt = ({ name }) => {
   return (
     <div className="hello-prompt">
-      <h3>Hello{name !== "" ? `, ${name}!` : "!"}</h3>
-      <p>Welcome to your user account</p>
+      <h3>Hola{name !== "" ? `, ${name}!` : "!"}</h3>
+      <p>Bienvenido a tu cuenta de usuario</p>
     </div>
   );
 };
