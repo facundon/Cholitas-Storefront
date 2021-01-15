@@ -39,7 +39,7 @@ const ThankYou: React.FC<IProps> = ({
             Por favor, ingresá al siguiente <S.Anchor href={parsed_externalResource}>Link</S.Anchor> donde se encuentra el ticket de pago junto a las instrucciones para realizar el mismo
           </S.Paragraph>
           <S.Paragraph>
-            <FormattedMessage defaultMessage="Una vez que se haya acreditado, te enviaremos un email para avisarte" />
+            <FormattedMessage defaultMessage="Una vez que se haya acreditado, te enviaremos un email para avisarte. Tene en cuenta que el ticket de pago tiene una validez de 30 días" />
           </S.Paragraph>
           </> : 
           orderStatus == "PENDING" ?

@@ -175,6 +175,7 @@ export interface MainMenu_shop {
    * Shop's navigation.
    */
   navigation: MainMenu_shop_navigation | null;
+  description: MainMenu_shop_navigation | null;
 }
 
 export interface MainMenu {

@@ -57,7 +57,11 @@ const MainMenu: React.FC = () => {
     <OverlayContext.Consumer>
       {overlayContext => (
         <nav className="main-navbar">
-          <div className="topbar" ref={element}>Hola manola</div>
+          <TypedMainMenuQuery renderOnError displayLoader={false}>
+            {({ data }) => (
+              <div className="topbar" ref={element}>{data.shop.description}</div>
+            )}
+          </TypedMainMenuQuery>
           <div className={`main-menu-wrapper${isSticky ? "-sticky" : ""}`}>
             <div className={`main-menu${isSticky ? "-sticky" : ""}`} id="header">
               <div className="main-menu__left">

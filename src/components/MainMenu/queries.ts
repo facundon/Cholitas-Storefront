@@ -39,6 +39,7 @@ export const mainMenu = gql`
           }
         }
       }
+      description
     }
   }
 `;
