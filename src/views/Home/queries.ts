@@ -27,7 +27,7 @@ export const homePageQuery = gql`
         }
       }
     }
-    products(first: 7) {
+    products(first: 10) {
       edges {
         node {
           id

@@ -43,7 +43,7 @@ export const Anchor = styled.a`
   color: ${props=> props.theme.colors.primaryDark};
   
   &:hover {
-    color: ${props=>props.theme.colors.primaryLight};
+    color: ${props=>props.theme.colors.primary};
   }
      `;
 

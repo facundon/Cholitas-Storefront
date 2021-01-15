@@ -71,12 +71,15 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
     return match;
   }
 
+  componentDidUpdate = () => { 
+    document.querySelector("body").style.overflow = this.state.menuOpen ? 'hidden' : 'auto';
+  }
+
   render() {
     const { displayedItems, parent } = this.state;
 
     return (
       <Menu
-        // noTransition={this.state.transInactive}
         width={320}
         isOpen={this.state.menuOpen}
         onClose={this.closeMenu}
