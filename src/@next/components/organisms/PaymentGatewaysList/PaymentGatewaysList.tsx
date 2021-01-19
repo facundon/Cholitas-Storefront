@@ -80,6 +80,28 @@ const PaymentGatewaysList: React.FC<IProps> = ({
               </div>
             );
 
+          case PROVIDERS.TRANSFERENCIA.label:
+            return (
+              <div key={index}>
+                <S.Tile checked={checked}>
+                <Radio
+                    data-test="checkoutPaymentGatewayTransferenciaInput"
+                    name="payment-method"
+                    value="credit-card"
+                    checked={checked}
+                    onChange={() =>
+                      selectPaymentGateway && selectPaymentGateway(id)
+                    }
+                    customLabel
+                  >
+                    <span data-test="checkoutPaymentGatewayTransferenciaName">
+                      {name}
+                    </span>
+                  </Radio>
+                </S.Tile>
+              </div>
+            )
+            
           case PROVIDERS.BRAINTREE.label:
             return (
               <div key={index}>

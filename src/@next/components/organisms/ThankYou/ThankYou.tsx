@@ -33,7 +33,7 @@ const ThankYou: React.FC<IProps> = ({
           <FormattedMessage defaultMessage="El número de orden es" />{" "}
           <span>{orderNumber}</span>
         </S.Paragraph>
-        {parsed_externalResource != "" ? 
+        {parsed_externalResource != null ? 
           <>
           <S.Paragraph>
             Por favor, ingresá al siguiente <S.Anchor href={parsed_externalResource}>Link</S.Anchor> donde se encuentra el ticket de pago junto a las instrucciones para realizar el mismo
