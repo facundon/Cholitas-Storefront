@@ -50,7 +50,7 @@ const CheckoutReview: React.FC<IProps> = ({
         </section>
         <section>
           <S.SubTitle>
-            <FormattedMessage defaultMessage="Método de Pago" />
+            <FormattedMessage defaultMessage="Medio de Pago" />
           </S.SubTitle>
           <S.Divider />
           <S.TextSummary data-test="paymentMethodName">

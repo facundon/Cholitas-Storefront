@@ -19,6 +19,7 @@ export * from "./StripeCreditCardForm";
 export * from "./MercadoPagoCreditCardForm";
 export * from "./MercadoPagoOtrosMediosForm";
 export * from "./MercadoPagoPaymentGateway";
+export * from "./TransferenciaBancariaPaymentGateway";
 export * from "./BraintreePaymentGateway";
 export * from "./DummyPaymentGateway";
 export * from "./StripePaymentGateway";

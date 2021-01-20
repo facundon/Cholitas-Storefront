@@ -5,6 +5,7 @@ import { PROVIDERS } from "@temp/core/config";
 
 import {
   MercadoPagoPaymentGateway,
+  TransferenciaBancariaPaymentGateway,
   BraintreePaymentGateway,
   DummyPaymentGateway,
   StripePaymentGateway,
@@ -99,6 +100,15 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     </span>
                   </Radio>
                 </S.Tile>
+                {checked &&
+                  <TransferenciaBancariaPaymentGateway
+                  formRef={formRef}
+                  processPayment={(token, cardData) =>
+                    processPayment(id, token, cardData)
+                  }
+                  errors={errors}
+                />
+                }
               </div>
             )
             

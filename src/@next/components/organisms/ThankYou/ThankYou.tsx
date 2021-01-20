@@ -33,7 +33,18 @@ const ThankYou: React.FC<IProps> = ({
           <FormattedMessage defaultMessage="El número de orden es" />{" "}
           <span>{orderNumber}</span>
         </S.Paragraph>
-        {parsed_externalResource != null ? 
+        {parsed_externalResource != null ?
+          parsed_externalResource?.name ?
+          <>
+          <S.Paragraph>
+            <FormattedMessage defaultMessage="A continuación se encuentran los datos para realizar la transferencia. Una vez que la hayas realizado, envianos un email con una foto del comprobante asi podemos realizar el pedido!" /> 
+          </S.Paragraph>
+          <S.Paragraph>
+            Nombre: <span>{parsed_externalResource?.name}</span>
+            <br></br>
+            CBU: <span>{parsed_externalResource?.cbu}</span>
+          </S.Paragraph>
+          </> : 
           <>
           <S.Paragraph>
             Por favor, ingresá al siguiente <S.Anchor href={parsed_externalResource}>Link</S.Anchor> donde se encuentra el ticket de pago junto a las instrucciones para realizar el mismo
