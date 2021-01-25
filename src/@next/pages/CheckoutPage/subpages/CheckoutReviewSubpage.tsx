@@ -37,6 +37,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
     paymentGatewayFormRef,
     changeSubmitProgress,
     onSubmitSuccess,
+    subtotal,
     ...props
   }: IProps,
   ref
@@ -105,13 +106,14 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
             orderNumber: data?.order?.number,
             token: data?.order?.token,
             orderStatus: data?.order?.paymentStatus,
-            externalResource: data?.confirmationData
+            externalResource: data?.confirmationData,
+            total_amount: payment?.total.amount,
+            subtotal: subtotal,
           });
         }
       }
     },
   }));
-  
   return (
     <CheckoutReview
       {...props}

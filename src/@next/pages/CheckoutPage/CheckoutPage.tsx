@@ -41,6 +41,7 @@ const prepareCartSummary = (
   totalWithRecharge?: any,
   installmentsCosts?: any,
   method?: any,
+  paymentGateway?: any,
 ) => {
   const products = items?.map(({ id, variant, totalPrice, quantity }) => ({
     id: id || "",
@@ -74,6 +75,7 @@ const prepareCartSummary = (
       totalWithRecharge={totalWithRecharge}
       installmentsCosts={installmentsCosts}
       method={method}
+      paymentGateway={paymentGateway}
     />
   );
 };
@@ -289,6 +291,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
             paymentGatewayFormRef={checkoutGatewayFormRef}
             selectedPaymentGatewayToken={selectedPaymentGatewayToken}
             changeSubmitProgress={setSubmitInProgress}
+            subtotal={subtotalPrice}
             onSubmitSuccess={data =>
               handleStepSubmitSuccess(CheckoutStep.Review, data)
             }
@@ -480,7 +483,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   };
 
   const activeStepIndex = getActiveStepIndex();
-
+  
   return (
     <Checkout
       loading={submitInProgress}
@@ -498,6 +501,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
         totalWithRecharge,
         installmentsCosts,
         method,
+        selectedPaymentGateway,
       )}
       checkout={checkoutView}
       paymentGateways={paymentGatewaysView}

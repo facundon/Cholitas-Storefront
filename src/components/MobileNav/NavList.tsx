@@ -21,7 +21,6 @@ interface NavListState {
   parent: INavItem | null;
   displayedItems: INavItem[];
   menuOpen: boolean;
-  transInactive: boolean;
 }
 
 class NavList extends React.PureComponent<NavListProps, NavListState> {
@@ -29,7 +28,6 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
     displayedItems: this.props.items,
     parent: null,
     menuOpen: false,
-    transInactive: false,
   };
 
   handleStateChange = (state) => {
@@ -37,18 +35,18 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
   }
 
   closeMenu = () => {
-    this.setState({ menuOpen: false, transInactive: false, parent: null, displayedItems: this.props.items });
+    this.setState({ menuOpen: false, parent: null, displayedItems: this.props.items });
   }
 
   handleShowSubItems = (item: INavItem) => {
-    this.setState({ parent: item, displayedItems: item.children, transInactive: false });
+    this.setState({ parent: item, displayedItems: item.children });
   };
 
   handleGoBack = () => {
     const grandparent = this.state.parent.parent;
 
     if (!grandparent) {
-      this.setState({ parent: null, displayedItems: this.props.items, transInactive: false });
+      this.setState({ parent: null, displayedItems: this.props.items });
     } else {
       const newParent = this.findItemById(grandparent.id);
       this.setState({

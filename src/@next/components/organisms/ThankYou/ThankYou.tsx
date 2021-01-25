@@ -16,7 +16,8 @@ const ThankYou: React.FC<IProps> = ({
   continueShopping,
   orderDetails,
   orderStatus,
-  externalResource
+  externalResource,
+  total
 }: IProps) => {
   const parsed_externalResource = JSON.parse(externalResource).externalResource
   return (
@@ -43,6 +44,8 @@ const ThankYou: React.FC<IProps> = ({
             Nombre: <span>{parsed_externalResource?.name}</span>
             <br></br>
             CBU: <span>{parsed_externalResource?.cbu}</span>
+            <br></br>
+            Monto a transferir: <span>${total}</span>
           </S.Paragraph>
           </> : 
           <>
