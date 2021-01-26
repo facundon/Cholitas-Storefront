@@ -43,7 +43,7 @@ const ThankYou: React.FC<IProps> = ({
           <S.Paragraph>
             Nombre: <span>{parsed_externalResource?.name}</span>
             <br></br>
-            CBU: <span>{parsed_externalResource?.cbu}</span>
+            CBU/Alias: <span>{parsed_externalResource?.cbu}</span>
             <br></br>
             Monto a transferir: <span>${total}</span>
           </S.Paragraph>

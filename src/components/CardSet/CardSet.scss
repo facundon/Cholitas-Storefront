@@ -16,6 +16,18 @@
     display: inline-block;
     width: 310px;
 
+    img{
+      object-fit: cover;
+      min-width: 100%;
+      min-width: -moz-available;          /* WebKit-based browsers will ignore this. */
+      min-width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+      min-width: fill-available;
+      height: 310px;
+    
+      @media (max-width: $medium-screen){
+        height: 130px;
+      }
+    }
     @media (max-width: $medium-screen){
       width: 130px;
     }
@@ -25,17 +37,4 @@
 .scroll-menu-arrow {
   padding: 20px;
   cursor: pointer;
-}
-
-img{
-  object-fit: cover;
-  min-width: 100%;
-  min-width: -moz-available;          /* WebKit-based browsers will ignore this. */
-  min-width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
-  min-width: fill-available;
-  height: 310px;
-
-  @media (max-width: $medium-screen){
-    height: 130px;
-  }
 }

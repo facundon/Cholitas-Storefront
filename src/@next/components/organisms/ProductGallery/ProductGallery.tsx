@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { Icon } from "@components/atoms";
@@ -6,12 +6,13 @@ import { CachedImage } from "@components/molecules";
 
 import * as S from "./styles";
 import { IProps } from "./types";
+import Viewer from 'react-viewer';
 
-const MINIMAL_NUMBER_OF_IMAGES_FOR_BUTTONS = 4;
+const MINIMAL_NUMBER_OF_IMAGES_FOR_BUTTONS = 2;
 
 export const ProductGallery: React.FC<IProps> = ({ images }: IProps) => {
   const [imageIndex, setImageIndex] = React.useState<number>(0);
-
+  const [visible, setVisible] = useState(false)
   const displayButtons = images.length > MINIMAL_NUMBER_OF_IMAGES_FOR_BUTTONS;
 
   React.useEffect(() => {
@@ -116,7 +117,7 @@ export const ProductGallery: React.FC<IProps> = ({ images }: IProps) => {
         </S.ThumbnailList>
       </S.ThumbnailsContainer>
 
-      <S.Preview data-test="imagePreview">
+      <S.Preview data-test="imagePreview" onClick={() => { setVisible(true); } }>
         {images && images.length > 0 && imageIndex < images.length && (
           <CachedImage
             alt={images[imageIndex].alt}
@@ -125,6 +126,28 @@ export const ProductGallery: React.FC<IProps> = ({ images }: IProps) => {
         )}
         {images.length === 0 && <CachedImage />}
       </S.Preview>
+
+      <Viewer
+        visible={visible}
+        left={0}
+        drag={true}
+        noImgDetails
+        maxScale={1}
+        minScale={0.5}
+        defaultScale={0.7}
+        scalable={false}
+        rotatable={false}
+        attribute={false}
+        activeIndex={imageIndex}
+        onClose={() => { setVisible(false); } }
+        images={images?.map(img => (
+          {
+            src: img.url,
+            alt: img.url,
+          }
+          ))
+        }
+        />
     </S.Wrapper>
   );
 };
