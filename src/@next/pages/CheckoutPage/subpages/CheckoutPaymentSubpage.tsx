@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   useRef,
   useState,
+  useEffect,
 } from "react";
 import { useIntl } from "react-intl";
 import { RouteComponentProps } from "react-router";
@@ -32,6 +33,7 @@ const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
     changeSubmitProgress,
     onSubmitSuccess,
     onPaymentGatewayError,
+    selectedPaymentGateway,
     ...props
   }: IProps,
   ref
@@ -115,6 +117,11 @@ const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
       ]);
     }
   };
+  useEffect(() => {
+    selectedPaymentGateway === "mirumee.payments.transferencia" ?
+      addPromoCode("391F65D3F6E9") :
+      removePromoCode("391F65D3F6E9")
+  }, [selectedPaymentGateway])
 
   return (
     <CheckoutPayment
@@ -128,6 +135,7 @@ const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
       removeVoucherCode={handleRemovePromoCode}
       submitUnchangedDiscount={handleSubmitUnchangedDiscount}
       promoCodeErrors={promoCodeErrors}
+      selectedPaymentGateway={selectedPaymentGateway}
     />
   );
 };

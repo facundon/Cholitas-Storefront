@@ -108,7 +108,6 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
             orderStatus: data?.order?.paymentStatus,
             externalResource: data?.confirmationData,
             total_amount: payment?.total.amount,
-            subtotal: subtotal,
           });
         }
       }

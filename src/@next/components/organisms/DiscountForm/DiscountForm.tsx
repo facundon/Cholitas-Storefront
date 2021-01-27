@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { Button, Chip, ErrorMessage, Input } from "@components/atoms";
@@ -13,6 +13,7 @@ export const DiscountForm: React.FC<IProps> = ({
   errors,
   formId,
   formRef,
+  selectedPaymentGateway,
 }: IProps) => {
   const promoCode = discount && discount.promoCode;
 
@@ -29,6 +30,10 @@ export const DiscountForm: React.FC<IProps> = ({
     setTempPromoCode(undefined);
     setInputCode(newInputCode);
   };
+
+  useEffect(() => {
+    setTempPromoCode(undefined)
+  }, [selectedPaymentGateway])
 
   return (
     <Formik
@@ -56,7 +61,6 @@ export const DiscountForm: React.FC<IProps> = ({
         setFieldTouched,
       }) => {
         const hasErrors = !!(values.errors && values.errors.length);
-
         return (
           <S.DiscountForm
             id={formId}
@@ -87,7 +91,7 @@ export const DiscountForm: React.FC<IProps> = ({
               </S.InputWithButton>
               <ErrorMessage errors={values.errors} />
             </S.Input>
-            {values.tempPromoCode && (
+            {values.tempPromoCode && selectedPaymentGateway !== "mirumee.payments.transferencia" && (
               <>
                 <span>
                   <FormattedMessage {...commonMessages.promoCode} />:

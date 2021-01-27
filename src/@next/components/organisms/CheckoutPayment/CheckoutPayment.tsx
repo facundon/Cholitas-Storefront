@@ -21,6 +21,7 @@ const CheckoutPayment: React.FC<IProps> = ({
   addPromoCode,
   removeVoucherCode,
   submitUnchangedDiscount,
+  selectedPaymentGateway,
 }: IProps) => {
   const [showPromoCodeForm, setShowPromoCodeForm] = useState(
     !!promoCodeDiscount?.voucherCode
@@ -28,7 +29,7 @@ const CheckoutPayment: React.FC<IProps> = ({
 
   useEffect(() => {
     const isVoucherCode = !!promoCodeDiscount?.voucherCode;
-    if (isVoucherCode) {
+    if (isVoucherCode && selectedPaymentGateway !== "mirumee.payments.transferencia") {
       setShowPromoCodeForm(isVoucherCode);
     }
   }, [promoCodeDiscount?.voucherCode]);
@@ -49,6 +50,9 @@ const CheckoutPayment: React.FC<IProps> = ({
       submitUnchangedDiscount();
     }
   };
+  useEffect(() => {
+    setShowPromoCodeForm(false)
+  }, [selectedPaymentGateway])
 
   return (
     <S.Wrapper>
@@ -62,7 +66,7 @@ const CheckoutPayment: React.FC<IProps> = ({
           checked={showPromoCodeForm}
           onChange={handleChangeShowPromoCodeForm}
         >
-          <FormattedMessage defaultMessage="Tenes una gift card o un código de descuento?" />
+          <FormattedMessage defaultMessage="Tenes un código de descuento?" />
         </Checkbox>
         {showPromoCodeForm && (
           <S.DiscountField>
@@ -72,6 +76,7 @@ const CheckoutPayment: React.FC<IProps> = ({
               formRef={promoCodeDiscountFormRef}
               handleSubmit={handleSubmitPromoCode}
               errors={promoCodeErrors}
+              selectedPaymentGateway={selectedPaymentGateway}
             />
           </S.DiscountField>
         )}

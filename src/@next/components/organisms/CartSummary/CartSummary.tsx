@@ -24,7 +24,7 @@ const CostLine = ({
   </S.CostLine>
 );
 
-const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts, method, paymentGateway }: ICosts) => {
+const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts, method }: ICosts) => {
   const recharge = {
     gross: {
       amount: installmentsCosts?.installment_amount || 0,
@@ -32,26 +32,6 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
     },
     net:{
       amount: installmentsCosts?.installment_amount || 0,
-      currency: "ARS"
-    }
-  }
-  const transferencia_discount = {
-    gross: {
-      amount: subtotal?.gross.amount * 0.1 || 0,
-      currency: "ARS"
-    },
-    net:{
-      amount: subtotal?.net.amount * 0.1 || 0,
-      currency: "ARS"
-    }
-  }
-  const transferencia_total = {
-    gross: {
-      amount: total?.gross.amount - transferencia_discount?.gross.amount || 0,
-      currency: "ARS"
-    },
-    net:{
-      amount: total?.net.amount - transferencia_discount?.net.amount || 0,
       currency: "ARS"
     }
   }
@@ -79,7 +59,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
       )}
       {promoCode && promoCode.gross.amount > 0 && (
         <CostLine
-          name={intl.formatMessage(commonMessages.promoCode)}
+          name={intl.formatMessage(commonMessages.discount)}
           cost={promoCode}
           negative
         />
@@ -92,7 +72,7 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
          </span>
        </S.CostLine>
       )}
-      {total && method == "card" && paymentGateway !== "mirumee.payments.transferencia" &&(
+      {total && method == "card" &&(
         <S.CostLine last={installmentsCosts ? false : true}>
           <span>{installmentsCosts ? "" : "Total"}</span>
           <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
@@ -104,20 +84,6 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
         <CostLine
           name={intl.formatMessage(commonMessages.total)}
           cost={total}
-          last
-        />
-      )}
-      {total && paymentGateway === "mirumee.payments.transferencia" && (
-        <CostLine
-          name={intl.formatMessage({defaultMessage: "Pago por Transferencia"})}
-          cost={transferencia_discount}
-          negative
-        />
-      )}
-      {total && paymentGateway === "mirumee.payments.transferencia" && (
-        <CostLine
-          name={intl.formatMessage(commonMessages.total)}
-          cost={transferencia_total}
           last
         />
       )}
@@ -137,7 +103,6 @@ const CartSummary: React.FC<IProps> = ({
   totalWithRecharge,
   installmentsCosts,
   method,
-  paymentGateway,
 }: IProps) => {
   const [mobileCartOpened, setMobileCartOpened] = useState(false);
   const [installmentRate, setInstallmentRate] = useState({TEA: "", CFT: ""})
@@ -194,7 +159,6 @@ const CartSummary: React.FC<IProps> = ({
           totalWithRecharge={totalWithRecharge}
           installmentsCosts={installmentsCosts}
           method={method}
-          paymentGateway={paymentGateway}
         />
         {method == "card" && ( 
         <>

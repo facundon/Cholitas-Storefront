@@ -10,8 +10,7 @@ import { IProps } from "./types";
 const ThankYouPage: React.FC<IProps> = ({}: IProps) => {
   const location = useLocation();
   const history = useHistory();
-  const { token, orderNumber, orderStatus, externalResource, total_amount, subtotal } = location.state;
-  const transferencia_total = (total_amount - subtotal?.gross.amount) + subtotal?.gross.amount * 0.9
+  const { token, orderNumber, orderStatus, externalResource, total_amount } = location.state;
 
   return (
       <ThankYou
@@ -20,7 +19,7 @@ const ThankYouPage: React.FC<IProps> = ({}: IProps) => {
         orderDetails={() => history.push(generateGuestOrderDetailsUrl(token))}
         orderStatus={orderStatus}
         externalResource={externalResource}
-        total={transferencia_total.toFixed(2)}
+        total={total_amount}
       />
   );
 };

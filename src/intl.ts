@@ -74,7 +74,10 @@ export const commonMessages = defineMessages({
     defaultMessage: "Envío",
   },
   promoCode: {
-    defaultMessage: "Codigo de Descuento",
+    defaultMessage: "Código de Descuento",
+  },
+  discount: {
+    defaultMessage: "Descuento",
   },
   total: {
     defaultMessage: "Total",
