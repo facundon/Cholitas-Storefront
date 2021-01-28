@@ -20,7 +20,7 @@
       flex-direction: column;
       // height: calc(100vh - 56px);
       justify-content: space-between;
-      padding: $spacer;
+      padding-bottom: 3rem;
 
       &-text {
         margin-top: $spacer * 5;
@@ -65,15 +65,22 @@
     }
   }
 
+  &__categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 5px;
+  }
+
   &__destacados {
     margin-bottom: 2rem;
 
     h3 {
       font-weight: $bold-font-weight;
-      //margin-bottom: 1rem;
       font-size: x-large;
       text-align: center;
-      margin: 50px,;
+      margin-top: 50px;
+      margin-bottom: 20px;
 
       @media (max-width: $medium-screen){
         font-size: large;

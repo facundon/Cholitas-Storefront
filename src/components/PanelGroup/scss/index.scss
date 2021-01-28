@@ -1,0 +1,25 @@
+@import "../../../globalStyles/scss/variables";
+
+
+.panel-container {
+    background-color: $cholitas-base;
+}
+
+.panel-group {
+    text-align: center;
+    @media (max-width: $small-screen) {
+        text-align: left;
+    }
+
+    h4 {
+        display:inline-block;
+        @media (max-width: $small-screen) {
+            font-size: 90%;
+        }
+    }
+
+    .rs-panel-body {
+        text-align: left;
+        background-color: white;
+    }
+}

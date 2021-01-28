@@ -2,8 +2,9 @@ import "./scss/index.scss";
 
 import * as React from "react";
 
-import { Loader } from "../../components";
+import { Loader, PanelGroup } from "../../components";
 
+import SlicedImages from "../../components"
 import AutoSlider from "../../components/AutoSlider/AutoSlider";
 import CardSet from "../../components/CardSet/CardSet";
 
@@ -15,7 +16,7 @@ import {
 } from "./gqlTypes/ProductsList";
 
 import { structuredData } from "../../core/SEO/Homepage/structuredData";
-import { generateProductUrl } from "../../core/utils";
+import { generateProductUrl, generateCategoryUrl } from "../../core/utils";
 
 
 const Page: React.FC<{
@@ -32,6 +33,9 @@ const Page: React.FC<{
   const getProductUrl = producto =>
     generateProductUrl(producto.node.id, producto.node.name);
 
+  const getCategoryUrl = cat =>
+    generateCategoryUrl(cat.node.id, cat.node.name)
+
   const getProductsImg = () => {
     return products.edges.map(producto => ({
       header: producto.node.name,
@@ -42,7 +46,11 @@ const Page: React.FC<{
 
   const getCategoriesImgs = () =>
    categories?.edges?.map(cat =>
-     cat?.node.backgroundImage ? cat.node.backgroundImage.url : null
+     cat?.node.backgroundImage ? {
+       header: cat.node.name,
+       src: cat.node.backgroundImage.url,
+       url: getCategoryUrl(cat),
+      } : null
    );
 
   return (
@@ -53,13 +61,21 @@ const Page: React.FC<{
       <div id="home-page__hero" className="home-page__hero">
         <AutoSlider>{getCategoriesImgs()}</AutoSlider>
       </div>
+      <div className="home-page__categories">
+        <SlicedImages>{getCategoriesImgs()}</SlicedImages> 
+      </div>
       {productsExist() &&
         (loading && !products ? (
           <Loader />
         ) : (
-          <div className="home-page__destacados">
-            <CardSet header="Productos Destacados">{getProductsImg()}</CardSet>
-          </div>
+          <>
+            <div className="home-page__destacados">
+              <CardSet header="Productos Destacados">{getProductsImg()}</CardSet>
+            </div>
+            <div className="home-page__info">
+              <PanelGroup />
+            </div>
+          </>
         ))}
     </>
   );

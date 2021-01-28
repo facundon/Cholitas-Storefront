@@ -114,3 +114,41 @@ export const CHECKOUT_STEPS = [
     withoutOwnView: true,
   },
 ];
+export const INFORMATION = [
+  {
+    header: "Envíos",
+    icon: {
+        icon: "truck",
+        size: "lg",
+        flip: true,
+    },
+    info: {
+      line1: "Hacemos envíos a todo el país mediante Correo Argentino.",
+      line2: "Si estas en CABA te podemos envíar tu pedido por motomensajeria.",
+    },
+},
+{
+    header: "Medios de Pago",
+    icon: {
+        icon: "credit-card",
+        size: "lg",
+        flip: false,
+    },
+    info: {
+      line1: "Aceptamos todas las tarjetas y pagos en efectivo mediante MercadoPago",
+      line2: "También aceptamos transferencia bancaria",
+    },
+},
+{
+    header: "Contacto",
+    icon: {
+        icon: "phone",
+        size: "lg",
+        flip: false,
+    },
+    info: {
+      line1: "Email: cholitas.deco@gmail.com",
+      line2: "Instagram: #cholitas.deco",
+    },
+}
+]

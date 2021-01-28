@@ -14,7 +14,7 @@
 
   &-panel{
     display: inline-block;
-    width: 310px;
+    width: 290px;
 
     img{
       object-fit: cover;
@@ -22,7 +22,7 @@
       min-width: -moz-available;          /* WebKit-based browsers will ignore this. */
       min-width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
       min-width: fill-available;
-      height: 310px;
+      height: 290px;
     
       @media (max-width: $medium-screen){
         height: 130px;

@@ -16,6 +16,10 @@
       height: 40px;
       width: 785px;
       object-fit: contain;
+      @media (max-width: $small-screen) {
+        height: 30px;
+        width: 350px;
+      }
     }
   
   }
