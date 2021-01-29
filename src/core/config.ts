@@ -119,36 +119,54 @@ export const INFORMATION = [
     header: "Envíos",
     icon: {
         icon: "truck",
-        size: "lg",
+        size: "3x",
         flip: true,
     },
-    info: {
-      line1: "Hacemos envíos a todo el país mediante Correo Argentino.",
-      line2: "Si estas en CABA te podemos envíar tu pedido por motomensajeria.",
-    },
-},
-{
+    data: [
+      {
+        info: "Realizamos envíos a todo el país mediante $Correo$ $Argentino$",
+        icon: "info",
+      },
+      {
+        info: "Si estas en $CABA$ te podemos enviar tu pedido por $Motomensajeria$",
+        icon: "info",
+      },
+      {
+        info: "También podes elegir retirar el pedido en nuestro domicilio. Nos encontramos por la zona de $Nueva$ $Pompeya$",
+        icon: "info",
+      },
+    ],
+  },
+  {
     header: "Medios de Pago",
     icon: {
         icon: "credit-card",
-        size: "lg",
+        size: "3x",
         flip: false,
     },
-    info: {
-      line1: "Aceptamos todas las tarjetas y pagos en efectivo mediante MercadoPago",
-      line2: "También aceptamos transferencia bancaria",
-    },
-},
-{
+    data: [
+      {
+        info: "Aceptamos todas las tarjetas mediante MercadoPago! Hasta 12 cuotas",
+        icon: "info"
+      },
+    ],
+  },
+  {
     header: "Contacto",
     icon: {
         icon: "phone",
-        size: "lg",
+        size: "3x",
         flip: false,
     },
-    info: {
-      line1: "Email: cholitas.deco@gmail.com",
-      line2: "Instagram: #cholitas.deco",
-    },
-}
+    data: [      
+      {
+        info: "Email: $cholitas.deco@gmail.com$",
+        icon: "envelope",
+      },
+      {
+        info: "Ig: $#cholitas.deco$",
+        icon: "instagram",
+      },
+    ],
+  }
 ]

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import ReactSVG from "react-svg";
 import { commonMessages } from "@temp/intl";
 import Menu from 'react-burger-menu/lib/menus/bubble'
+import { Icon } from "rsuite"
 
 import { baseUrl } from "../../app/routes";
 import NavItem, { INavItem } from "./NavItem";
@@ -105,6 +106,7 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
               className="side-nav__menu-item-link__home"
               onClick={this.closeMenu}
             >
+              <Icon icon="home" size="2x"/>
               <FormattedMessage {...commonMessages.home} />
             </Link>
           </>

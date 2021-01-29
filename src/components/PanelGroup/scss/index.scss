@@ -11,13 +11,54 @@
         text-align: left;
     }
 
-    h4 {
-        display:inline-block;
+    h3 {
         @media (max-width: $small-screen) {
-            font-size: 90%;
+            transform: scale(0.7);
+            transform-origin: left;
         }
     }
 
+   .sub-header {
+        font-weight: 300;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        color: $base-font-color;
+
+        @media (max-width: $small-screen) {
+            font-size: 0.8rem;
+            margin-bottom: 1.4rem;
+        }
+    }
+
+    .content {
+        font-weight: 200;
+        margin-bottom: $spacer;
+        font-size: 1.1rem;
+
+        &:last-of-type {
+            margin-bottom: 0rem;
+        }
+
+        .rs-icon {
+            vertical-align: middle;
+            padding-right: 5px;
+        }
+
+        @media (max-width: $small-screen) {
+            font-size: 0.8rem;
+            margin-bottom: 0.7rem;
+        }
+
+        span {
+            font-weight: $bold-font-weight;
+            color: $turquoise;
+        }
+
+    }
+    
+    .rs-icon {
+        vertical-align: sub;
+    }
     .rs-panel-body {
         text-align: left;
         background-color: white;
