@@ -146,9 +146,13 @@ export const INFORMATION = [
     },
     data: [
       {
-        info: "Aceptamos todas las tarjetas mediante MercadoPago! Hasta 12 cuotas",
+        info: "Aceptamos hasta $12$ $cuotas$ con todas las tarjetas y $Pago$ $en$ $Efectivo$ mediante $MercadoPago$",
         icon: "info"
       },
+      {
+        info: "También podes elegír $Transferencia$ $Bancaria$ donde tendrás aplicado un $10%$ $de$ $descuento$",
+        icon: "info",
+      }
     ],
   },
   {
@@ -168,5 +172,24 @@ export const INFORMATION = [
         icon: "instagram",
       },
     ],
-  }
+  },{
+    header: "Nosotros",
+    icon: {
+        icon: "group",
+        size: "3x",
+        flip: false,
+    },
+    data: [      
+      {
+        info: "Email: $cholitas.deco@gmail.com$",
+        icon: "envelope",
+      },
+      {
+        info: "Ig: $#cholitas.deco$",
+        icon: "instagram",
+      },
+    ],
+  },
 ]
+
+export const TRANSFERENCIA_PROMOCODE = "391F65D3F6E9"

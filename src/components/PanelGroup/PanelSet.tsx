@@ -6,7 +6,7 @@ import "./scss/index.scss";
 
 const PanelSet = () => {
     const getParagraph = (data) => {
-        const elements = data?.map(
+        return data?.map(
             d => {
                 var data_arr = d.info?.split(" ")
                 const placeholders = d.info?.match(/\$(.*?)\$/g)
@@ -17,14 +17,13 @@ const PanelSet = () => {
                         data_arr[index] = element
                     })
                 return (
-                    <p className="content">
+                    <p key={d.info} className="content">
                         <Icon size="lg" icon={d.icon} />
-                        {data_arr?.map(item => <>{item} </>)}
+                        {data_arr?.map((item, index) => <React.Fragment key={index*100}>{item} </React.Fragment>)}
                     </p>
                 )
             }
         )
-        return (elements)
     }
 
     const getContent = (header, data) => {
@@ -38,7 +37,7 @@ const PanelSet = () => {
                 return (<>
                     {getParagraph(data)}
                 </>)                
-                
+
             case "Contacto":
                 return (<>
                     <p className="sub-header">Cualquier inquietud no dudes en contactarnos por estos medios</p>
@@ -52,7 +51,7 @@ const PanelSet = () => {
             <Panel 
                 header={<h3>
                             <Icon 
-                                    style={icon.flip ? {paddingLeft: "8px"} : {paddingRight: "8px"}} 
+                                    style={icon.flip ? {paddingLeft: "10px"} : {paddingRight: "10px"}} 
                                     icon={icon.icon} 
                                     size={icon.size} 
                                     flip={icon.flip ? "horizontal" : null}

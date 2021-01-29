@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Panel } from "rsuite";
+import { Panel, Icon } from "rsuite";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./CardSet.scss";
 import { Redirect } from "react-router-dom";
@@ -71,7 +71,7 @@ class CardSet extends Component {
         {this.state.redirect ? (
           <Redirect push to={selected_obj.props.url} />
         ) : null}
-        <h3>{this.props.header}</h3>
+        <h3>{this.props.header}<Icon className="cardset-icon" icon="public-opinion" size="2x"/></h3>
         <div className="scroll-menu">
           <ScrollMenu
             data={menu}

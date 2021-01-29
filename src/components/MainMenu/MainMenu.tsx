@@ -3,6 +3,7 @@ import { FormattedMessage } from "react-intl";
 import { commonMessages } from "@temp/intl";
 import { useAuth, useCart } from "@saleor/sdk";
 
+import { Icon } from "rsuite";
 import Media from "react-media";
 import { Link } from "react-router-dom";
 import ReactSVG from "react-svg";
@@ -59,7 +60,7 @@ const MainMenu: React.FC = () => {
         <nav className="main-navbar">
           <TypedMainMenuQuery renderOnError displayLoader={false}>
             {({ data }) => (
-              <div className="topbar" ref={element}>{data.shop.description}</div>
+              <p className="topbar" ref={element}>{data.shop.description}</p>
             )}
           </TypedMainMenuQuery>
           <div className={`main-menu-wrapper${isSticky ? "-sticky" : ""}`}>
@@ -102,6 +103,7 @@ const MainMenu: React.FC = () => {
                                       <ul className="main-menu__dropdown">
                                         <li data-test="mobileMenuMyAccountLink">
                                           <Link to={appPaths.accountUrl}>
+                                            <Icon icon="profile" />
                                             <FormattedMessage
                                               {...commonMessages.myAccount}
                                             />
@@ -109,6 +111,7 @@ const MainMenu: React.FC = () => {
                                         </li>
                                         <li data-test="mobileMenuOrderHistoryLink">
                                           <Link to={appPaths.orderHistoryUrl}>
+                                            <Icon icon="book2" />
                                             <FormattedMessage
                                               {...commonMessages.orderHistory}
                                             />
@@ -116,6 +119,7 @@ const MainMenu: React.FC = () => {
                                         </li>
                                         <li data-test="mobileMenuAddressBookLink">
                                           <Link to={appPaths.addressBookUrl}>
+                                            <Icon icon="location-arrow" />
                                             <FormattedMessage
                                               {...commonMessages.addressBook}
                                             />
@@ -125,6 +129,7 @@ const MainMenu: React.FC = () => {
                                           onClick={handleSignOut}
                                           data-test="mobileMenuLogoutLink"
                                         >
+                                          <Icon icon="sign-out" />
                                           <FormattedMessage
                                             {...commonMessages.logOut}
                                           />
@@ -180,6 +185,7 @@ const MainMenu: React.FC = () => {
                                 <ul className="main-menu__dropdown">
                                   <li data-test="desktopMenuMyAccountLink">
                                     <Link to={appPaths.accountUrl}>
+                                      <Icon icon="profile" />
                                       <FormattedMessage
                                         {...commonMessages.myAccount}
                                       />
@@ -187,6 +193,7 @@ const MainMenu: React.FC = () => {
                                   </li>
                                   <li data-test="desktopMenuOrderHistoryLink">
                                     <Link to={appPaths.orderHistoryUrl}>
+                                      <Icon icon="book2" />
                                       <FormattedMessage
                                         {...commonMessages.orderHistory}
                                       />
@@ -194,6 +201,7 @@ const MainMenu: React.FC = () => {
                                   </li>
                                   <li data-test="desktopMenuAddressBookLink">
                                     <Link to={appPaths.addressBookUrl}>
+                                      <Icon icon="location-arrow" />
                                       <FormattedMessage
                                         {...commonMessages.addressBook}
                                       />
@@ -203,6 +211,7 @@ const MainMenu: React.FC = () => {
                                     onClick={handleSignOut}
                                     data-test="desktopMenuLogoutLink"
                                   >
+                                    <Icon icon="sign-out" />
                                     <FormattedMessage
                                       {...commonMessages.logOut}
                                     />

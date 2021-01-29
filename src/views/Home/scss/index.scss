@@ -72,6 +72,61 @@
     padding: 5px;
   }
 
+  &__pedidos {
+    margin: 20px 0 15px 0;
+    padding: 25px;
+    text-align: center;
+    background-color: $turquoise-light;
+
+    h2 {
+      @media (max-width: $small-screen){
+        line-height: 35px;
+      }
+    }
+    span {
+      color: $rose;
+    }
+
+    .rs-sidebar {
+      align-self: center;
+
+      @media (max-width: $medium-screen){
+        flex: 0 0 80px !important;
+      }
+      @media (max-width: $small-screen){
+        flex: 0 0 40px !important;
+      }
+
+      .icon {
+        height: 60px;
+        width: 60px;
+        fill: $rose;
+
+        @media (max-width: $small-screen){
+          height: 30px;
+          width: 30px;
+        }
+      }
+    }
+    
+
+    @media (max-width: $small-screen){
+      margin: 15px 0 10px 0;
+      padding: 10px;
+      h2 {
+        font-size: large;
+      }
+    }
+  }
+
+  &footer__favicons {
+    border-top: 1px solid $gray-light;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0 15px 0 !important;
+    
+  }
+
   &__destacados {
     margin-bottom: 2rem;
 
@@ -79,7 +134,7 @@
       font-weight: $bold-font-weight;
       font-size: x-large;
       text-align: center;
-      margin-top: 50px;
+      margin-top: 35px;
       margin-bottom: 20px;
 
       @media (max-width: $medium-screen){

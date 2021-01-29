@@ -204,10 +204,14 @@
   &__dropdown {
     text-transform: uppercase;
     font-weight: $bold-font-weight;
-    border-left: 1px solid hotpink;
+    border-left: 1px solid $turquoise-light;
     li {
       cursor: pointer;
       margin: 0 auto;
+
+      .rs-icon {
+        padding-right: 10px;
+      }
 
       &:hover {
         color: $gray;

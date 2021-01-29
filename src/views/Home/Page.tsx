@@ -1,12 +1,16 @@
 import "./scss/index.scss";
 
 import * as React from "react";
-
+import { Container, Content, Sidebar } from "rsuite"
 import { Loader, PanelGroup } from "../../components";
-
+import SewingMachine from "../../images/sewing-machine.svg"
 import SlicedImages from "../../components"
 import AutoSlider from "../../components/AutoSlider/AutoSlider";
 import CardSet from "../../components/CardSet/CardSet";
+import ReactSVG from "react-svg"
+
+import { SocialMediaIcon } from "../../components";
+import { SOCIAL_MEDIA } from "../../core/config";
 
 import {
   ProductsList_products,
@@ -37,11 +41,16 @@ const Page: React.FC<{
     generateCategoryUrl(cat.node.id, cat.node.name)
 
   const getProductsImg = () => {
-    return products.edges.map(producto => ({
-      header: producto.node.name,
-      src: producto.node.thumbnail.url,
-      url: getProductUrl(producto),
-    }));
+    const product_list = products?.edges.map(producto =>
+      producto.node.metadata?.filter(pair => pair.key == "destacado").length > 0 ? (
+        {
+          header: producto.node.name,
+          src: producto.node.thumbnail.url,
+          url: getProductUrl(producto),
+        }
+      ) : null 
+    );
+    return product_list?.filter(elements => elements != null)
   };
 
   const getCategoriesImgs = () =>
@@ -61,9 +70,26 @@ const Page: React.FC<{
       <div id="home-page__hero" className="home-page__hero">
         <AutoSlider>{getCategoriesImgs()}</AutoSlider>
       </div>
-      <div className="home-page__categories">
-        <SlicedImages>{getCategoriesImgs()}</SlicedImages> 
-      </div>
+
+      {loading ? <Loader /> :
+        <div className="home-page__categories">
+          <SlicedImages>{getCategoriesImgs()}</SlicedImages> 
+        </div>
+      }
+
+      <Container  className="home-page__pedidos">
+        <Sidebar>
+          <ReactSVG path={SewingMachine} svgClassName="icon"/>
+        </Sidebar>
+        <Content>
+          <h2>Realizamos trabajos <span>a medida!</span></h2>
+          <h2>No dudes en consultar</h2>
+        </Content>
+        <Sidebar>
+          <ReactSVG path={SewingMachine} svgClassName="icon"/>
+        </Sidebar>
+      </Container>
+
       {productsExist() &&
         (loading && !products ? (
           <Loader />
@@ -71,6 +97,11 @@ const Page: React.FC<{
           <>
             <div className="home-page__destacados">
               <CardSet header="Productos Destacados">{getProductsImg()}</CardSet>
+            </div>
+            <div className="footer__favicons container">
+              {SOCIAL_MEDIA.map(medium => (
+                <SocialMediaIcon medium={medium} key={medium.ariaLabel} />
+              ))}
             </div>
             <div className="home-page__info">
               <PanelGroup />

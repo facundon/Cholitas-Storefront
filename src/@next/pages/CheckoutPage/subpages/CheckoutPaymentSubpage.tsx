@@ -13,6 +13,8 @@ import { CheckoutPayment } from "@components/organisms";
 import { useCheckout } from "@saleor/sdk";
 import { commonMessages } from "@temp/intl";
 import { IFormError } from "@types";
+import { TRANSFERENCIA_PROMOCODE } from "../../../../core/config"
+
 
 export interface ICheckoutPaymentSubpageHandles {
   submitPayment: () => void;
@@ -119,8 +121,8 @@ const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
   };
   useEffect(() => {
     selectedPaymentGateway === "mirumee.payments.transferencia" ?
-      addPromoCode("391F65D3F6E9") :
-      removePromoCode("391F65D3F6E9")
+      addPromoCode(TRANSFERENCIA_PROMOCODE) :
+      removePromoCode(TRANSFERENCIA_PROMOCODE)
   }, [selectedPaymentGateway])
 
   return (
