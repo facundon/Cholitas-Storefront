@@ -76,9 +76,10 @@
     margin: 20px 0 15px 0;
     padding: 25px;
     text-align: center;
-    background-color: $turquoise-light;
+    background-color: $blue-dark;
 
     h2 {
+      color: $white;
       @media (max-width: $small-screen){
         line-height: 35px;
       }
@@ -120,7 +121,6 @@
   }
 
   &footer__favicons {
-    border-top: 1px solid $gray-light;
     display: flex;
     justify-content: center;
     padding: 15px 0 15px 0 !important;

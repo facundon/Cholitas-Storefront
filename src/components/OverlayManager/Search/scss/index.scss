@@ -12,6 +12,17 @@ $drawer-width: 25rem;
 
   &.sticky {
     padding-top: 0;
+
+    .input {
+      height: inherit;
+    }
+
+    .input__icon-right {
+      transform: translateY(18px);
+    }
+    .input__icon-left {
+      transform: translateY(24px);
+    }
   }
 
   &--has-results {
@@ -20,28 +31,35 @@ $drawer-width: 25rem;
 
   .input {
     margin-bottom: 0;
+    height: 5rem;
+    &__content {
+      height: inherit;
+    }
   }
 
   &__input {
     .input__icon-right {
+      transform: translateY(26px);
       svg * {
-        fill: $turquoise;
+        fill: $blue;
       }
     }
 
     .input__icon-left {
+      transform: translateY(33px);
       svg * {
         fill: $base-font-color;
       }
     }
 
     .input__field {
-      background-color: $turquoise-light;
+      background-color: $gray-light;
       border: none;
       box-shadow: none;
       padding-bottom: 1.2rem;
       padding-top: 1.25rem;
       width: 100%;
+      height: inherit;
 
       &:focus {
         box-shadow: none;

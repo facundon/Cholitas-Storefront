@@ -2,23 +2,29 @@
 
 .topbar {
   text-align: center;
-  background-color: #040404;
-  color: #ffffff;
-  fill: #ffffff;
+  background-color: $base-font-color;
+  color: $white;
+  fill: $white;
   font-size: 12px;
-  padding: 3px 0;
+  padding: 3.5px 0;
   line-height: 20px;
 }
 
 .navbar {
   text-align: center;
-  background-color: #ffffff;
-  padding: 4px 0;
+  background-color: $blue-dark;
   line-height: 20px;
   z-index: 0;
 
-  @media (max-width: $medium-screen) {
-    padding: 0px;
+  a {
+    color: $white !important;
+    &:hover {
+      background-color: $blue !important;
+    }
+  }
+
+  .rs-dropdown-menu {
+    background-color: $blue-dark !important;
   }
 }
 
@@ -26,17 +32,18 @@
   align-items: center;
   align-items: stretch;
   background-color: $cholitas-base;
-  border-bottom: 1px solid $gray-light;
   display: flex;
   flex-direction: row;
-  height: 3.9rem;
+  height: 5rem;
   position: relative;
+  background-image: url("./images/background.svg");
+  background-size: 7920px 150px;
 
   &-sticky {
-    align-items: center;
     align-items: stretch;
     background-color: $cholitas-base;
-    border-bottom: 1px solid $gray-light;
+    background-image: url("./images/background.svg");
+    background-size: 7920px 150px;
     display: flex;
     flex-direction: row;
     height: 3.9rem;
@@ -92,6 +99,7 @@
 
     svg {
       fill-opacity: 1;
+      transform:scale(1.7);
     }
 
     &-sticky {
@@ -99,8 +107,8 @@
       padding-top: 5px;
 
       svg {
-        // height: 3.8rem;
         fill-opacity: 1;
+        transform:scale(1.4);
       }
     }
   }
@@ -196,7 +204,7 @@
 
   &__user {
     &--active * {
-      fill: $turquoise;
+      fill: $blue;
       fill-rule: inherit;
     }
   }
@@ -251,9 +259,9 @@
     }
 
     &:hover {
-      color: $turquoise;
+      color: $blue-dark;
       svg * {
-        fill: $turquoise;
+        fill: $blue;
       }
     }
 

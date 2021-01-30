@@ -42,6 +42,15 @@ export const homePageQuery = gql`
         }
       }
     }
+    collections(first: 5) {
+      edges {
+        node {
+          backgroundImage {
+            url
+          }
+        }
+      }
+    }
   }
 `;
 

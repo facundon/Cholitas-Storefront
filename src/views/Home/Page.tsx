@@ -29,7 +29,8 @@ const Page: React.FC<{
   backgroundImage: ProductsList_shop_homepageCollection_backgroundImage;
   shop: ProductsList_shop;
   products: ProductsList_products;
-}> = ({ loading, categories, backgroundImage, shop, products }) => {
+  collections: any;
+}> = ({ loading, categories, collections, shop, products }) => {
   const productsExist = () => {
     return products && products.edges && products.edges.length > 0;
   };
@@ -62,13 +63,20 @@ const Page: React.FC<{
       } : null
    );
 
+  const getCollectionImgs = () =>
+  collections?.edges?.map(col =>
+    col?.node.backgroundImage ? {
+      src: col.node.backgroundImage.url,
+     } : null
+  );
+
   return (
     <>
       <script className="structured-data-list" type="application/ld+json">
         {structuredData(shop)}
       </script>
       <div id="home-page__hero" className="home-page__hero">
-        <AutoSlider>{getCategoriesImgs()}</AutoSlider>
+        <AutoSlider>{getCollectionImgs()}</AutoSlider>
       </div>
 
       {loading ? <Loader /> :

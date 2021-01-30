@@ -13,19 +13,19 @@ a {
   vertical-align: middle;
 
   svg * {
-    fill: $cholitas-base;
+    fill: $blue-dark;
     transition: 0.4s;
   }
 
   &:hover {
     svg * {
-      fill: $turquoise;
+      fill: $blue;
     }
   }
 }
 
 .brand {
-  color: $cholitas-base;
+  color: $blue-dark;
   padding: $spacer 0;
   vertical-align: middle;
   align-self: center;
@@ -34,7 +34,7 @@ a {
   transition: 0.4s;
 
   &:hover {
-    color: $turquoise
+    color: $blue
   }
 
   @media (max-width: $small-screen) {
