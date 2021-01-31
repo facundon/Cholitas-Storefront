@@ -21,6 +21,9 @@
     &:hover {
       background-color: $blue !important;
     }
+    &:focus {
+      background-color: inherit !important;
+    }
   }
 
   .rs-dropdown-menu {
@@ -47,6 +50,12 @@
     display: flex;
     flex-direction: row;
     height: 3.9rem;
+
+    .main-menu {
+      &__search {
+        box-shadow: 0 0 9px 4px $cholitas-base;
+      }
+    }
   }
 
   &-wrapper {
@@ -100,6 +109,9 @@
     svg {
       fill-opacity: 1;
       transform:scale(1.7);
+      border-radius: 1000px;
+      background-color: rgba($cholitas-base, 0.65);
+      box-shadow: 0 0 4px 1px $cholitas-base;
     }
 
     &-sticky {
@@ -109,6 +121,9 @@
       svg {
         fill-opacity: 1;
         transform:scale(1.4);
+        border-radius: 100px;
+        background-color: rgba($cholitas-base, 0.65);
+        box-shadow: 0 0 4px 1px $cholitas-base;
       }
     }
   }
@@ -131,7 +146,7 @@
   }
 
   &__hamburger {
-    border-right: 1px solid $gray-light;
+    border-right: 1px solid $blue;
     cursor: pointer;
     padding-top: 8px;
     padding-bottom: 8px;
@@ -249,9 +264,13 @@
     cursor: pointer;
     line-height: 24px;
     transition: 0.3s;
-
+    display: inherit;
+    align-items: center;
+    background-color: rgba($cholitas-base, 0.65);
+    box-shadow: 0 0 10px 10px $cholitas-base;
+    
     @media (min-width: $medium-screen) {
-      border-left: 1px solid $gray-light;
+      border-left: 1px solid $blue;
     }
 
     svg * {

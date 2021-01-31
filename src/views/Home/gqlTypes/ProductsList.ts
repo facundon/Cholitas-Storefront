@@ -48,6 +48,14 @@ export interface ProductsList_categories_edges_node_backgroundImage {
   url: string;
 }
 
+export interface ProductsList_products_edges_node_metadata {
+  [x: string]: any;
+  __typename: "MetadataItem";
+
+  key: string;
+  value: string;
+}
+
 export interface ProductsList_categories_edges_node {
   __typename: "Category";
   /**
@@ -103,6 +111,7 @@ export interface ProductsList_products_edges_node{
    */
   name: string;
   thumbnail: ProductsList_products_edges_node_thumbnail | null;
+  metadata: ProductsList_products_edges_node_metadata | null;
 }
 
 export interface ProductsList_products_edges_node_thumbnail {

@@ -120,16 +120,14 @@
     }
   }
 
-  &footer__favicons {
+  .footer__favicons {
     display: flex;
     justify-content: center;
-    padding: 15px 0 15px 0 !important;
-    
+    padding: 15px 0 15px 0;
+    margin: 15px auto 15px auto;
   }
 
   &__destacados {
-    margin-bottom: 2rem;
-
     h3 {
       font-weight: $bold-font-weight;
       font-size: x-large;

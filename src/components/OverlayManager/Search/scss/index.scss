@@ -53,7 +53,7 @@ $drawer-width: 25rem;
     }
 
     .input__field {
-      background-color: $gray-light;
+      background-color: $cholitas-base;
       border: none;
       box-shadow: none;
       padding-bottom: 1.2rem;
@@ -74,7 +74,7 @@ $drawer-width: 25rem;
   }
 
   &__products {
-    background: $white;
+    background: $cholitas-base-dark;
     overflow: auto;
     padding: $spacer / 2 0;
     position: relative;
