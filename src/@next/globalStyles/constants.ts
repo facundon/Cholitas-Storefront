@@ -5,11 +5,11 @@ export const baseFontColor = "#323232";
 export const baseFontColorSemiTransparent = "rgba(50,50,50,0.6)";
 export const baseFontColorTransparent = "rgba(50,50,50,0.1)";
 export const black = "#323232";
-export const blue = "rgb(33,18,94)";
-export const blueDark = "#190c4e";
+export const blue = "rgb(116,148,179)";
+export const blueDark = "#526a83";
 export const blueLight = "#513CA3";
-export const blueOverlay = `rgba(33,18,94,0.1)`;
-export const blueOverlayDark = `rgba(33,18,94,0.2)`;
+export const blueOverlay = `rgba(116,148,179,0.2)`;
+export const blueOverlayDark = `rgba(82,106,131,0.2)`;
 export const gray = "#7d7d7d";
 export const grayMedium = "#c4c4c4";
 export const grayDark = "#323232";
@@ -17,8 +17,8 @@ export const grayLight = "#f1f5f5";
 export const green = "#3ed256";
 export const overlayColor = "rgba(199, 207, 207, 0.8)";
 export const rose = "#c22d74";
-export const turquoise = "#13bebb";
-export const turquoiseDark = "#06a09e";
+export const turquoise = "rgb(116,148,179)";
+export const turquoiseDark = "#526a83";
 export const turquoiseLight = "rgba(6, 132, 123, 0.25)";
 export const turquoiseTransparent = "rgba(6, 132, 123, 0.1)";
 export const white = "#fff";
@@ -44,7 +44,7 @@ export const theme = {
   divider: grayLight,
   dividerDark: grayMedium,
   error: rose,
-  hoverLightBackground: turquoiseLight,
+  hoverLightBackground: blueOverlay,
   light: grayLight,
   lightFont: gray,
   listAttributeName: baseFontColorSemiTransparent,

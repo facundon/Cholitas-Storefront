@@ -10,14 +10,17 @@ export const Money: React.FC<IProps> = ({
     return <span {...props}>{defaultValue}</span>;
   }
   return (
+    // <span {...props}>
+    //   {money.currency && money.currency !== ""
+    //     ? money.amount.toLocaleString(undefined, {
+    //         currency: money.currency,
+    //         style: "currency",
+    //       })
+    //     : money.amount.toString()}
+    // </span>
     <span {...props}>
-      {money.currency && money.currency !== ""
-        ? money.amount.toLocaleString(undefined, {
-            currency: money.currency,
-            style: "currency",
-          })
-        : money.amount.toString()}
-    </span>
+    {`$${money.amount.toString()}`}
+  </span>
   );
 };
 

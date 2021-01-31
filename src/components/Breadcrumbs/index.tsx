@@ -4,6 +4,7 @@ import { FormattedMessage } from "react-intl";
 import Media from "react-media";
 import { Link } from "react-router-dom";
 import { commonMessages } from "@temp/intl";
+import { Icon } from "rsuite"
 
 import { baseUrl } from "../../app/routes";
 import { getDBIdFromGraphqlId, slugify } from "../../core/utils";
@@ -54,6 +55,7 @@ const Breadcrumbs: React.FC<{
         <ul className="breadcrumbs">
           <li>
             <Link to={baseUrl}>
+              <Icon icon="back-arrow" />
               <FormattedMessage {...commonMessages.home} />
             </Link>
           </li>

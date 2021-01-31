@@ -132,8 +132,8 @@ export const ProductGallery: React.FC<IProps> = ({ images }: IProps) => {
         left={0}
         drag={true}
         noImgDetails
-        maxScale={1}
-        minScale={0.5}
+        maxScale={1.5}
+        minScale={0.7}
         defaultScale={0.7}
         scalable={false}
         rotatable={false}

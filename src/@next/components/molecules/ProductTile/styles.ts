@@ -1,46 +1,78 @@
 import { media, styled } from "@styles";
-import { css } from "styled-components";
 
-const textProps = css`
-  font-size: ${props => props.theme.typography.baseFontSize};
-  margin: 0 0 0.5rem 0;
-  text-align: left;
-`;
 
 export const Wrapper = styled.div`
-  background: ${props => props.theme.colors.light};
-  padding: 2.5rem;
-  text-align: center;
-  max-height: 30rem;
-  transition: 0.3s;
+  background: ${props => props.theme.colors.hoverLightBackground};
+  padding: 1rem 2rem 1.6rem 2rem;
+  text-align: center;  
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  box-shadow: 10px 10px 13px -12px;
+  border-radius: 10px;
+  display: inline-grid;
+  align-content: space-between;
+  grid-template-rows: 1fr 6fr 1fr;
+  grid-gap: 0.5rem;
 
   :hover {
-    background-color: ${props => props.theme.colors.hoverLightBackground};
+    background-color: ${props => props.theme.colors.secondaryOverlayDark};
+    box-shadow: 9px 9px 6px -12px ${props => props.theme.colors.dark};
+    color: ${props => props.theme.colors.secondaryDark}
   }
 
   ${media.largeScreen`
-    padding: 1.8rem;
+    padding: 0.8rem 1.5rem 1.1rem 1.5rem;
+  `}
+
+  ${media.smallScreen`
+    padding: 0.5rem 1rem 0.7rem 1rem;
   `}
 `;
 
 export const Title = styled.h4`
   text-transform: uppercase;
-  font-weight: normal;
-  ${textProps}
+  font-size: 0.9rem;
+  text-align: center;
+  font-weight: 200;
+
+  ${media.largeScreen`
+    font-size: 0.8rem;
+  `}
+  ${media.smallScreen`
+    font-size: 0.7rem;
+  `}
 `;
 
 export const Price = styled.p`
-  ${textProps}
+  font-size: ${props => props.theme.typography.h3FontSize};
+  text-align: left;
+  align-self: end;
+  font-weight: 600;
+
+  ${media.largeScreen`
+    font-size: 1.25rem;
+  `}
+
+  ${media.smallScreen`
+    font-size: 1rem;
+  `}
 `;
 
 export const Image = styled.div`
-  width: auto;
   height: auto;
-  max-width: 100%;
-
+  width: fit-content;
+  justify-self: center;
+  align-self: center;
+  
   > img {
     width: auto;
     height: auto;
     max-width: 100%;
+    object-fit:cover;
+
+    ${media.largeScreen`
+    `}
+
+    ${media.smallScreen`
+    `} 
   }
 `;
