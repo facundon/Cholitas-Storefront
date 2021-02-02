@@ -191,12 +191,16 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
       const script = document.createElement("script");
       script.src = scriptConfig.src;
       script.crossOrigin = scriptConfig.crossOrigin;
+      script.id = "mercadopago-script-id";
       script.async = true;
       script.onload = initMP
       document.body.appendChild(script);
-      handleChangeMethod(method)
-  }, [method])
+  }, [])
 
+  useEffect(() => {
+    handleChangeMethod(method)
+  }, [method])
+  
   const initMP = () => {
     if (apiKey) {
       window.Mercadopago.setPublishableKey(apiKey)

@@ -17,8 +17,10 @@ export const grayLight = "#f1f5f5";
 export const green = "#3ed256";
 export const overlayColor = "rgba(199, 207, 207, 0.8)";
 export const rose = "#c22d74";
-export const turquoise = "rgb(116,148,179)";
-export const turquoiseDark = "#526a83";
+// export const turquoise = "rgb(116,148,179)";
+export const turquoise = blue
+// export const turquoiseDark = "#526a83";
+export const turquoiseDark = blueDark
 export const turquoiseLight = "rgba(6, 132, 123, 0.25)";
 export const turquoiseTransparent = "rgba(6, 132, 123, 0.1)";
 export const white = "#fff";
@@ -50,7 +52,7 @@ export const theme = {
   listAttributeName: baseFontColorSemiTransparent,
   listBullet: darkGreen,
   overlay: overlayColor,
-  primary: turquoise,
+  primary: blueDark,
   primaryDark: turquoiseDark,
   primaryLight: turquoiseLight,
   primaryTransparent: turquoiseTransparent,

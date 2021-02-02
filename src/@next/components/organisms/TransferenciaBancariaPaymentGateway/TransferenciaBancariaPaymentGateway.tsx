@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { ErrorMessage } from "@components/atoms";
 
@@ -11,6 +11,13 @@ const TransferenciaBancariaPaymentGateway: React.FC<IProps> = ({
   errors = [],
 }: IProps) => {
 
+  useEffect(() => {
+      const scriptList = document.querySelectorAll("script")
+      const convertedNodeList = Array.from(scriptList)
+      const mpScript = convertedNodeList.find(script => script.id === "mercadopago-script-id")
+      mpScript?.parentNode.removeChild(mpScript)
+  }, [])
+ 
   const handleSubmit = () => {
     const checkoutForm = {
       brand: null,

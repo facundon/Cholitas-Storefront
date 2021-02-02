@@ -109,30 +109,33 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
 
   useEffect(() => {
-    setSubmitErrors([{message:""}])
-    let cardnumber = removeEmptySpaces(maybe(() => values.cardNumber, "") || "");
-    if (cardnumber.length >= 6) {
-        let bin = cardnumber.substring(0,6);
-        window.Mercadopago.getPaymentMethod({
-            "bin": bin
-        }, setPaymentMethod);
-    }
-
-    function setPaymentMethod (status: any, response: any) {
-      if (status == 200) {
-        const paymentMethodId = response[0].id
-        setPaymentMethodId(paymentMethodId)
-      } else {
-        setInstallmentsOptions([])
-        setIssuerOptions([])
-        const mpIssuersError = [
-          {
-            message: "Número de tarjeta inválido",
-          },
-        ];
-        setSubmitErrors(mpIssuersError);
+    if (window.Mercadopago){
+      setSubmitErrors([{message:""}])
+      let cardnumber = removeEmptySpaces(maybe(() => values.cardNumber, "") || "");
+      if (cardnumber.length >= 6) {
+          let bin = cardnumber.substring(0,6);
+          window.Mercadopago?.getPaymentMethod({
+              "bin": bin
+          }, setPaymentMethod)
       }
-    }
+
+      function setPaymentMethod (status: any, response: any) {
+        if (status == 200) {
+          const paymentMethodId = response[0].id
+          setPaymentMethodId(paymentMethodId)
+        } else {
+          setInstallmentsOptions([])
+          setIssuerOptions([])
+          const mpIssuersError = [
+            {
+              message: "Número de tarjeta inválido",
+            },
+          ];
+          setSubmitErrors(mpIssuersError);
+        }
+      }} else {
+        setSubmitErrors([{message: "Hubo un problema con la aplicación de MercadoPago"}])
+      }
   }, [values.cardNumber])
 
  

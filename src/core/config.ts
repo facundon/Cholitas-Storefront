@@ -12,7 +12,7 @@ export const PROVIDERS = {
   MERCADOPAGO: {
     label: "Mercado Pago",
     script: {
-      src: "../../mercadopago.js",
+      src: "https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js",
       crossOrigin: "anonymous",
     },
   },
@@ -29,14 +29,14 @@ export const PROVIDERS = {
     label: "Adyen",
     script: {
       src:
-        "https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/3.10.1/adyen.js",
+        "",
       integrity:
         "sha384-wG2z9zSQo61EIvyXmiFCo+zB3y0ZB4hsrXVcANmpP8HLthjoQJQPBh7tZKJSV8jA",
       crossOrigin: "anonymous",
     },
     style: {
       src:
-        "https://checkoutshopper-test.adyen.com/checkoutshopper/sdk/3.10.1/adyen.css",
+        "",
       integrity:
         "sha384-8ofgICZZ/k5cC5N7xegqFZOA73H9RQ7H13439JfAZW8Gj3qjuKL2isaTD3GMIhDE",
       crossOrigin: "anonymous",
