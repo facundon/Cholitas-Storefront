@@ -16,6 +16,11 @@ const TransferenciaBancariaPaymentGateway: React.FC<IProps> = ({
       const convertedNodeList = Array.from(scriptList)
       const mpScript = convertedNodeList.find(script => script.id === "mercadopago-script-id")
       mpScript?.parentNode.removeChild(mpScript)
+      const iframesList = document.querySelectorAll('iframe');
+      const convertedNodeIframes = Array.from(iframesList)
+      const mpIframe = convertedNodeIframes[convertedNodeIframes.length - 1]
+      mpScript && 
+        mpIframe?.parentNode.removeChild(mpIframe);
   }, [])
  
   const handleSubmit = () => {

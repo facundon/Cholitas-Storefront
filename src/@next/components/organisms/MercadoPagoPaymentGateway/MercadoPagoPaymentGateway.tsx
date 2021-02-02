@@ -181,12 +181,12 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   }
 
   useEffect(() => {
-      const script = document.createElement("script");
-      script.src = scriptConfig.src;
-      script.id = "mercadopago-script-id";
-      script.async = true;
-      script.onload = initMP
-      document.body.appendChild(script);
+    const script = document.createElement("script");
+    script.src = scriptConfig.src;
+    script.id = "mercadopago-script-id";
+    script.async = true;
+    script.onload = initMP
+    document.head.appendChild(script);
   }, [])
 
   useEffect(() => {
