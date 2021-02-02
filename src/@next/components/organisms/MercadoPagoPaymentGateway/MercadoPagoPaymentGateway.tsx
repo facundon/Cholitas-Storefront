@@ -17,13 +17,6 @@ import * as MpErrors from "./errors.json"
 import * as yup from 'yup';
 
 
-declare global {
-  interface Window {
-    Mercadopago: any;
-  }
-}
-
-
 let card_schema = yup.object().shape({
   email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
   cuotas: yup.string().required("Ingresa la cantidad de cuotas"),
@@ -190,7 +183,6 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   useEffect(() => {
       const script = document.createElement("script");
       script.src = scriptConfig.src;
-      script.crossOrigin = scriptConfig.crossOrigin;
       script.id = "mercadopago-script-id";
       script.async = true;
       script.onload = initMP
@@ -200,7 +192,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   useEffect(() => {
     handleChangeMethod(method)
   }, [method])
-  
+
   const initMP = () => {
     if (apiKey) {
       window.Mercadopago.setPublishableKey(apiKey)

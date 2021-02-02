@@ -15,6 +15,7 @@ declare interface Window {
   Stripe: any;
   Cypress?: any;
   AdyenCheckout: any;
+  Mercadopago: any;
 }
 
 declare interface Navigator {

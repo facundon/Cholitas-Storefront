@@ -3,8 +3,8 @@
 import { generatePageUrl } from "./utils";
 
 export const BASE_URL = "/";
-export const PRODUCTS_PER_PAGE = 6;
-export const SUPPORT_EMAIL = "support@example.com";
+export const PRODUCTS_PER_PAGE = 12;
+export const SUPPORT_EMAIL = "cholitas.deco@gmail.com";
 export const PROVIDERS = {
   TRANSFERENCIA : {
     label: "Transferencia Bancaria",
@@ -13,7 +13,6 @@ export const PROVIDERS = {
     label: "Mercado Pago",
     script: {
       src: "https://secure.mlstatic.com/sdk/javascript/v1/mercadopago.js",
-      crossOrigin: "anonymous",
     },
   },
   BRAINTREE: {

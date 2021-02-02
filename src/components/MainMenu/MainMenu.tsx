@@ -52,7 +52,7 @@ const MainMenu: React.FC = () => {
   useEffect(() => {
     observer.observe(element.current);
     return () => {observer.disconnect}  
-  })
+  }, [observer])
 
   return (
     <OverlayContext.Consumer>
