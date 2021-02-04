@@ -109,8 +109,8 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
 
   useEffect(() => {
+    setSubmitErrors([{message:""}])
     if (window.Mercadopago){
-      setSubmitErrors([{message:""}])
       let cardnumber = removeEmptySpaces(maybe(() => values.cardNumber, "") || "");
       if (cardnumber.length >= 6) {
           let bin = cardnumber.substring(0,6);
@@ -133,10 +133,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           ];
           setSubmitErrors(mpIssuersError);
         }
-      }} else {
+      }
+    } else {
         setSubmitErrors([{message: "Hubo un problema con la aplicación de MercadoPago"}])
       }
-  }, [values.cardNumber])
+  }, [values.cardNumber, window.Mercadopago])
 
  
   useEffect(() => {
