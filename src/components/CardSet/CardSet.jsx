@@ -8,13 +8,8 @@ import { Redirect } from "react-router-dom";
 // selected prop will be passed
 const Card = ({ src, selected }) => (
   <div className={`menu-item ${selected ? "active" : ""}`}>
-    <Panel
-      className="menu-item-panel"
-      shaded
-      bordered
-      bodyFill
-    >
-      <img src={src}/>
+    <Panel className="menu-item-panel" shaded bordered bodyFill>
+      <img src={src} />
       {/* <Panel header={header}>
         <p>
           <small>{header}</small>
@@ -30,14 +25,7 @@ export const Menu = (list, selected) =>
   list.map(el => {
     const { header, src, url } = el;
 
-    return (
-      <Card
-        key={header}
-        selected={selected}
-        src={src}
-        url={url}
-      />
-    );
+    return <Card key={header} selected={selected} src={src} url={url} />;
   });
 
 const Arrow = ({ text, className }) => {
@@ -71,7 +59,10 @@ class CardSet extends Component {
         {this.state.redirect ? (
           <Redirect push to={selected_obj.props.url} />
         ) : null}
-        <h3>{this.props.header}<Icon className="cardset-icon" icon="public-opinion" size="2x"/></h3>
+        <h3>
+          {this.props.header}
+          <Icon className="cardset-icon" icon="public-opinion" size="2x" />
+        </h3>
         <div className="scroll-menu">
           <ScrollMenu
             data={menu}

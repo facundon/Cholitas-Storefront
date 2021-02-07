@@ -12,6 +12,7 @@ import {
   AdyenPaymentGateway,
 } from "..";
 import * as S from "./styles";
+// eslint-disable-next-line import/namespace
 import { IProps } from "./types";
 
 /**
@@ -33,7 +34,6 @@ const PaymentGatewaysList: React.FC<IProps> = ({
   onError,
   items,
   total,
-  shippingPrice,
 }: IProps) => {
   return (
     <S.Wrapper>
@@ -45,7 +45,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
             return (
               <div key={index}>
                 <S.Tile checked={checked}>
-                <Radio
+                  <Radio
                     data-test="checkoutPaymentGatewayMercadoPagoInput"
                     name="payment-method"
                     value="credit-card"
@@ -75,7 +75,6 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     onError={onError}
                     items={items}
                     total={total}
-                    shippingPrice={shippingPrice}
                   />
                 )}
               </div>
@@ -85,7 +84,7 @@ const PaymentGatewaysList: React.FC<IProps> = ({
             return (
               <div key={index}>
                 <S.Tile checked={checked}>
-                <Radio
+                  <Radio
                     data-test="checkoutPaymentGatewayTransferenciaInput"
                     name="payment-method"
                     value="credit-card"
@@ -100,18 +99,18 @@ const PaymentGatewaysList: React.FC<IProps> = ({
                     </span>
                   </Radio>
                 </S.Tile>
-                {checked &&
+                {checked && (
                   <TransferenciaBancariaPaymentGateway
-                  formRef={formRef}
-                  processPayment={(token, cardData) =>
-                    processPayment(id, token, cardData)
-                  }
-                  errors={errors}
-                />
-                }
+                    formRef={formRef}
+                    processPayment={(token, cardData) =>
+                      processPayment(id, token, cardData)
+                    }
+                    errors={errors}
+                  />
+                )}
               </div>
-            )
-            
+            );
+
           case PROVIDERS.BRAINTREE.label:
             return (
               <div key={index}>

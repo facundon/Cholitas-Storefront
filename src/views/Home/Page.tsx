@@ -1,15 +1,16 @@
 import "./scss/index.scss";
 
 import * as React from "react";
-import { Container, Content, Sidebar } from "rsuite"
-import { Loader, PanelGroup } from "../../components";
-import SewingMachine from "../../images/sewing-machine.svg"
-import SlicedImages from "../../components"
+import { Container, Content, Sidebar } from "rsuite";
+import ReactSVG from "react-svg";
+import SlicedImages, {
+  Loader,
+  PanelGroup,
+  SocialMediaIcon,
+} from "../../components";
+import SewingMachine from "../../images/sewing-machine.svg";
 import AutoSlider from "../../components/AutoSlider/AutoSlider";
 import CardSet from "../../components/CardSet/CardSet";
-import ReactSVG from "react-svg"
-
-import { SocialMediaIcon } from "../../components";
 import { SOCIAL_MEDIA } from "../../core/config";
 
 import {
@@ -21,7 +22,6 @@ import {
 
 import { structuredData } from "../../core/SEO/Homepage/structuredData";
 import { generateProductUrl, generateCategoryUrl } from "../../core/utils";
-
 
 const Page: React.FC<{
   loading: boolean;
@@ -38,37 +38,41 @@ const Page: React.FC<{
   const getProductUrl = producto =>
     generateProductUrl(producto.node.id, producto.node.name);
 
-  const getCategoryUrl = cat =>
-    generateCategoryUrl(cat.node.id, cat.node.name)
+  const getCategoryUrl = cat => generateCategoryUrl(cat.node.id, cat.node.name);
 
   const getProductsImg = () => {
     const product_list = products?.edges.map(producto =>
-      producto.node.metadata?.filter(pair => pair.key == "destacado").length > 0 ? (
-        {
-          header: producto.node.name,
-          src: producto.node.thumbnail.url,
-          url: getProductUrl(producto),
-        }
-      ) : null 
+      producto.node.metadata?.filter(pair => pair.key === "destacado").length >
+      0
+        ? {
+            header: producto.node.name,
+            src: producto.node.thumbnail.url,
+            url: getProductUrl(producto),
+          }
+        : null
     );
-    return product_list?.filter(elements => elements != null)
+    return product_list?.filter(elements => elements != null);
   };
 
   const getCategoriesImgs = () =>
-   categories?.edges?.map(cat =>
-     cat?.node.backgroundImage ? {
-       header: cat.node.name,
-       src: cat.node.backgroundImage.url,
-       url: getCategoryUrl(cat),
-      } : null
-   );
+    categories?.edges?.map(cat =>
+      cat?.node.backgroundImage
+        ? {
+            header: cat.node.name,
+            src: cat.node.backgroundImage.url,
+            url: getCategoryUrl(cat),
+          }
+        : null
+    );
 
   const getCollectionImgs = () =>
-  collections?.edges?.map(col =>
-    col?.node.backgroundImage ? {
-      src: col.node.backgroundImage.url,
-     } : null
-  );
+    collections?.edges?.map(col =>
+      col?.node.backgroundImage
+        ? {
+            src: col.node.backgroundImage.url,
+          }
+        : null
+    );
 
   return (
     <>
@@ -79,22 +83,26 @@ const Page: React.FC<{
         <AutoSlider>{getCollectionImgs()}</AutoSlider>
       </div>
 
-      {loading ? <Loader /> :
+      {loading ? (
+        <Loader />
+      ) : (
         <div className="home-page__categories">
-          <SlicedImages>{getCategoriesImgs()}</SlicedImages> 
+          <SlicedImages>{getCategoriesImgs()}</SlicedImages>
         </div>
-      }
+      )}
 
-      <Container  className="home-page__pedidos">
+      <Container className="home-page__pedidos">
         <Sidebar>
-          <ReactSVG path={SewingMachine} svgClassName="icon"/>
+          <ReactSVG path={SewingMachine} svgClassName="icon" />
         </Sidebar>
         <Content>
-          <h2>Realizamos trabajos <span>a medida!</span></h2>
+          <h2>
+            Realizamos trabajos <span>a medida!</span>
+          </h2>
           <h2>No dudes en consultar</h2>
         </Content>
         <Sidebar>
-          <ReactSVG path={SewingMachine} svgClassName="icon"/>
+          <ReactSVG path={SewingMachine} svgClassName="icon" />
         </Sidebar>
       </Container>
 
@@ -104,7 +112,9 @@ const Page: React.FC<{
         ) : (
           <>
             <div className="home-page__destacados">
-              <CardSet header="Productos Destacados">{getProductsImg()}</CardSet>
+              <CardSet header="Productos Destacados">
+                {getProductsImg()}
+              </CardSet>
             </div>
             <div className="footer__favicons container">
               {SOCIAL_MEDIA.map(medium => (

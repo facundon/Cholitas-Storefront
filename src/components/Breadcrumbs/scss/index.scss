@@ -4,7 +4,11 @@
   display: inline-flex;
   flex-wrap: wrap;
   margin: $spacer 0;
-  
+
+  .rs-icon {
+    padding-right: 5px;
+  }
+
   li {
     &:not(:last-of-type) {
       &:after {

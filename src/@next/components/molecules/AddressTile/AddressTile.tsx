@@ -52,9 +52,13 @@ export const AddressTile: React.FC<IProps> = ({
       {address.isDefaultBillingAddress && address.isDefaultShippingAddress
         ? intl.formatMessage({ defaultMessage: "Domicilio predeterminado" })
         : address.isDefaultShippingAddress
-        ? intl.formatMessage({ defaultMessage: "Domicilio de envío predeterminado" })
+        ? intl.formatMessage({
+            defaultMessage: "Domicilio de envío predeterminado",
+          })
         : address.isDefaultBillingAddress
-        ? intl.formatMessage({ defaultMessage: "Domicilio de facturación predeterminado" })
+        ? intl.formatMessage({
+            defaultMessage: "Domicilio de facturación predeterminado",
+          })
         : null}
     </S.HeaderContent>
   );

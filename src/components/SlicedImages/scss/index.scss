@@ -1,57 +1,56 @@
 @import "../../../globalStyles/scss/variables";
 
-
 .image-wrapper {
-    height: 170px;
-    width: 600px;
-    margin: 10px;
-    max-width: 600px;
-    border-radius: 15px;
-    transition: .3s ease-in-out;
-    box-shadow: 4px 4px 7px 0px;
-    cursor: pointer;
+  height: 170px;
+  width: 600px;
+  margin: 10px;
+  max-width: 600px;
+  border-radius: 15px;
+  transition: 0.3s ease-in-out;
+  box-shadow: 4px 4px 7px 0px;
+  cursor: pointer;
 
-    &:hover {
-        background-color:#000;
-        opacity:0.7;
-        box-shadow: 2px 2px 3px 0px;
-        transform: scale(1.05);
-
-        @media (max-width: $small-screen) {
-            box-shadow: 0px 0px 15px 0.7px;
-            transform: scale(1.02);
-        }
-    }
+  &:hover {
+    background-color: #000;
+    opacity: 0.7;
+    box-shadow: 2px 2px 3px 0px;
+    transform: scale(1.05);
 
     @media (max-width: $small-screen) {
-        height: 70px;
-        margin: 2px;
-        border-radius: 10px;
+      box-shadow: 0px 0px 15px 0.7px;
+      transform: scale(1.02);
     }
+  }
 
-    img {
-        height: inherit;
-        width: 100%;
-        object-fit: cover;
-        position: relative;
-        border-radius: inherit;
+  @media (max-width: $small-screen) {
+    height: 70px;
+    margin: 2px;
+    border-radius: 10px;
+  }
 
-        @media (max-width: $small-screen) {
-            height: inherit;
-        }
+  img {
+    height: inherit;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+    border-radius: inherit;
+
+    @media (max-width: $small-screen) {
+      height: inherit;
     }
+  }
 
-    h2 { 
-        position: relative; 
-        bottom: 110px;
-        text-align: center;
-        text-transform: uppercase;
-        color: $cholitas-base;
-        font-size: xx-large;
+  h2 {
+    position: relative;
+    bottom: 110px;
+    text-align: center;
+    text-transform: uppercase;
+    color: $cholitas-base;
+    font-size: xx-large;
 
-        @media (max-width: $small-screen) {
-            bottom: 60px;
-            font-size: 100%;
-        }
-     }
+    @media (max-width: $small-screen) {
+      bottom: 60px;
+      font-size: 100%;
+    }
+  }
 }

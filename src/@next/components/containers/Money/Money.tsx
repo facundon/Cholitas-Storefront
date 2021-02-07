@@ -18,9 +18,7 @@ export const Money: React.FC<IProps> = ({
     //       })
     //     : money.amount.toString()}
     // </span>
-    <span {...props}>
-    {`$${money.amount.toString()}`}
-  </span>
+    <span {...props}>{`$${money.amount.toString()}`}</span>
   );
 };
 

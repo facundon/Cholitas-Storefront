@@ -18,9 +18,9 @@ export const green = "#3ed256";
 export const overlayColor = "rgba(199, 207, 207, 0.8)";
 export const rose = "#c22d74";
 // export const turquoise = "rgb(116,148,179)";
-export const turquoise = blue
+export const turquoise = blue;
 // export const turquoiseDark = "#526a83";
-export const turquoiseDark = blueDark
+export const turquoiseDark = blueDark;
 export const turquoiseLight = "rgba(6, 132, 123, 0.25)";
 export const turquoiseTransparent = "rgba(6, 132, 123, 0.1)";
 export const white = "#fff";
@@ -29,6 +29,8 @@ export const darkGreen = "#06847B";
 export const secondaryGrey = "#EBF1F6";
 export const secondaryGreyDark = "#9D9FB1";
 export const secondaryBlue = "#036DFF";
+export const baseOverlay = "rgba(238, 228, 213, 0.3)";
+export const baseOverlayDark = "rgba(238, 228, 213, 0.6)";
 
 // theme colors
 export const theme = {
@@ -67,6 +69,8 @@ export const theme = {
   tabsBorder: baseFontColorTransparent,
   thumbnailBorder: darkGreen,
   white,
+  baseOverlay,
+  baseOverlayDark,
 };
 
 // typography

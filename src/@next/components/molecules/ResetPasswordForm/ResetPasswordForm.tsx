@@ -53,7 +53,9 @@ export const ResetPasswordForm: React.FC<IProps> = ({
             }
           />
           <TextField
-            label={intl.formatMessage({ defaultMessage: "Volver a escribir contraseña" })}
+            label={intl.formatMessage({
+              defaultMessage: "Volver a escribir contraseña",
+            })}
             onBlur={handleBlur}
             name="retypedPassword"
             onChange={handleChange}

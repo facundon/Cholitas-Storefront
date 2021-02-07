@@ -29,12 +29,12 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
     email: cardEmailError,
   },
   disabled,
-  labelsText: { 
-    name: ccTitularText, 
-    docNumber: ccNroDocText, 
-    docType: ccTipoDocText, 
-    email: ccEmailText
-   },
+  labelsText: {
+    name: ccTitularText,
+    docNumber: ccNroDocText,
+    docType: ccTipoDocText,
+    email: ccEmailText,
+  },
   handleSubmit,
   handleChange,
   values,
@@ -49,11 +49,12 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
 
   const selectStyle = {
     padding: "0.8rem 1rem",
-    width: "100%", 
-    fontSize: "1rem", 
+    width: "100%",
+    fontSize: "1rem",
     border: "1px solid #323232",
-  }
+  };
 
+  // eslint-disable-next-line no-return-assign
   return (
     <S.PaymentForm
       ref={formRef}
@@ -68,14 +69,17 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
         <Select
           id="paymentMethodId"
           name="paymentMethodId"
-          data-checkout="paymentMethodId" 
+          data-checkout="paymentMethodId"
           value={values.paymentMethodId}
           onChange={handleChange}
           errors={cardTipoDocError}
-          style={selectStyle}>
-            {Object.entries(otherPaymentMethods).map(
-              option => <option key={option[1]} value={option[1]}>{option[0]}</option>
-            )}
+          style={selectStyle}
+        >
+          {Object.entries(otherPaymentMethods).map((option: any) => (
+            <option key={option[1]} value={option[1]}>
+              {option[0]}
+            </option>
+          ))}
         </Select>
       </S.PaymentInput>
 
@@ -87,7 +91,7 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
           autoFocus
           name="name"
           autoComplete="given-name"
-          id="name" 
+          id="name"
           data-checkout="name"
           type="text"
           {...basicInputProps(ccTitularText, [cardTitularError], values.name)}
@@ -98,7 +102,7 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
         <TextField
           name="email"
           autoComplete="email"
-          id="email" 
+          id="email"
           type="text"
           {...basicInputProps(ccEmailText, [cardEmailError], values.email)}
         />
@@ -109,10 +113,11 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
           <Select
             id="docType"
             name="docType"
-            data-checkout="docType" 
+            data-checkout="docType"
             value={values.docType}
             onChange={handleChange}
-            style={selectStyle} />
+            style={selectStyle}
+          />
         </S.PaymentInput>
 
         <S.PaymentInput>
@@ -122,21 +127,27 @@ export const MercadoPagoOtrosMediosFormContent: React.FC<PropsWithFormik> = ({
             name="docNumber"
             id="docNumber"
             data-checkout="docNumber"
-            {...basicInputProps(ccNroDocText, [cardNroDocError], values.docNumber)}
+            {...basicInputProps(
+              ccNroDocText,
+              [cardNroDocError],
+              values.docNumber
+            )}
           />
         </S.PaymentInput>
       </S.Grid>
 
-      <input 
-        type="hidden" 
-        name="transactionAmount" 
-        id="transactionAmount" 
-        value={values.transactionAmount = total.gross.amount} />
-      <input 
-        type="hidden" 
-        name="description" 
-        id="description" 
-        value={values.description = items[0].variant.product.name}/>
+      <input
+        type="hidden"
+        name="transactionAmount"
+        id="transactionAmount"
+        value={(values.transactionAmount = total.gross.amount)}
+      />
+      <input
+        type="hidden"
+        name="description"
+        id="description"
+        value={(values.description = items[0].variant.product.name)}
+      />
     </S.PaymentForm>
   );
 };

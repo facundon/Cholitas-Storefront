@@ -40,12 +40,12 @@ export const Paragraph = styled.p`
 export const Anchor = styled.a`
   font-size: ${props => props.theme.typography.h4FontSize};
   font-weight: ${props => props.theme.typography.boldFontWeight};
-  color: ${props=> props.theme.colors.primaryDark};
-  
+  color: ${props => props.theme.colors.primaryDark};
+
   &:hover {
-    color: ${props=>props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   }
-     `;
+`;
 
 export const Buttons = styled.div`
   width: 50%;

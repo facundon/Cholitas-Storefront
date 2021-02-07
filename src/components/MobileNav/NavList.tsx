@@ -5,8 +5,8 @@ import { FormattedMessage } from "react-intl";
 import { Link } from "react-router-dom";
 import ReactSVG from "react-svg";
 import { commonMessages } from "@temp/intl";
-import Menu from 'react-burger-menu/lib/menus/bubble'
-import { Icon } from "rsuite"
+import Menu from "react-burger-menu/lib/menus/bubble";
+import { Icon } from "rsuite";
 
 import { baseUrl } from "../../app/routes";
 import NavItem, { INavItem } from "./NavItem";
@@ -31,13 +31,17 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
     menuOpen: false,
   };
 
-  handleStateChange = (state) => {
+  handleStateChange = state => {
     this.setState({ menuOpen: state.isOpen });
-  }
+  };
 
   closeMenu = () => {
-    this.setState({ menuOpen: false, parent: null, displayedItems: this.props.items });
-  }
+    this.setState({
+      menuOpen: false,
+      parent: null,
+      displayedItems: this.props.items,
+    });
+  };
 
   handleShowSubItems = (item: INavItem) => {
     this.setState({ parent: item, displayedItems: item.children });
@@ -57,6 +61,12 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
     }
   };
 
+  componentDidUpdate = () => {
+    document.querySelector("body").style.overflow = this.state.menuOpen
+      ? "hidden"
+      : "auto";
+  };
+
   findItemById(id: string): INavItem {
     let match = null;
     function find(item) {
@@ -68,10 +78,6 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
     }
     this.props.items.some(find);
     return match;
-  }
-
-  componentDidUpdate = () => { 
-    document.querySelector("body").style.overflow = this.state.menuOpen ? 'hidden' : 'auto';
   }
 
   render() {
@@ -98,7 +104,7 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
               className="side-nav__menu-item-logo"
               onClick={this.closeMenu}
             >
-              <ReactSVG path={logoImg} style={{textAlign: "center"}} />
+              <ReactSVG path={logoImg} style={{ textAlign: "center" }} />
             </Link>
 
             <Link
@@ -106,7 +112,7 @@ class NavList extends React.PureComponent<NavListProps, NavListState> {
               className="side-nav__menu-item-link__home"
               onClick={this.closeMenu}
             >
-              <Icon icon="home" size="2x"/>
+              <Icon icon="home" size="2x" />
               <FormattedMessage {...commonMessages.home} />
             </Link>
           </>

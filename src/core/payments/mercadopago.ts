@@ -30,7 +30,12 @@ export interface IOtherInputs {
   paymentMethodId: string;
 }
 
-export type CardError = { field?: string; message: string } | null;
+export type CardError =
+  | {
+      field?: string;
+      message: string;
+    }[]
+  | null;
 
 export interface ICardPaymentInput {
   billingAddress: {
@@ -42,23 +47,23 @@ export interface ICardPaymentInput {
 }
 
 export interface ICardErrors {
-  titular: CardError,
-  nro_doc: CardError,
-  tipo_doc: CardError,
-  email: CardError,
-  number: CardError,
-  cvv: CardError,
-  expirationMonth: CardError,
-  expirationYear: CardError,
-  banco_emisor: CardError,
-  cuotas: CardError,
+  titular: CardError;
+  nro_doc: CardError;
+  tipo_doc: CardError;
+  email: CardError;
+  number: CardError;
+  cvv: CardError;
+  expirationMonth: CardError;
+  expirationYear: CardError;
+  banco_emisor: CardError;
+  cuotas: CardError;
 }
 
 export interface IOtherErrors {
-  name: CardError,
-  docNumber: CardError,
-  paymentMethodId: CardError,
-  email: CardError,
+  name: CardError;
+  docNumber: CardError;
+  paymentMethodId: CardError;
+  email: CardError;
 }
 
 export interface ErrorData {
@@ -69,4 +74,5 @@ export interface IPaymentCardError {
   code: string;
   field: string;
   message: string;
+  path: string;
 }

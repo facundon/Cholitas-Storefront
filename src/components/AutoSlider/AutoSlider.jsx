@@ -10,7 +10,9 @@ const AutoplaySlider = withAutoplay(AwesomeSlider);
 
 class AutoSlider extends Component {
   render() {
-    const imgs = this.props.children?.map(img => <div key={img?.src} data-src={img?.src} />);
+    const imgs = this.props.children?.map(img => (
+      <div key={img?.src} data-src={img?.src} />
+    ));
 
     return (
       <AutoplaySlider

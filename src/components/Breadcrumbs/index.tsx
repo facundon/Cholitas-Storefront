@@ -4,7 +4,7 @@ import { FormattedMessage } from "react-intl";
 import Media from "react-media";
 import { Link } from "react-router-dom";
 import { commonMessages } from "@temp/intl";
-import { Icon } from "rsuite"
+import { Icon } from "rsuite";
 
 import { baseUrl } from "../../app/routes";
 import { getDBIdFromGraphqlId, slugify } from "../../core/utils";
@@ -73,6 +73,7 @@ const Breadcrumbs: React.FC<{
       ) : (
         <div className="breadcrumbs">
           <Link to={getBackLink(breadcrumbs)}>
+            <Icon icon="back-arrow" />
             <FormattedMessage defaultMessage="Volver" />
           </Link>
         </div>

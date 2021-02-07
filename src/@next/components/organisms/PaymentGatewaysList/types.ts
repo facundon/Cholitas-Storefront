@@ -35,7 +35,9 @@ export interface IProps {
    */
   items: any;
   total: any;
-  
+  handleRechargeInstallment: any;
+  handleChangeMethod: any;
+
   processPayment: (
     gateway: string,
     token?: string,

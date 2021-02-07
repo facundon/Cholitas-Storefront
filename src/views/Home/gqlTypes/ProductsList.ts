@@ -80,6 +80,7 @@ export interface ProductsList_categories {
 }
 
 export interface ProductsList {
+  collections: any;
   /**
    * Return information about the shop.
    */

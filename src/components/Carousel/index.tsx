@@ -1,9 +1,9 @@
 import NukaCarousel, { CarouselProps } from "nuka-carousel";
 import * as React from "react";
-import { useState } from "react"
+import { useState } from "react";
 import Media from "react-media";
 import ReactSVG from "react-svg";
-import Viewer from 'react-viewer';
+import Viewer from "react-viewer";
 
 import arrowImg from "../../images/carousel-arrow.svg";
 import {
@@ -17,7 +17,7 @@ interface CarouselType extends CarouselProps {
 }
 
 const Carousel: React.FC<CarouselType> = ({ children, ...rest }) => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
   const settings = {
     className: "carousel",
     renderBottomCenterControls: () => null,
@@ -49,28 +49,34 @@ const Carousel: React.FC<CarouselType> = ({ children, ...rest }) => {
   const carousel = (slides: number) => (
     <>
       <div className="carousel-wrapper" onClick={() => setVisible(true)}>
-        <NukaCarousel slidesToShow={slides} slidesToScroll={slides} {...settings}>
+        <NukaCarousel
+          slidesToShow={slides}
+          slidesToScroll={slides}
+          {...settings}
+        >
           {children}
         </NukaCarousel>
-      </div>     
+      </div>
       <Viewer
         visible={visible}
         noImgDetails
         maxScale={2}
         minScale={0.8}
-        drag={true}
+        drag
         scalable={false}
         rotatable={false}
         attribute={false}
-        onClose={() => { setVisible(false); } }
-        images={children.map(img => (
-          {src: img?.props.url, alt: img?.props.url}
-          ))
-        }
+        onClose={() => {
+          setVisible(false);
+        }}
+        images={children?.map(img => ({
+          src: img?.props.url,
+          alt: img?.props.url,
+        }))}
       />
     </>
   );
-  
+
   return (
     <Media query={{ maxWidth: smallScreen }}>
       {matches =>

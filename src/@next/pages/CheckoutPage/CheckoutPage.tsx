@@ -40,7 +40,7 @@ const prepareCartSummary = (
   items?: IItems,
   totalWithRecharge?: any,
   installmentsCosts?: any,
-  method?: any,
+  method?: any
 ) => {
   const products = items?.map(({ id, variant, totalPrice, quantity }) => ({
     id: id || "",
@@ -129,9 +129,9 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     return <Redirect to="/cart/" />;
   }
 
-  const [totalWithRecharge, setTotalWithRecharge] = useState()
-  const [installmentsCosts, setInstallmentsCosts] = useState()
-  const [method, setMethod] = useState("card")
+  const [totalWithRecharge, setTotalWithRecharge] = useState();
+  const [installmentsCosts, setInstallmentsCosts] = useState();
+  const [method, setMethod] = useState("card");
 
   const [submitInProgress, setSubmitInProgress] = useState(false);
   const [paymentConfirmation, setPaymentConfirmation] = useState(false);
@@ -304,7 +304,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   const handleProcessPayment = async (
     gateway: string,
     token?: string,
-    cardData?: ICardData,
+    cardData?: ICardData
   ) => {
     const paymentConfirmStepLink = CHECKOUT_STEPS.find(
       step => step.step === CheckoutStep.PaymentConfirm
@@ -355,14 +355,17 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
     }
   };
 
-  const handleRechargeInstallment = (totalWithRecharge: any, installmentsCosts: any) => {
-    setTotalWithRecharge(totalWithRecharge)
-    setInstallmentsCosts(installmentsCosts)
-  }
+  const handleRechargeInstallment = (
+    totalWithRecharge: any,
+    installmentsCosts: any
+  ) => {
+    setTotalWithRecharge(totalWithRecharge);
+    setInstallmentsCosts(installmentsCosts);
+  };
 
   const handleChangeMethod = (method: any) => {
-    setMethod(method)
-  }
+    setMethod(method);
+  };
 
   const paymentGatewaysView = availablePaymentGateways && (
     <PaymentGatewaysList
@@ -481,7 +484,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
   };
 
   const activeStepIndex = getActiveStepIndex();
-  
+
   return (
     <Checkout
       loading={submitInProgress}
@@ -498,7 +501,7 @@ const CheckoutPage: React.FC<IProps> = ({}: IProps) => {
         items,
         totalWithRecharge,
         installmentsCosts,
-        method,
+        method
       )}
       checkout={checkoutView}
       paymentGateways={paymentGatewaysView}

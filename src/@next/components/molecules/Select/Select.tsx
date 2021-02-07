@@ -9,8 +9,6 @@ export const Select: React.FC<IProps> = ({
   helpText,
   ...rest
 }: IProps) => {
-  const hasErrors = !!(errors && errors.length);
-
   return (
     <>
       <S.Select>

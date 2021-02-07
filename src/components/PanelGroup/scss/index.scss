@@ -1,66 +1,64 @@
 @import "../../../globalStyles/scss/variables";
 
-
 .panel-container {
-    background-color: $cholitas-base;
+  background-color: $cholitas-base;
 }
 
 .panel-group {
-    text-align: center;
+  text-align: center;
+  @media (max-width: $small-screen) {
+    text-align: left;
+  }
+
+  h3 {
     @media (max-width: $small-screen) {
-        text-align: left;
+      transform: scale(0.7);
+      transform-origin: left;
+    }
+  }
+
+  .sub-header {
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    color: $base-font-color;
+
+    @media (max-width: $small-screen) {
+      font-size: 0.8rem;
+      margin-bottom: 1.4rem;
+    }
+  }
+
+  .content {
+    font-weight: 200;
+    margin-bottom: $spacer;
+    font-size: 1.1rem;
+
+    &:last-of-type {
+      margin-bottom: 0rem;
     }
 
-    h3 {
-        @media (max-width: $small-screen) {
-            transform: scale(0.7);
-            transform-origin: left;
-        }
-    }
-
-   .sub-header {
-        font-weight: 300;
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
-        color: $base-font-color;
-
-        @media (max-width: $small-screen) {
-            font-size: 0.8rem;
-            margin-bottom: 1.4rem;
-        }
-    }
-
-    .content {
-        font-weight: 200;
-        margin-bottom: $spacer;
-        font-size: 1.1rem;
-
-        &:last-of-type {
-            margin-bottom: 0rem;
-        }
-
-        .rs-icon {
-            vertical-align: middle;
-            padding-right: 5px;
-        }
-
-        @media (max-width: $small-screen) {
-            font-size: 0.8rem;
-            margin-bottom: 0.7rem;
-        }
-
-        span {
-            font-weight: $bold-font-weight;
-            color: $turquoise;
-        }
-
-    }
-    
     .rs-icon {
-        vertical-align: sub;
+      vertical-align: middle;
+      padding-right: 5px;
     }
-    .rs-panel-body {
-        text-align: left;
-        background-color: white;
+
+    @media (max-width: $small-screen) {
+      font-size: 0.8rem;
+      margin-bottom: 0.7rem;
     }
+
+    span {
+      font-weight: $bold-font-weight;
+      color: $turquoise;
+    }
+  }
+
+  .rs-icon {
+    vertical-align: sub;
+  }
+  .rs-panel-body {
+    text-align: left;
+    background-color: white;
+  }
 }

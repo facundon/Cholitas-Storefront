@@ -34,4 +34,8 @@ export interface IProps {
   items: any;
 
   total: any;
+
+  handleRechargeInstallment: any;
+
+  handleChangeMethod: any;
 }

@@ -18,7 +18,7 @@ export const Link = styled(NavLink)<{ fullWidth: boolean }>`
   &:hover, &:focus {
     outline: none;
     color: ${({ theme }) => theme.colors.primary};
-  }       
+  }
 
   /* Active URL styles
   &.${props => props.activeClassName} {

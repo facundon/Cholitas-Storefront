@@ -15,6 +15,9 @@ export interface ISubmitCheckoutData {
   id: string;
   orderNumber: string;
   token: string;
+  orderStatus?: any;
+  externalResource?: any;
+  total_amount?: any;
 }
 
 export interface ICheckoutReviewSubpageHandles {
@@ -37,7 +40,6 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
     paymentGatewayFormRef,
     changeSubmitProgress,
     onSubmitSuccess,
-    subtotal,
     ...props
   }: IProps,
   ref
@@ -72,13 +74,12 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
       return `Adyen payments`;
     }
     if (payment?.gateway === "mirumee.payments.transferencia") {
-      return "Transferencia Bancaria"
+      return "Transferencia Bancaria";
     }
-    if (payment?.creditCard && payment?.creditCard?.extra_data == null ) {
+    if (payment?.creditCard && payment?.creditCard?.extra_data == null) {
       return `Tarjeta terminada en ${payment?.creditCard.lastDigits}`;
-    } else {
-      return `${payment?.creditCard?.extra_data?.readable_method}`
     }
+    return `${payment?.creditCard?.extra_data?.readable_method}`;
   };
 
   useImperativeHandle(ref, () => ({
@@ -91,7 +92,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
           new Event("submitComplete", { cancelable: true })
         );
       } else {
-        const paymentData = payment?.creditCard
+        const paymentData: any = payment?.creditCard;
         const response = await completeCheckout({ paymentData });
         data = response.data;
         dataError = response.dataError;
@@ -99,7 +100,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
         const errors = dataError?.error;
         if (errors) {
           setErrors(errors);
-        } else { 
+        } else {
           setErrors([]);
           onSubmitSuccess({
             id: data?.order?.id,
@@ -107,7 +108,7 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
             token: data?.order?.token,
             orderStatus: data?.order?.paymentStatus,
             externalResource: data?.confirmationData,
-            total_amount: payment?.total.amount,
+            total_amount: payment?.total!.amount,
           });
         }
       }

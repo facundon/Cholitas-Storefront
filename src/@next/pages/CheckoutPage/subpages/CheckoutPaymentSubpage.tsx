@@ -13,8 +13,7 @@ import { CheckoutPayment } from "@components/organisms";
 import { useCheckout } from "@saleor/sdk";
 import { commonMessages } from "@temp/intl";
 import { IFormError } from "@types";
-import { TRANSFERENCIA_PROMOCODE } from "../../../../core/config"
-
+import { TRANSFERENCIA_PROMOCODE } from "../../../../core/config";
 
 export interface ICheckoutPaymentSubpageHandles {
   submitPayment: () => void;
@@ -24,6 +23,7 @@ interface IProps extends RouteComponentProps<any> {
   changeSubmitProgress: (submitInProgress: boolean) => void;
   onSubmitSuccess: () => void;
   onPaymentGatewayError: (errors: IFormError[]) => void;
+  selectedPaymentGateway: any;
 }
 
 const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
@@ -120,10 +120,11 @@ const CheckoutPaymentSubpageWithRef: RefForwardingComponent<
     }
   };
   useEffect(() => {
-    selectedPaymentGateway === "mirumee.payments.transferencia" ?
-      addPromoCode(TRANSFERENCIA_PROMOCODE) :
-      removePromoCode(TRANSFERENCIA_PROMOCODE)
-  }, [selectedPaymentGateway])
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    selectedPaymentGateway === "mirumee.payments.transferencia"
+      ? addPromoCode(TRANSFERENCIA_PROMOCODE)
+      : removePromoCode(TRANSFERENCIA_PROMOCODE);
+  }, [selectedPaymentGateway]);
 
   return (
     <CheckoutPayment

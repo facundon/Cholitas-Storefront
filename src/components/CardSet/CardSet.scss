@@ -1,6 +1,5 @@
 @import "../../globalStyles/scss/variables.scss";
 
-
 .scroll-menu {
   .menu-wrapper--inner {
     width: 4000px !important;
@@ -13,27 +12,27 @@
   border: none;
   text-align: center;
 
-  @media (max-width: $medium-screen){
+  @media (max-width: $medium-screen) {
     margin: 0 20px;
   }
 
-  &-panel{
+  &-panel {
     display: inline-block;
     width: 290px;
 
-    img{
+    img {
       object-fit: cover;
       min-width: 100%;
-      min-width: -moz-available;          /* WebKit-based browsers will ignore this. */
-      min-width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+      min-width: -moz-available; /* WebKit-based browsers will ignore this. */
+      min-width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
       min-width: fill-available;
       height: 290px;
-    
-      @media (max-width: $medium-screen){
+
+      @media (max-width: $medium-screen) {
         height: 130px;
       }
     }
-    @media (max-width: $medium-screen){
+    @media (max-width: $medium-screen) {
       width: 130px;
     }
   }

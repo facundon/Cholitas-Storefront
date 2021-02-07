@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useRef} from "react";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, { useEffect, useState, useRef } from "react";
 import { FormattedMessage } from "react-intl";
 import { commonMessages } from "@temp/intl";
 import { useAuth, useCart } from "@saleor/sdk";
@@ -15,10 +16,11 @@ import {
   OverlayContext,
   OverlayTheme,
   OverlayType,
+  MobileNavList,
 } from "..";
 import * as appPaths from "../../app/routes";
 import { maybe } from "../../core/utils";
-import {MobileNavList} from "../"
+
 import Navbar from "../Navbar/Navbar";
 import { TypedMainMenuQuery } from "./queries";
 
@@ -46,13 +48,20 @@ const MainMenu: React.FC = () => {
     0;
 
   const [isSticky, setSticky] = useState(false);
-  const element = useRef(null)
-  let observer = new IntersectionObserver(entries => {entries[0]['isIntersecting'] === false ? setSticky(true) : setSticky(false)}, {rootMargin: "35px"})
+  const element = useRef(null);
+  const observer = new IntersectionObserver(
+    entries => {
+      entries[0].isIntersecting === false ? setSticky(true) : setSticky(false);
+    },
+    { rootMargin: "35px" }
+  );
 
   useEffect(() => {
     observer.observe(element.current);
-    return () => {observer.disconnect}  
-  }, [observer])
+    return () => {
+      observer.disconnect;
+    };
+  }, [observer]);
 
   return (
     <OverlayContext.Consumer>
@@ -60,11 +69,16 @@ const MainMenu: React.FC = () => {
         <nav className="main-navbar">
           <TypedMainMenuQuery renderOnError displayLoader={false}>
             {({ data }) => (
-              <p className="topbar" ref={element}>{data.shop.description}</p>
+              <p className="topbar" ref={element}>
+                {data.shop.description}
+              </p>
             )}
           </TypedMainMenuQuery>
           <div className={`main-menu-wrapper${isSticky ? "-sticky" : ""}`}>
-            <div className={`main-menu${isSticky ? "-sticky" : ""}`} id="header">
+            <div
+              className={`main-menu${isSticky ? "-sticky" : ""}`}
+              id="header"
+            >
               <div className="main-menu__left">
                 <TypedMainMenuQuery renderOnError displayLoader={false}>
                   {({ data }) => {
@@ -80,8 +94,8 @@ const MainMenu: React.FC = () => {
                           render={() => (
                             <div className="main-menu__hamburger">
                               <MobileNavList
-                              data-test="toggleSideMenuLink"
-                              items={items}
+                                data-test="toggleSideMenuLink"
+                                items={items}
                               />
                             </div>
                           )}
@@ -161,7 +175,7 @@ const MainMenu: React.FC = () => {
                 </TypedMainMenuQuery>
               </div>
 
-              <div className={`main-menu__center${isSticky? "-sticky":""}`}>
+              <div className={`main-menu__center${isSticky ? "-sticky" : ""}`}>
                 <Link to={appPaths.baseUrl}>
                   <ReactSVG path={logoImg} />
                 </Link>
@@ -240,7 +254,10 @@ const MainMenu: React.FC = () => {
                       data-test="menuCartOverlayLink"
                       className="main-menu__icon main-menu__cart"
                       onClick={() => {
-                        overlayContext.show(OverlayType.cart, OverlayTheme.right);
+                        overlayContext.show(
+                          OverlayType.cart,
+                          OverlayTheme.right
+                        );
                       }}
                     >
                       <ReactSVG path={cartImg} />
@@ -267,7 +284,11 @@ const MainMenu: React.FC = () => {
                     data-test="menuSearchOverlayLink"
                     className="main-menu__search"
                     onClick={() =>
-                      overlayContext.show(OverlayType.search, OverlayTheme.right, { data: isSticky })
+                      overlayContext.show(
+                        OverlayType.search,
+                        OverlayTheme.right,
+                        { data: isSticky }
+                      )
                     }
                   >
                     <Media
@@ -286,7 +307,10 @@ const MainMenu: React.FC = () => {
             <div className="navbar">
               <TypedMainMenuQuery renderOnError displayLoader={false}>
                 {({ data }) => {
-                  const items = maybe(() => data.shop.navigation.main.items, []);
+                  const items = maybe(
+                    () => data.shop.navigation.main.items,
+                    []
+                  );
                   return (
                     <Media
                       query={{ minWidth: mediumScreen }}

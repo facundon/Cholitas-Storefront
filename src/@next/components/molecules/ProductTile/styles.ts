@@ -1,10 +1,9 @@
 import { media, styled } from "@styles";
 
-
 export const Wrapper = styled.div`
-  background: ${props => props.theme.colors.hoverLightBackground};
+  background: ${props => props.theme.colors.baseOverlay};
   padding: 1rem 2rem 1.6rem 2rem;
-  text-align: center;  
+  text-align: center;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   box-shadow: 10px 10px 13px -12px;
   border-radius: 10px;
@@ -14,9 +13,9 @@ export const Wrapper = styled.div`
   grid-gap: 0.5rem;
 
   :hover {
-    background-color: ${props => props.theme.colors.secondaryOverlayDark};
+    background-color: ${props => props.theme.colors.baseOverlayDark};
     box-shadow: 9px 9px 6px -12px ${props => props.theme.colors.dark};
-    color: ${props => props.theme.colors.secondaryDark}
+    color: ${props => props.theme.colors.secondaryDark};
   }
 
   ${media.largeScreen`
@@ -25,6 +24,7 @@ export const Wrapper = styled.div`
 
   ${media.smallScreen`
     padding: 0.5rem 1rem 0.7rem 1rem;
+    grid-template-rows: 1fr 4fr 1fr;
   `}
 `;
 
@@ -62,17 +62,17 @@ export const Image = styled.div`
   width: fit-content;
   justify-self: center;
   align-self: center;
-  
+
   > img {
     width: auto;
     height: auto;
     max-width: 100%;
-    object-fit:cover;
+    object-fit: cover;
 
     ${media.largeScreen`
     `}
 
     ${media.smallScreen`
-    `} 
+    `}
   }
 `;

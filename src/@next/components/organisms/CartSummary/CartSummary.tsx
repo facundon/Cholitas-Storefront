@@ -24,17 +24,25 @@ const CostLine = ({
   </S.CostLine>
 );
 
-const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, installmentsCosts, method }: ICosts) => {
+const Costs = ({
+  subtotal,
+  promoCode,
+  shipping,
+  total,
+  totalWithRecharge,
+  installmentsCosts,
+  method,
+}: ICosts) => {
   const recharge = {
     gross: {
       amount: installmentsCosts?.installment_amount || 0,
-      currency: "ARS"
+      currency: "ARS",
     },
-    net:{
+    net: {
       amount: installmentsCosts?.installment_amount || 0,
-      currency: "ARS"
-    }
-  }
+      currency: "ARS",
+    },
+  };
 
   const intl = useIntl();
   return (
@@ -44,13 +52,15 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
           name={intl.formatMessage(commonMessages.subtotal)}
           cost={subtotal}
         />
-      )}     
-      {totalWithRecharge != total?.gross.amount && method == "card" && recharge?.gross.amount != 0 && (
-        <CostLine
-          name={intl.formatMessage(commonMessages.recharge)}
-          cost={recharge}
-        />
       )}
+      {totalWithRecharge !== total?.gross.amount &&
+        method === "card" &&
+        recharge?.gross.amount !== 0 && (
+          <CostLine
+            name={intl.formatMessage(commonMessages.recharge)}
+            cost={recharge}
+          />
+        )}
       {shipping && (
         <CostLine
           name={intl.formatMessage(commonMessages.shipping)}
@@ -64,23 +74,37 @@ const Costs = ({ subtotal, promoCode, shipping, total, totalWithRecharge, instal
           negative
         />
       )}
-      {installmentsCosts && method == "card" &&(
-        <S.CostLine last={true}>
-         <span>{intl.formatMessage(commonMessages.total)}</span>
-         <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
-          {`${installmentsCosts?.installments} ${installmentsCosts?.installments != 1 ? "cuotas" : "cuota"} de ${installmentsCosts?.installment_amount} ARS`}
-         </span>
-       </S.CostLine>
-      )}
-      {total && method == "card" &&(
-        <S.CostLine last={installmentsCosts ? false : true}>
-          <span>{installmentsCosts ? "" : "Total"}</span>
-          <span data-test={`cartSummaryCost${intl.formatMessage(commonMessages.total).replace(/\s/g, "")}`}>
-            {`${installmentsCosts ? '(' : ""}${installmentsCosts ? totalWithRecharge.toFixed(2) : total.gross.amount.toFixed(2)} ARS${installmentsCosts ? ')' : ""}`}
+      {installmentsCosts && method === "card" && (
+        <S.CostLine last>
+          <span>{intl.formatMessage(commonMessages.total)}</span>
+          <span
+            data-test={`cartSummaryCost${intl
+              .formatMessage(commonMessages.total)
+              .replace(/\s/g, "")}`}
+          >
+            {`${installmentsCosts?.installments} ${
+              installmentsCosts?.installments !== 1 ? "cuotas" : "cuota"
+            } de ${installmentsCosts?.installment_amount} ARS`}
           </span>
         </S.CostLine>
       )}
-      {total && method == "other" && (
+      {total && method === "card" && (
+        <S.CostLine last={!installmentsCosts}>
+          <span>{installmentsCosts ? "" : "Total"}</span>
+          <span
+            data-test={`cartSummaryCost${intl
+              .formatMessage(commonMessages.total)
+              .replace(/\s/g, "")}`}
+          >
+            {`${installmentsCosts ? "(" : ""}${
+              installmentsCosts
+                ? totalWithRecharge.toFixed(2)
+                : total.gross.amount.toFixed(2)
+            } ARS${installmentsCosts ? ")" : ""}`}
+          </span>
+        </S.CostLine>
+      )}
+      {total && method === "other" && (
         <CostLine
           name={intl.formatMessage(commonMessages.total)}
           cost={total}
@@ -105,21 +129,21 @@ const CartSummary: React.FC<IProps> = ({
   method,
 }: IProps) => {
   const [mobileCartOpened, setMobileCartOpened] = useState(false);
-  const [installmentRate, setInstallmentRate] = useState({TEA: "", CFT: ""})
+  const [installmentRate, setInstallmentRate] = useState({ TEA: "", CFT: "" });
 
-  useEffect(()=>{
-    if (installmentsCosts && Object.keys(installmentsCosts).length != 0) {
-      const installmentRate = installmentsCosts?.labels?.find((e: any) => e.includes("CFT")).split('|')
-      setInstallmentRate(
-        {
-          TEA: installmentRate[1]?.replace("TEA_", ""),
-          CFT: installmentRate[0]?.replace("CFT_", ""),
-        }
-      )
+  useEffect(() => {
+    if (installmentsCosts && Object.keys(installmentsCosts).length !== 0) {
+      const installmentRate = installmentsCosts?.labels
+        ?.find((e: any) => e.includes("CFT"))
+        .split("|");
+      setInstallmentRate({
+        TEA: installmentRate[1]?.replace("TEA_", ""),
+        CFT: installmentRate[0]?.replace("CFT_", ""),
+      });
     } else {
-      setInstallmentRate({TEA: "", CFT: ""})
+      setInstallmentRate({ TEA: "", CFT: "" });
     }
-  }, [installmentsCosts])
+  }, [installmentsCosts]);
 
   return (
     <S.Wrapper mobileCartOpened={mobileCartOpened}>
@@ -160,19 +184,19 @@ const CartSummary: React.FC<IProps> = ({
           installmentsCosts={installmentsCosts}
           method={method}
         />
-        {method == "card" && ( 
-        <>
-        {installmentRate?.TEA != "" &&
-          <S.TEA>
-              <span>TEA: {installmentRate?.TEA}</span>
-          </S.TEA>
-        }
-        {installmentRate?.CFT != "" &&
-          <S.CFT>
-            <span>CFT: {installmentRate?.CFT}</span>
-          </S.CFT>
-        }
-        </>
+        {method === "card" && (
+          <>
+            {installmentRate?.TEA !== "" && (
+              <S.TEA>
+                <span>TEA: {installmentRate?.TEA}</span>
+              </S.TEA>
+            )}
+            {installmentRate?.CFT !== "" && (
+              <S.CFT>
+                <span>CFT: {installmentRate?.CFT}</span>
+              </S.CFT>
+            )}
+          </>
         )}
       </S.Content>
     </S.Wrapper>

@@ -3,10 +3,10 @@
 import { generatePageUrl } from "./utils";
 
 export const BASE_URL = "/";
-export const PRODUCTS_PER_PAGE = 12;
+export const PRODUCTS_PER_PAGE = 9;
 export const SUPPORT_EMAIL = "cholitas.deco@gmail.com";
 export const PROVIDERS = {
-  TRANSFERENCIA : {
+  TRANSFERENCIA: {
     label: "Transferencia Bancaria",
   },
   MERCADOPAGO: {
@@ -27,15 +27,13 @@ export const PROVIDERS = {
   ADYEN: {
     label: "Adyen",
     script: {
-      src:
-        "",
+      src: "",
       integrity:
         "sha384-wG2z9zSQo61EIvyXmiFCo+zB3y0ZB4hsrXVcANmpP8HLthjoQJQPBh7tZKJSV8jA",
       crossOrigin: "anonymous",
     },
     style: {
-      src:
-        "",
+      src: "",
       integrity:
         "sha384-8ofgICZZ/k5cC5N7xegqFZOA73H9RQ7H13439JfAZW8Gj3qjuKL2isaTD3GMIhDE",
       crossOrigin: "anonymous",
@@ -57,8 +55,7 @@ export const SOCIAL_MEDIA = [
 ];
 export const META_DEFAULTS = {
   custom: [],
-  description:
-    "Cholitas Deco",
+  description: "Cholitas Deco",
   image: `${window.location.origin}${require("../images/logo.svg")}`,
   title: "Cholitas Deco",
   type: "website",
@@ -117,9 +114,9 @@ export const INFORMATION = [
   {
     header: "Envíos",
     icon: {
-        icon: "truck",
-        size: "3x",
-        flip: true,
+      icon: "truck",
+      size: "3x",
+      flip: true,
     },
     data: [
       {
@@ -127,11 +124,13 @@ export const INFORMATION = [
         icon: "info",
       },
       {
-        info: "Si estas en $CABA$ te podemos enviar tu pedido por $Motomensajeria$",
+        info:
+          "Si estas en $CABA$ te podemos enviar tu pedido por $Motomensajeria$",
         icon: "info",
       },
       {
-        info: "También podes elegir retirar el pedido en nuestro domicilio. Nos encontramos por la zona de $Nueva$ $Pompeya$",
+        info:
+          "También podes elegir retirar el pedido en nuestro domicilio. Nos encontramos por la zona de $Nueva$ $Pompeya$",
         icon: "info",
       },
     ],
@@ -139,46 +138,31 @@ export const INFORMATION = [
   {
     header: "Medios de Pago",
     icon: {
-        icon: "credit-card",
-        size: "3x",
-        flip: false,
+      icon: "credit-card",
+      size: "3x",
+      flip: false,
     },
     data: [
       {
-        info: "Aceptamos hasta $12$ $cuotas$ con todas las tarjetas y $Pago$ $en$ $Efectivo$ mediante $MercadoPago$",
-        icon: "info"
+        info:
+          "Aceptamos hasta $12$ $cuotas$ con todas las tarjetas y $Pago$ $en$ $Efectivo$ mediante $MercadoPago$",
+        icon: "info",
       },
       {
-        info: "También podes elegír $Transferencia$ $Bancaria$ donde tendrás aplicado un $10%$ $de$ $descuento$",
+        info:
+          "También podes elegír $Transferencia$ $Bancaria$ donde tendrás aplicado un $10%$ $de$ $descuento$",
         icon: "info",
-      }
+      },
     ],
   },
   {
     header: "Contacto",
     icon: {
-        icon: "phone",
-        size: "3x",
-        flip: false,
+      icon: "phone",
+      size: "3x",
+      flip: false,
     },
-    data: [      
-      {
-        info: "Email: $cholitas.deco@gmail.com$",
-        icon: "envelope",
-      },
-      {
-        info: "Ig: $#cholitas.deco$",
-        icon: "instagram",
-      },
-    ],
-  },{
-    header: "Nosotros",
-    icon: {
-        icon: "group",
-        size: "3x",
-        flip: false,
-    },
-    data: [      
+    data: [
       {
         info: "Email: $cholitas.deco@gmail.com$",
         icon: "envelope",
@@ -189,6 +173,24 @@ export const INFORMATION = [
       },
     ],
   },
-]
+  {
+    header: "Nosotros",
+    icon: {
+      icon: "group",
+      size: "3x",
+      flip: false,
+    },
+    data: [
+      {
+        info: "Email: $cholitas.deco@gmail.com$",
+        icon: "envelope",
+      },
+      {
+        info: "Ig: $#cholitas.deco$",
+        icon: "instagram",
+      },
+    ],
+  },
+];
 
-export const TRANSFERENCIA_PROMOCODE = "391F65D3F6E9"
+export const TRANSFERENCIA_PROMOCODE = "391F65D3F6E9";

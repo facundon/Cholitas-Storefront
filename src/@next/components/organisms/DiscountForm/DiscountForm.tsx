@@ -32,8 +32,8 @@ export const DiscountForm: React.FC<IProps> = ({
   };
 
   useEffect(() => {
-    setTempPromoCode(undefined)
-  }, [selectedPaymentGateway])
+    setTempPromoCode(undefined);
+  }, [selectedPaymentGateway]);
 
   return (
     <Formik
@@ -91,20 +91,23 @@ export const DiscountForm: React.FC<IProps> = ({
               </S.InputWithButton>
               <ErrorMessage errors={values.errors} />
             </S.Input>
-            {values.tempPromoCode && selectedPaymentGateway !== "mirumee.payments.transferencia" && (
-              <>
-                <span>
-                  <FormattedMessage {...commonMessages.promoCode} />:
-                </span>
-                <S.ChipsWrapper>
-                  <Chip onClose={() => handleRemoveBtnClick(values.inputCode)}>
-                    <span data-test="promoCodeChip">
-                      {values.tempPromoCode}
-                    </span>
-                  </Chip>
-                </S.ChipsWrapper>
-              </>
-            )}
+            {values.tempPromoCode &&
+              selectedPaymentGateway !== "mirumee.payments.transferencia" && (
+                <>
+                  <span>
+                    <FormattedMessage {...commonMessages.promoCode} />:
+                  </span>
+                  <S.ChipsWrapper>
+                    <Chip
+                      onClose={() => handleRemoveBtnClick(values.inputCode)}
+                    >
+                      <span data-test="promoCodeChip">
+                        {values.tempPromoCode}
+                      </span>
+                    </Chip>
+                  </S.ChipsWrapper>
+                </>
+              )}
           </S.DiscountForm>
         );
       }}

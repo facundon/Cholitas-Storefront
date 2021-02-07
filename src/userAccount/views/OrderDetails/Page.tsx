@@ -46,7 +46,7 @@ const Page: React.FC<{
         <div>
           <h3>
             <FormattedMessage
-              defaultMessage="Tu Orden Nro.: {orderNum}"
+              defaultMessage="Orden Nro.: {orderNum}"
               values={{ orderNum: order.number }}
             />
           </h3>

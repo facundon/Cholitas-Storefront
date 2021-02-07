@@ -15,6 +15,7 @@ export * from "./ProductList";
 export * from "./CartSummary";
 export * from "./CartRow";
 export * from "./AddressGridSelector";
+export * from "./CreditCardForm";
 export * from "./StripeCreditCardForm";
 export * from "./MercadoPagoCreditCardForm";
 export * from "./MercadoPagoOtrosMediosForm";

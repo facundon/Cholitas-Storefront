@@ -5,7 +5,7 @@ import ReactSVG from "react-svg";
 import { NavLink } from "..";
 import { MainMenuSubItem } from "../MainMenu/gqlTypes/MainMenuSubItem";
 
-import subcategoriesImg from "../../images/subcategories.svg";;
+import subcategoriesImg from "../../images/subcategories.svg";
 
 export interface INavItem extends MainMenuSubItem {
   children?: INavItem[];

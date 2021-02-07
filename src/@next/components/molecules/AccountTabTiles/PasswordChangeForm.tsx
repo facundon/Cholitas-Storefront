@@ -87,7 +87,9 @@ export const PasswordChangeForm: React.FC<{
             <S.Form onSubmit={handleSubmit} data-test="changePasswordForm">
               <TextField
                 name="oldPassword"
-                label={intl.formatMessage({ defaultMessage: "Contraseña Antigua" })}
+                label={intl.formatMessage({
+                  defaultMessage: "Contraseña Antigua",
+                })}
                 type="password"
                 value={values.oldPassword}
                 onBlur={handleBlur}
@@ -100,7 +102,9 @@ export const PasswordChangeForm: React.FC<{
               />
               <TextField
                 name="newPassword"
-                label={intl.formatMessage({ defaultMessage: "Contraseña Nueva" })}
+                label={intl.formatMessage({
+                  defaultMessage: "Contraseña Nueva",
+                })}
                 type="password"
                 value={values.newPassword}
                 onBlur={handleBlur}

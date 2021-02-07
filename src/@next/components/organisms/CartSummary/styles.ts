@@ -93,7 +93,7 @@ export const CFT = styled.div`
   font-size: 27px;
   text-transform: uppercase;
   font-weight: 400;
-`
+`;
 
 export const TEA = styled.div`
   display: flex;
@@ -102,4 +102,4 @@ export const TEA = styled.div`
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 400;
-`
+`;

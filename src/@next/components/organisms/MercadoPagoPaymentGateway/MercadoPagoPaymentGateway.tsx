@@ -1,41 +1,53 @@
+/* eslint-disable func-names */
 import React, { useState, useEffect } from "react";
 
 import { ErrorMessage } from "@components/atoms";
-import { MercadoPagoCreditCardForm, MercadoPagoOtrosMediosForm } from "@components/organisms";
+import {
+  MercadoPagoCreditCardForm,
+  MercadoPagoOtrosMediosForm,
+} from "@components/organisms";
 import { IFormError } from "@types";
-import { Nav, Icon } from 'rsuite'
+import { Nav, Icon } from "rsuite";
 
+import * as yup from "yup";
 import {
   ErrorData,
   IPaymentCardError,
 } from "../../../../core/payments/mercadopago";
 
-
 import * as S from "./styles";
 import { IProps } from "./types";
-import * as MpErrors from "./errors.json"
-import * as yup from 'yup';
+import * as MpErrors from "./errors.json";
 
-
-let card_schema = yup.object().shape({
-  email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
+const card_schema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Ingresa tu email")
+    .email("Ingrese un email válido"),
   cuotas: yup.string().required("Ingresa la cantidad de cuotas"),
   banco_emisor: yup.string().required("Ingresa el banco emisor"),
-})
-
-let other_schema = yup.object().shape({
-  name: yup.string().required("Ingresa el nombre y apellido.").matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
-  docNumber: yup.string().required("Ingresa tu documento"),
-  email: yup.string().required("Ingresa tu email").email("Ingrese un email válido"),
-  paymentMethodId: yup.string().required("Seleccione el medio de pago")
 });
 
-const other_payment_methods = {
-  "Rapipago": "rapipago",
+const other_schema = yup.object().shape({
+  name: yup
+    .string()
+    .required("Ingresa el nombre y apellido.")
+    .matches(/^[a-zA-Z\s]*$/, "Ingrese solo letras"),
+  docNumber: yup.string().required("Ingresa tu documento"),
+  email: yup
+    .string()
+    .required("Ingresa tu email")
+    .email("Ingrese un email válido"),
+  paymentMethodId: yup.string().required("Seleccione el medio de pago"),
+});
+
+const other_payment_methods: any = {
+  // eslint-disable-next-line prettier/prettier
+  Rapipago: "rapipago",
   "Pago Fácil": "pagofacil",
   "Provincia NET Pagos": "bapropagos",
   "Carga Virtual": "cargavirtual",
-}
+};
 
 const INITIAL_CARD_ERROR_STATE = {
   fieldErrors: {
@@ -61,7 +73,7 @@ const INITIAL_OTROS_MEDIOS_ERROR_STATE = {
     email: null,
   },
   nonFieldError: "",
-}
+};
 
 const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   config,
@@ -77,7 +89,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   total,
 }: IProps) => {
   const apiKey = config.find(({ field }) => field === "api_key")?.value;
-  const [method, setMethod] = useState("card")
+  const [method, setMethod] = useState("card");
   const [submitErrors, setSubmitErrors] = useState<IFormError[]>([]);
   const [cardErrors, setCardErrors] = React.useState<ErrorData>(
     INITIAL_CARD_ERROR_STATE
@@ -87,7 +99,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   );
 
   const setCardErrorsHelper = (errors: IPaymentCardError[]) => {
-    if (method == "card") {
+    if (method === "card") {
       errors.map(({ field, message }: IPaymentCardError) =>
         setCardErrors(({ fieldErrors }) => ({
           fieldErrors: {
@@ -95,63 +107,79 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
             [field]: { field, message },
           },
         }))
-      )} else {
-        errors.map(({ path: field, message }: IPaymentCardError) =>
-        setOtherErrors(({ fieldErrors } : any) => ({
+      );
+    } else {
+      errors.map(({ path: field, message }: IPaymentCardError) =>
+        setOtherErrors(({ fieldErrors }: any) => ({
           fieldErrors: {
             ...fieldErrors,
             [field]: { field, message },
           },
-        })))
+        }))
+      );
     }
-  }
+  };
 
   const allErrors = [...errors, ...submitErrors];
 
   const handleSubmit = async (formData: any) => {
-    setCardErrors(INITIAL_CARD_ERROR_STATE)
-    setOtherErrors(INITIAL_OTROS_MEDIOS_ERROR_STATE)
+    setCardErrors(INITIAL_CARD_ERROR_STATE);
+    setOtherErrors(INITIAL_OTROS_MEDIOS_ERROR_STATE);
     if (formData) {
-      if (method == "card") {
-        await window.Mercadopago.createToken(formData, (status: any, response: any) => {       
-          if (status == 200 || status == 201) {
-            card_schema.validate({
-              email: formData.email,
-              banco_emisor: formData.issuer,
-              cuotas: formData.installments
-            })     
-            .then(function(valid) {
-              const checkoutForm = {
-                brand: formData.paymentMethodId,
-                firstDigits: null,
-                lastDigits: response.last_four_digits,
-                payer: response.cardholder,
-                email: formData.email,
-                installments: formData.installments,
-                description: items[0]?.variant?.product?.name,
-                extra_data: null
-              }
-              processPayment(response.id, checkoutForm)
-            })
-            .catch( err => {
-              const formated_err: any = [{field: err.path, message: err.message}]
-              setCardErrorsHelper(formated_err)
-            })
-          } else {
-              const formatedResponse: any = response.cause.map((error: any) => MpErrors[error.code])
-              setCardErrorsHelper(formatedResponse)
+      if (method === "card") {
+        await window.Mercadopago.createToken(
+          formData,
+          (status: any, response: any) => {
+            if (status === 200 || status === 201) {
+              card_schema
+                .validate({
+                  email: formData.email,
+                  banco_emisor: formData.issuer,
+                  cuotas: formData.installments,
+                })
+                .then(function (valid) {
+                  const checkoutForm: any = {
+                    brand: formData.paymentMethodId,
+                    firstDigits: null,
+                    lastDigits: response.last_four_digits,
+                    payer: response.cardholder,
+                    email: formData.email,
+                    installments: formData.installments,
+                    description: items[0]?.variant?.product?.name,
+                    extra_data: null,
+                  };
+                  processPayment(response.id, checkoutForm);
+                })
+                .catch(err => {
+                  const formated_err: any = [
+                    { field: err.path, message: err.message },
+                  ];
+                  setCardErrorsHelper(formated_err);
+                });
+            } else {
+              const formatedResponse: any = response.cause.map(
+                (error: any) => MpErrors[error.code]
+              );
+              setCardErrorsHelper(formatedResponse);
+            }
           }
-        })
+        );
       } else {
-        other_schema.validate({
+        other_schema
+          .validate({
             name: formData.name,
             docNumber: formData.docNumber,
             email: formData.email,
-            paymentMethodId: formData.paymentMethodId
+            paymentMethodId: formData.paymentMethodId,
           })
           .then(function (valid) {
-            const readable_method = Object.keys(other_payment_methods).find(key => other_payment_methods[key] === formData.paymentMethodId)
-            const checkoutForm = {
+            const readable_method: any = Object.keys(
+              other_payment_methods
+            ).find(
+              (key: any) =>
+                other_payment_methods[key] === formData.paymentMethodId
+            );
+            const checkoutForm: any = {
               brand: formData.paymentMethodId,
               firstDigits: null,
               lastDigits: null,
@@ -161,14 +189,14 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
               email: formData.email,
               description: items[0]?.variant?.product?.name,
               extra_data: {
-                readable_method: readable_method
+                readable_method,
               },
-            }
-            processPayment("111111111", checkoutForm)
+            };
+            processPayment("111111111", checkoutForm);
           })
-          .catch( err => {
-            setCardErrorsHelper([err])
-          })
+          .catch(err => {
+            setCardErrorsHelper([err]);
+          });
       }
     } else {
       const mpFormError = [
@@ -176,49 +204,60 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           message: "Ocurrio un error con la carga del formulario de pago.",
         },
       ];
-      setSubmitErrors(mpFormError)
+      setSubmitErrors(mpFormError);
     }
-  }
+  };
 
   useEffect(() => {
     const script = document.createElement("script");
     script.src = scriptConfig.src;
     script.id = "mercadopago-script-id";
     script.async = true;
-    script.onload = initMP
+    script.onload = initMP;
     document.head.appendChild(script);
-  }, [])
+  }, []);
 
   useEffect(() => {
-    handleChangeMethod(method)
-  }, [method])
+    handleChangeMethod(method);
+  }, [method]);
 
   const initMP = () => {
     if (apiKey) {
-      window.Mercadopago.setPublishableKey(apiKey)
+      window.Mercadopago.setPublishableKey(apiKey);
     } else {
       const mpApiKeyError = [
         {
-          message: "Fallo en la configuración de la API de Mercado Pago. Proveer una clave pública",
+          message:
+            "Fallo en la configuración de la API de Mercado Pago. Proveer una clave pública",
         },
       ];
-      setSubmitErrors(mpApiKeyError)
-      return false
+      setSubmitErrors(mpApiKeyError);
+      return false;
     }
     window.Mercadopago.getIdentificationTypes();
-  }
+  };
 
   const handleSelect = (activeKey: any) => {
-    setMethod(activeKey)
-  }
+    setMethod(activeKey);
+  };
 
   return (
     <S.Wrapper data-test="mercadopagoPaymentGateway">
-      <Nav justified appearance="tabs" onSelect={handleSelect} activeKey={method} style={{marginBottom: 20, textAlign: "center", zIndex: 0}}>
-        <Nav.Item eventKey="card" icon={<Icon icon="credit-card"/>}>Tarjeta</Nav.Item>
-        <Nav.Item eventKey="other" icon={<Icon icon="money"/>}>Efectivo</Nav.Item>
+      <Nav
+        justified
+        appearance="tabs"
+        onSelect={handleSelect}
+        activeKey={method}
+        style={{ marginBottom: 20, textAlign: "center", zIndex: 0 }}
+      >
+        <Nav.Item eventKey="card" icon={<Icon icon="credit-card" />}>
+          Tarjeta
+        </Nav.Item>
+        <Nav.Item eventKey="other" icon={<Icon icon="money" />}>
+          Efectivo
+        </Nav.Item>
       </Nav>
-      {method == "card" ?
+      {method === "card" ? (
         <MercadoPagoCreditCardForm
           formRef={formRef}
           formId={formId}
@@ -240,7 +279,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           handleRechargeInstallment={handleRechargeInstallment}
           items={items}
           total={total}
-        /> : 
+        />
+      ) : (
         <MercadoPagoOtrosMediosForm
           formRef={formRef}
           formId={formId}
@@ -257,8 +297,8 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
           items={items}
           total={total}
           otherPaymentMethods={other_payment_methods}
-        />        
-      }
+        />
+      )}
       <ErrorMessage errors={allErrors} />
     </S.Wrapper>
   );

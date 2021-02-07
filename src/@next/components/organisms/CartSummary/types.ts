@@ -12,6 +12,9 @@ export interface ICosts {
   promoCode?: ITaxedMoney | null;
   shipping?: ITaxedMoney | null;
   total?: ITaxedMoney | null;
+  totalWithRecharge?: any | null;
+  installmentsCosts?: any | null;
+  method?: any | null;
 }
 
 export interface IProduct {

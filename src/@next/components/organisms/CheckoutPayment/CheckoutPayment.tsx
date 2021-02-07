@@ -29,7 +29,10 @@ const CheckoutPayment: React.FC<IProps> = ({
 
   useEffect(() => {
     const isVoucherCode = !!promoCodeDiscount?.voucherCode;
-    if (isVoucherCode && selectedPaymentGateway !== "mirumee.payments.transferencia") {
+    if (
+      isVoucherCode &&
+      selectedPaymentGateway !== "mirumee.payments.transferencia"
+    ) {
       setShowPromoCodeForm(isVoucherCode);
     }
   }, [promoCodeDiscount?.voucherCode]);
@@ -51,8 +54,8 @@ const CheckoutPayment: React.FC<IProps> = ({
     }
   };
   useEffect(() => {
-    setShowPromoCodeForm(false)
-  }, [selectedPaymentGateway])
+    setShowPromoCodeForm(false);
+  }, [selectedPaymentGateway]);
 
   return (
     <S.Wrapper>

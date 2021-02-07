@@ -22,12 +22,23 @@ class NavLink extends React.Component {
 
   getDropdownItems(props) {
     const link = (url, subitem) => (
-      <Dropdown.Item key={subitem.id} componentClass={this.routerLink} url={url} {...props}>{subitem.name}</Dropdown.Item>
-    )
-    
+      <Dropdown.Item
+        key={subitem.id}
+        componentClass={this.routerLink}
+        url={url}
+        {...props}
+      >
+        {subitem.name}
+      </Dropdown.Item>
+    );
+
     const subitems = this.children.map(subitem => {
       if (subitem.url) {
-        return <Dropdown.Item key={subitem.name} href={subitem.url}>{subitem.name}</Dropdown.Item>;
+        return (
+          <Dropdown.Item key={subitem.name} href={subitem.url}>
+            {subitem.name}
+          </Dropdown.Item>
+        );
       }
       if (subitem.category) {
         return link(
@@ -51,18 +62,20 @@ class NavLink extends React.Component {
       <Dropdown title={this.name} trigger="hover" {...props}>
         {subitems}
       </Dropdown>
-    )
+    );
   }
 
-  routerLink(props){
-    return <Link to={props.url} {...props}></Link>
+  routerLink(props) {
+    return <Link to={props.url} {...props}></Link>;
   }
 
   getNavItem(props) {
     const link = url => (
-        <Nav.Item componentClass={this.routerLink} url={url} {...props}>{this.name}</Nav.Item>
+      <Nav.Item componentClass={this.routerLink} url={url} {...props}>
+        {this.name}
+      </Nav.Item>
     );
-    
+
     if (this.url) {
       return link(this.url);
     }

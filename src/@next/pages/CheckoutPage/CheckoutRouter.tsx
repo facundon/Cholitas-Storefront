@@ -58,7 +58,7 @@ const CheckoutRouter: React.FC<IRouterProps> = ({
   ) {
     return <Redirect to={getStepLink()} />;
   }
-  
+
   return (
     <Switch>
       <Route path={CHECKOUT_STEPS[4].link} render={renderReview} />

@@ -1,33 +1,33 @@
 @import "../../globalStyles/scss/variables.scss";
 
 .awssld {
-    --slider-height-percentage: 40%;
-    --slider-transition-duration: 400ms;
-    --organic-arrow-thickness: 4px;
-    --organic-arrow-border-radius: 3px;
-    --organic-arrow-height: 35px;
-    --organic-arrow-color:  #3c93c5;
-    --control-button-width: 10%;
-    --control-button-height: 100%;
-    --control-button-background: transparent;
-    --control-bullet-color: #3c93c5;
-    --control-bullet-active-color: #1366b3;
-    --loader-bar-color: $blue;
-    --loader-bar-height: 4px;
-    --cube-animation-duration: 675ms;
-    --cube-animation-perspective: 1800px;
-    --cube-animation-ease-in: cubic-bezier(0.8, 0, 1, 0.8);
-    --cube-animation-ease-out: cubic-bezier(0, 0.2, 0.2, 1);
-    --cube-translateZ-distance: -225px;
-    z-index: 0;
+  --slider-height-percentage: 40%;
+  --slider-transition-duration: 400ms;
+  --organic-arrow-thickness: 4px;
+  --organic-arrow-border-radius: 3px;
+  --organic-arrow-height: 35px;
+  --organic-arrow-color: #3c93c5;
+  --control-button-width: 10%;
+  --control-button-height: 100%;
+  --control-button-background: transparent;
+  --control-bullet-color: #3c93c5;
+  --control-bullet-active-color: #1366b3;
+  --loader-bar-color: $blue;
+  --loader-bar-height: 4px;
+  --cube-animation-duration: 675ms;
+  --cube-animation-perspective: 1800px;
+  --cube-animation-ease-in: cubic-bezier(0.8, 0, 1, 0.8);
+  --cube-animation-ease-out: cubic-bezier(0, 0.2, 0.2, 1);
+  --cube-translateZ-distance: -225px;
+  z-index: 0;
 
-    &__bullets {
-        @media (max-width: $small-screen) {
-            transform: scale(0.5);
-          }
+  &__bullets {
+    @media (max-width: $small-screen) {
+      transform: scale(0.5);
     }
+  }
 }
 
 .startup-wraper {
-    background-color: $cholitas-base;
+  background-color: $cholitas-base;
 }

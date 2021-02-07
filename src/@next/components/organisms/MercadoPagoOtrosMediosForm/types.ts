@@ -20,6 +20,7 @@ export interface IProps {
   formRef?: React.RefObject<HTMLFormElement>;
   formId?: string;
   otherErrors: IOtherErrors;
+  onError: any;
   labelsText: ILabelsText;
   handleSubmit: (formData: IOtherInputs) => void;
   disabled: boolean;

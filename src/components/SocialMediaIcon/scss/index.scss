@@ -1,14 +1,14 @@
 @import "../../../globalStyles/scss/variables.scss";
 
 a {
-  &:link{
-    text-decoration: none!important;
+  &:link {
+    text-decoration: none !important;
   }
 }
 
 .social-icon {
   padding: $spacer $spacer / 2;
-  padding-bottom: $spacer /2;
+  padding-bottom: $spacer / 2;
   display: inline-block;
   vertical-align: middle;
 
@@ -34,12 +34,11 @@ a {
   transition: 0.4s;
 
   &:hover {
-    color: $blue
+    color: $blue;
   }
 
   @media (max-width: $small-screen) {
     font-size: 1.3rem;
     font-weight: 500;
   }
-
 }

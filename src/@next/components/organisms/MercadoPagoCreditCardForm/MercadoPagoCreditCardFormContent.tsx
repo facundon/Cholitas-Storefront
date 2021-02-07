@@ -4,19 +4,18 @@ import NumberFormat from "react-number-format";
 
 import { TextField, Select } from "@components/molecules";
 import { ErrorMessage } from "@components/atoms";
+import Cards, { Focused } from "react-credit-cards";
 import * as S from "./styles";
 import { maybe, removeEmptySpaces } from "../../../../core/utils";
 
 import { CardErrors, PropsWithFormik } from "./types";
-import Cards from 'react-credit-cards';
-import 'react-credit-cards/lib/styles.scss'
+import "react-credit-cards/lib/styles.scss";
 
 declare global {
   interface Window {
     Mercadopago: any;
   }
 }
-
 
 const getInputProps = (
   disabled: boolean,
@@ -46,18 +45,18 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     cuotas: cardCuotasError,
   },
   disabled,
-  labelsText: { 
-    securityCode: ccCscText, 
-    cardExpirationMonth: ccExpMonthText, 
-    cardExpirationYear: ccExpYearText, 
-    cardNumber: ccNumberText, 
-    cardholderName: ccTitularText, 
-    installments: ccCuotasText, 
-    issuer: ccBancoText, 
-    docNumber: ccNroDocText, 
-    docType: ccTipoDocText, 
-    email: ccEmailText
-   },
+  labelsText: {
+    securityCode: ccCscText,
+    cardExpirationMonth: ccExpMonthText,
+    cardExpirationYear: ccExpYearText,
+    cardNumber: ccNumberText,
+    cardholderName: ccTitularText,
+    installments: ccCuotasText,
+    issuer: ccBancoText,
+    docNumber: ccNroDocText,
+    docType: ccTipoDocText,
+    email: ccEmailText,
+  },
   handleSubmit,
   handleChange,
   handleRechargeInstallment,
@@ -72,60 +71,54 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
   const selectStyle = {
     padding: "0.8rem 1rem",
-    width: "100%", 
-    fontSize: "1rem", 
+    width: "100%",
+    fontSize: "1rem",
     border: "1px solid #323232",
-  }
+  };
 
   const errorStyle = {
     padding: "0.8rem 1rem",
-    width: "100%", 
-    fontSize: "1rem", 
+    width: "100%",
+    fontSize: "1rem",
     border: "1px solid #c22d74",
     color: "#c22d74",
-  }
+  };
 
-  const [focus, setFocus] = useState("cardholderName")
-  const [expiry, setExpiry] = useState("--/--")
-  const [issuerOptions, setIssuerOptions] = useState([])
-  const [installmentsOptions, setInstallmentsOptions] = useState([])
-  const [paymentMethodId, setPaymentMethodId] = useState()
-  const [totalAmount, setTotalAmount] = useState(total.gross.amount)
-  const [submitErrors, setSubmitErrors] = useState([{message:""}])
-  const [installmentsCosts, setInstallmentsCosts] = useState({})
+  const [focus, setFocus] = useState<Focused>("name");
+  const [expiry, setExpiry] = useState("--/--");
+  const [issuerOptions, setIssuerOptions] = useState([]);
+  const [installmentsOptions, setInstallmentsOptions] = useState([]);
+  const [paymentMethodId, setPaymentMethodId] = useState<any>();
+  const [totalAmount, setTotalAmount] = useState(total.gross.amount);
+  const [submitErrors, setSubmitErrors] = useState([{ message: "" }]);
+  const [installmentsCosts, setInstallmentsCosts] = useState({});
 
-  const focus_map = {
+  const focus_map: any = {
     cardholderName: "name",
     cardNumber: "number",
     securityCode: "cvc",
     cardExpirationMonth: "expiry",
-    cardExpirationYear: "expiry"
-  }
+    cardExpirationYear: "expiry",
+  };
 
   useEffect(() => {
-    const expiry_arr = [values.cardExpirationMonth, values.cardExpirationYear]
-    setExpiry(expiry_arr.join("/"))
-  }, [values.cardExpirationMonth, values.cardExpirationYear])
-
+    const expiry_arr = [values.cardExpirationMonth, values.cardExpirationYear];
+    setExpiry(expiry_arr.join("/"));
+  }, [values.cardExpirationMonth, values.cardExpirationYear]);
 
   useEffect(() => {
-    setSubmitErrors([{message:""}])
-    if (window.Mercadopago){
-      let cardnumber = removeEmptySpaces(maybe(() => values.cardNumber, "") || "");
-      if (cardnumber.length >= 6) {
-          let bin = cardnumber.substring(0,6);
-          window.Mercadopago?.getPaymentMethod({
-              "bin": bin
-          }, setPaymentMethod)
-      }
-
-      function setPaymentMethod (status: any, response: any) {
-        if (status == 200) {
-          const paymentMethodId = response[0].id
-          setPaymentMethodId(paymentMethodId)
+    setSubmitErrors([{ message: "" }]);
+    if (window.Mercadopago) {
+      const cardnumber = removeEmptySpaces(
+        maybe(() => values.cardNumber, "") || ""
+      );
+      const setPaymentMethod = (status: any, response: any) => {
+        if (status === 200) {
+          const paymentMethodId = response[0].id;
+          setPaymentMethodId(paymentMethodId);
         } else {
-          setInstallmentsOptions([])
-          setIssuerOptions([])
+          setInstallmentsOptions([]);
+          setIssuerOptions([]);
           const mpIssuersError = [
             {
               message: "Número de tarjeta inválido",
@@ -133,26 +126,47 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           ];
           setSubmitErrors(mpIssuersError);
         }
+      };
+      if (cardnumber.length >= 6) {
+        const bin = cardnumber.substring(0, 6);
+        window.Mercadopago?.getPaymentMethod(
+          {
+            bin,
+          },
+          setPaymentMethod
+        );
       }
     } else {
-        setSubmitErrors([{message: "Hubo un problema con la aplicación de MercadoPago"}])
-      }
-  }, [values.cardNumber, window.Mercadopago])
+      setSubmitErrors([
+        { message: "Hubo un problema con la aplicación de MercadoPago" },
+      ]);
+    }
+  }, [values.cardNumber, window.Mercadopago]);
 
- 
   useEffect(() => {
     if (installmentsOptions) {
-      const current_installment = installmentsOptions.find((option: any) => option.installments == values.installments) 
-      setTotalAmount(current_installment?.total_amount ? current_installment.total_amount : total.gross.amount)
-      setInstallmentsCosts(current_installment)
+      const current_installment: any = installmentsOptions.find(
+        (option: any) => option.installments === values.installments
+      );
+      setTotalAmount(
+        current_installment?.total_amount
+          ? current_installment.total_amount
+          : total.gross.amount
+      );
+      setInstallmentsCosts(current_installment);
     }
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     paymentMethodId &&
       window.Mercadopago.getIssuers(
         paymentMethodId,
         (status: any, response: any) => {
-          if (status == 200) {
-            const current_issuer_id = response.filter((items: any) => removeEmptySpaces(items.name) == removeEmptySpaces(values.issuer))[0]?.id
-            setIssuerOptions(response)
+          if (status === 200) {
+            const current_issuer_id = response.filter(
+              (items: any) =>
+                removeEmptySpaces(items.name) ===
+                removeEmptySpaces(values.issuer)
+            )[0]?.id;
+            setIssuerOptions(response);
             getInstallments(
               paymentMethodId,
               total.gross.amount,
@@ -160,47 +174,64 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
               current_issuer_id
             );
           } else {
-              setInstallmentsOptions([])
-              setIssuerOptions([])
-              const mpPaymentError = [
-                {
-                  message: response.message,
-                },
-              ];
-              setSubmitErrors(mpPaymentError)
-            }
-        })
-
-    function getInstallments(paymentMethodId: any, transactionAmount: any, issuerId?: any, current_issuer_id?: any){
-      window.Mercadopago.getInstallments({
-          "payment_method_id": paymentMethodId,
-          "amount": parseFloat(transactionAmount),
-          "issuer_id": issuerId ? parseInt(issuerId) : undefined
-      }, (status: any, response: any) => {
-        if (status == 200) {
-          const filtered_response = response.filter((data: any) => data.issuer.id == current_issuer_id)
-          setInstallmentsOptions(filtered_response[0]?.payer_costs)
-        } else {
-          const mpInstallmentError = [
-            {
-              message: response.message,
-            },
-          ];
-          setSubmitErrors(mpInstallmentError);
+            setInstallmentsOptions([]);
+            setIssuerOptions([]);
+            const mpPaymentError = [
+              {
+                message: response.message,
+              },
+            ];
+            setSubmitErrors(mpPaymentError);
+          }
         }
-      });
-    }
-  }, [values.issuer, values.installments, paymentMethodId, installmentsOptions])
+      );
 
-  useEffect(()=>{
-    handleRechargeInstallment(totalAmount, installmentsCosts)
-  }, [totalAmount, installmentsCosts]) 
+    function getInstallments(
+      paymentMethodId: any,
+      transactionAmount: any,
+      issuerId?: any,
+      current_issuer_id?: any
+    ) {
+      window.Mercadopago.getInstallments(
+        {
+          payment_method_id: paymentMethodId,
+          amount: parseFloat(transactionAmount),
+          issuer_id: issuerId ? parseInt(issuerId, 10) : undefined,
+        },
+        (status: any, response: any) => {
+          if (status === 200) {
+            const filtered_response = response.filter(
+              (data: any) => data.issuer.id === current_issuer_id
+            );
+            setInstallmentsOptions(filtered_response[0]?.payer_costs);
+          } else {
+            const mpInstallmentError = [
+              {
+                message: response.message,
+              },
+            ];
+            setSubmitErrors(mpInstallmentError);
+          }
+        }
+      );
+    }
+  }, [
+    values.issuer,
+    values.installments,
+    paymentMethodId,
+    installmentsOptions,
+  ]);
+
+  useEffect(() => {
+    handleRechargeInstallment(totalAmount, installmentsCosts);
+  }, [totalAmount, installmentsCosts]);
 
   const handleFocus = (e: any) => {
-    const mapped_focus = focus_map[e.target.name]
-    setFocus(mapped_focus)
-  }
+    const mapped_focus: any = focus_map[e.target.name];
+    setFocus(mapped_focus);
+  };
 
+  // eslint-disable-next-line no-return-assign
   return (
     <S.PaymentForm
       ref={formRef}
@@ -216,7 +247,7 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           autoFocus
           name="email"
           autoComplete="email"
-          id="email" 
+          id="email"
           type="text"
           {...basicInputProps(ccEmailText, [cardEmailError], values.email)}
         />
@@ -227,11 +258,14 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           <Select
             id="docType"
             name="docType"
-            data-checkout="docType" 
+            data-checkout="docType"
             value={values.docType}
             onChange={handleChange}
             errors={compact([cardTipoDocError])}
-            style={compact([cardTipoDocError]).length ? errorStyle : selectStyle} />
+            style={
+              compact([cardTipoDocError]).length ? errorStyle : selectStyle
+            }
+          />
         </S.PaymentInput>
 
         <S.PaymentInput>
@@ -241,7 +275,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             name="docNumber"
             id="docNumber"
             data-checkout="docNumber"
-            {...basicInputProps(ccNroDocText, [cardNroDocError], values.docNumber)}
+            {...basicInputProps(
+              ccNroDocText,
+              [cardNroDocError],
+              values.docNumber
+            )}
           />
         </S.PaymentInput>
       </S.Grid>
@@ -253,14 +291,18 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
         <TextField
           name="cardholderName"
           autoComplete="given-name"
-          id="cardholderName" 
+          id="cardholderName"
           data-checkout="cardholderName"
           type="text"
           onFocus={handleFocus}
-          {...basicInputProps(ccTitularText, [cardTitularError], values.cardholderName)}
+          {...basicInputProps(
+            ccTitularText,
+            [cardTitularError],
+            values.cardholderName
+          )}
         />
       </S.PaymentInput>
-      
+
       <S.PaymentInput>
         <NumberFormat
           autoComplete="cc-number"
@@ -269,7 +311,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
           id="cardNumber"
           data-checkout="cardNumber"
           onFocus={handleFocus}
-          {...basicInputProps(ccNumberText, [cardNumberError], values.cardNumber)}
+          {...basicInputProps(
+            ccNumberText,
+            [cardNumberError],
+            values.cardNumber
+          )}
         />
       </S.PaymentInput>
 
@@ -317,39 +363,51 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             )}
           />
         </S.PaymentInput>
-      </S.Grid>      
+      </S.Grid>
 
       <S.Grid>
         <S.PaymentInput>
-          <Select 
+          <Select
             value={values.installments}
             onChange={handleChange}
             errors={compact([cardCuotasError])}
-            id="installments" 
-            name="installments" 
-            style={compact([cardCuotasError]).length ? errorStyle : selectStyle}>
-              <option id="cuotas" hidden>{ccCuotasText}</option>
-              {installmentsOptions?.map((installment: any, index: any) => 
-              <option 
+            id="installments"
+            name="installments"
+            style={compact([cardCuotasError]).length ? errorStyle : selectStyle}
+          >
+            <option id="cuotas" hidden>
+              {ccCuotasText}
+            </option>
+            {installmentsOptions?.map((installment: any, index: any) => (
+              <option
                 key={index}
-                value={installment.installments} 
-                id={installment.installments}>
-                  {installment.recommended_message}
-              </option>)}
+                value={installment.installments}
+                id={installment.installments}
+              >
+                {installment.recommended_message}
+              </option>
+            ))}
           </Select>
         </S.PaymentInput>
 
         <S.PaymentInput>
-          <Select 
+          <Select
             value={values.issuer}
             onChange={handleChange}
             errors={compact([cardBancoEmisorError])}
-            id="issuer" 
-            name="issuer" 
-            data-checkout="issuer" 
-            style={compact([cardBancoEmisorError]).length ? errorStyle : selectStyle}>
-              <option hidden>{ccBancoText}</option>
-              {issuerOptions?.map((issuer: any, index: any) => <option key={index} id={issuer.id}>{issuer.name}</option>)}
+            id="issuer"
+            name="issuer"
+            data-checkout="issuer"
+            style={
+              compact([cardBancoEmisorError]).length ? errorStyle : selectStyle
+            }
+          >
+            <option hidden>{ccBancoText}</option>
+            {issuerOptions?.map((issuer: any, index: any) => (
+              <option key={index} id={issuer.id}>
+                {issuer.name}
+              </option>
+            ))}
           </Select>
         </S.PaymentInput>
       </S.Grid>
@@ -360,34 +418,31 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
         focused={focus}
         name={values.cardholderName}
         number={values.cardNumber}
-        placeholders={{name: "Nombre y Apellido"}}
-        locale={{valid: "Fecha vto."}}
+        placeholders={{ name: "Nombre y Apellido" }}
+        locale={{ valid: "Fecha vto." }}
       />
 
-      <input 
-        type="hidden" 
-        name="transactionAmount" 
-        id="transactionAmount" 
-        value={values.transactionAmount = totalAmount}
-        
-        />
-
-      <input 
+      <input
         type="hidden"
-        name="paymentMethodId" 
+        name="transactionAmount"
+        id="transactionAmount"
+        value={(values.transactionAmount = totalAmount)}
+      />
+
+      <input
+        type="hidden"
+        name="paymentMethodId"
         id="paymentMethodId"
-        value={values.paymentMethodId = paymentMethodId}
-        
-        />
+        value={(values.paymentMethodId = paymentMethodId)}
+      />
 
-      <input 
-        type="hidden" 
-        name="description" 
-        id="description" 
-        value={values.description = items[0].variant.product.name}
-
-        />
-        <ErrorMessage errors={submitErrors} />
+      <input
+        type="hidden"
+        name="description"
+        id="description"
+        value={(values.description = items[0].variant.product.name)}
+      />
+      <ErrorMessage errors={submitErrors} />
     </S.PaymentForm>
   );
 };

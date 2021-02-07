@@ -28,13 +28,10 @@ export interface IProps {
   cardErrors: ICardErrors;
   labelsText: ILabelsText;
   handleSubmit: (formData: ICardInputs) => void;
+  handleRechargeInstallment: any;
   disabled: boolean;
   items: any;
   total: any;
-  paymentMethodId: any;
-  handleKeyPress: any;
-  installmentsOptions: any;
-  issuerOptions: any;
 }
 
 export type CardErrors = CardError[] | null[];
