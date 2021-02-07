@@ -30,12 +30,10 @@ export interface IOtherInputs {
   paymentMethodId: string;
 }
 
-export type CardError =
-  | {
-      field?: string;
-      message: string;
-    }[]
-  | null;
+export type CardError = {
+  message: string;
+  field?: string;
+} | null;
 
 export interface ICardPaymentInput {
   billingAddress: {

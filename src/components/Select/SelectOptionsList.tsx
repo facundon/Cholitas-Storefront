@@ -18,7 +18,7 @@ const getRef = (isSelected: boolean, ref: React.Ref<Ref>) =>
 const SelectOptionsList = React.forwardRef<Ref, ISelectOptionsList>(
   ({ activeOption, options, onChange, setOpen, updateOptions }, ref) => (
     <>
-      {options.length
+      {options?.length
         ? options.map(({ label, value }) => {
             const isSelected = activeOption.value === value;
             return (

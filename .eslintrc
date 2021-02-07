@@ -43,6 +43,7 @@
     "react/jsx-props-no-spreading": "off",
     "react/jsx-wrap-multilines": "off",
     "react/prop-types": "off",
+    "react/require-default-props": "off",
     "sort-imports": "off",
     "no-underscore-dangle": "off",
     "react/state-in-constructor": "off",

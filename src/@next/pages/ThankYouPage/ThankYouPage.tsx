@@ -3,12 +3,19 @@ import { useHistory, useLocation } from "react-router-dom";
 
 import { ThankYou } from "@components/organisms";
 import { BASE_URL } from "@temp/core/config";
-import { generateGuestOrderDetailsUrl } from "@utils/core";
 
+import { generateGuestOrderDetailsUrl } from "@utils/core";
 import { IProps } from "./types";
 
+interface LocationState {
+  token: any;
+  orderNumber: any;
+  orderStatus: any;
+  externalResource: any;
+  total_amount: any;
+}
 const ThankYouPage: React.FC<IProps> = ({}: IProps) => {
-  const location = useLocation();
+  const location = useLocation<LocationState>();
   const history = useHistory();
   const {
     token,

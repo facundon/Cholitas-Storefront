@@ -71,4 +71,11 @@ const CheckoutRouter: React.FC<IRouterProps> = ({
   );
 };
 
+CheckoutRouter.defaultProps = {
+  items: null,
+  checkout: undefined,
+  payment: undefined,
+  totalPrice: null,
+};
+
 export { CheckoutRouter };
