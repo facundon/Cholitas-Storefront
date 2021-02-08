@@ -10,10 +10,6 @@ import {
 } from "../../core/utils";
 
 class NavLink extends React.Component {
-  static routerLink(props) {
-    return <Link to={props.url} {...props} />;
-  }
-
   constructor(item, ...props) {
     super(item, ...props);
     this.name = item.item.name;
@@ -22,6 +18,11 @@ class NavLink extends React.Component {
     this.collection = item.item.collection;
     this.page = item.item.page;
     this.children = item.item.children;
+  }
+
+  // eslint-disable-next-line react/sort-comp
+  routerLink(props) {
+    return <Link to={props.url} {...props} />;
   }
 
   getDropdownItems(props) {
