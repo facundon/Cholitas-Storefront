@@ -183,11 +183,60 @@ export const INFORMATION = [
     data: [
       {
         info: "Email: $cholitas.deco@gmail.com$",
-        icon: "envelope",
+        icon: "info",
       },
       {
         info: "Ig: $#cholitas.deco$",
-        icon: "instagram",
+        icon: "info",
+      },
+    ],
+  },
+  {
+    header: "Como Comprar",
+    icon: {
+      icon: "question",
+      size: "3x",
+      flip: false,
+    },
+    data: [
+      {
+        info: "Agrega a $tu$ $bolsa$ los productos que quieras comprar.",
+        icon: "info",
+      },
+      {
+        info:
+          "Una vez que tengas todos los productos en tu bolsa, ya podes hacer el $checkout$ . Podrás encontrar la opción dentro de $tu$ $bolsa$",
+        icon: "info",
+      },
+      {
+        info:
+          "Tendrás que elegir el domicilio a donde querés $recibir$ $el$ $producto$ y el domicilio de facturación.",
+        icon: "info",
+      },
+      {
+        info:
+          "Si el domicilio de envío es donde vivís, marca la casilla $'$ $Igual$ $a$ $domicilio$ $de$ $envío$ $'$",
+        icon: "info",
+      },
+      {
+        info:
+          "Luego te consultaremos si $pasas$ $a$ $retirar$ el producto por nuestro domicilio o si te lo $enviamos$",
+        icon: "info",
+      },
+      {
+        info:
+          "En caso que quieras que te lo enviemos, $nos$ $contactaremos$ $luego$ $de$ $tu$ $compra$ para informarte del $costo$ y $medio$",
+        icon: "info",
+      },
+      {
+        info:
+          "Si realizas tu pago mediante $MercadoPago$ , tendrás que igresar el $email$ que esta asociado a tu cuenta",
+        icon: "info",
+      },
+      {
+        info:
+          "Una vez que tu pago se encuentre confirmado, te envíaremos un email con los datos de tu compra",
+        icon: "info",
       },
     ],
   },

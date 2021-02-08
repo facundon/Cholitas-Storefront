@@ -9,6 +9,13 @@ export const Wrapper = styled.div`
   align-items: center;
   position: relative;
   margin-bottom: 2rem;
+
+  .text-icon-wrapper {
+    justify-content: start;
+  }
+  .rs-icon {
+    padding-right: 5px;
+  }
 `;
 
 export const Overlay = styled.div`

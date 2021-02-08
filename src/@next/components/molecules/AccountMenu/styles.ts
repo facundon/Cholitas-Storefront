@@ -21,4 +21,11 @@ export const MenuItem = styled.div<{
   cursor: pointer;
   padding-bottom: 1.5rem;
   color: ${props => (props.active ? props.theme.colors.activeMenuOption : "")};
+
+  .text-icon-wrapper {
+    justify-content: start;
+  }
+  .rs-icon {
+    padding-right: 5px;
+  }
 `;

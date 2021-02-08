@@ -10,6 +10,10 @@ import {
 } from "../../core/utils";
 
 class NavLink extends React.Component {
+  static routerLink(props) {
+    return <Link to={props.url} {...props} />;
+  }
+
   constructor(item, ...props) {
     super(item, ...props);
     this.name = item.item.name;
@@ -63,10 +67,6 @@ class NavLink extends React.Component {
         {subitems}
       </Dropdown>
     );
-  }
-
-  routerLink(props) {
-    return <Link to={props.url} {...props}></Link>;
   }
 
   getNavItem(props) {

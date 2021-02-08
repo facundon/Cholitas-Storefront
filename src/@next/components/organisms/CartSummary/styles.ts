@@ -42,6 +42,7 @@ export const HR = styled.hr`
 export const Title = styled.div`
   padding: 20px 20px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 0;
   font-size: ${props => props.theme.typography.h3FontSize};
@@ -52,6 +53,10 @@ export const Title = styled.div`
       props.theme.typography.h4FontSize};
     cursor: pointer;
   `}
+  .rs-icon {
+    line-height: normal;
+    padding-right: 10px;
+  }
 `;
 export const ArrowUp = styled.div<{ mobileCartOpened: boolean }>`
   display: none;

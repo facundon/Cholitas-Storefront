@@ -209,15 +209,27 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
   };
 
   useEffect(() => {
+    const scriptList = document.querySelectorAll("script");
+    const convertedNodeList = Array.from(scriptList);
+    const mpScript: any = convertedNodeList.find(
+      script => script.id === "mercadopago-script-id"
+    );
+    if (mpScript) {
+      mpScript?.parentNode.removeChild(mpScript);
+      const iframesList = document.querySelectorAll("iframe");
+      const convertedNodeIframes = Array.from(iframesList);
+      const mpIframe: any =
+        convertedNodeIframes[convertedNodeIframes.length - 1];
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      mpScript && mpIframe?.parentNode.removeChild(mpIframe);
+    }
+
     const script = document.createElement("script");
     script.src = scriptConfig.src;
     script.id = "mercadopago-script-id";
     script.async = true;
     script.onload = initMP;
     document.head.appendChild(script);
-  }, []);
-
-  useEffect(() => {
     handleChangeMethod(method);
   }, [method]);
 

@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { Icon } from "@components/atoms";
+import { Icon as RIcon } from "rsuite";
 import { useHandlerWhenClickedOutside } from "@hooks";
 import { commonMessages } from "@temp/intl";
 
@@ -20,7 +21,7 @@ export const AccountMenuMobile: React.FC<IProps> = ({
     setShowMenu(false);
   });
 
-  const linkToMenuItem = (link: string) => {
+  const linkToMenuItem = (link: string | any) => {
     link = link
       .replace(/\//g, "")
       .replace("-", " ")
@@ -31,13 +32,28 @@ export const AccountMenuMobile: React.FC<IProps> = ({
     /* eslint-disable default-case */
     switch (link) {
       case "Account":
-        menuItem = intl.formatMessage(commonMessages.account);
+        menuItem = (
+          <div className="text-icon-wrapper">
+            <RIcon icon="profile" />{" "}
+            {intl.formatMessage(commonMessages.account)}
+          </div>
+        );
         break;
       case "Order History":
-        menuItem = intl.formatMessage(commonMessages.orderHistory);
+        menuItem = (
+          <div className="text-icon-wrapper">
+            <RIcon icon="book2" />{" "}
+            {intl.formatMessage(commonMessages.orderHistory)}
+          </div>
+        );
         break;
       case "Address Book":
-        menuItem = intl.formatMessage(commonMessages.addressBook);
+        menuItem = (
+          <div className="text-icon-wrapper">
+            <RIcon icon="location-arrow" />{" "}
+            {intl.formatMessage(commonMessages.addressBook)}
+          </div>
+        );
         break;
     }
     return menuItem;

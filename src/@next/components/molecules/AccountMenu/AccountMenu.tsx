@@ -2,6 +2,7 @@ import React from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 import { Link } from "react-router-dom";
 
+import { Icon as RIcon } from "rsuite";
 import { commonMessages } from "@temp/intl";
 import * as S from "./styles";
 import { IProps } from "./types";
@@ -24,13 +25,28 @@ export const AccountMenu: React.FC<IProps> = ({ links, active }: IProps) => {
         /* eslint-disable default-case */
         switch (menuItem) {
           case "Account":
-            menuItemTrans = intl.formatMessage(commonMessages.account);
+            menuItemTrans = (
+              <div className="text-icon-wrapper">
+                <RIcon icon="profile" />{" "}
+                {intl.formatMessage(commonMessages.account)}
+              </div>
+            );
             break;
           case "Order History":
-            menuItemTrans = intl.formatMessage(commonMessages.orderHistory);
+            menuItemTrans = (
+              <div className="text-icon-wrapper">
+                <RIcon icon="book2" />{" "}
+                {intl.formatMessage(commonMessages.orderHistory)}
+              </div>
+            );
             break;
           case "Address Book":
-            menuItemTrans = intl.formatMessage(commonMessages.addressBook);
+            menuItemTrans = (
+              <div className="text-icon-wrapper">
+                <RIcon icon="location-arrow" />{" "}
+                {intl.formatMessage(commonMessages.addressBook)}
+              </div>
+            );
             break;
         }
         return (

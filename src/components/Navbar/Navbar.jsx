@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Nav from "@rsuite/responsive-nav";
-import NavLink from "./NavLink.jsx";
+import NavLink from "./NavLink";
 
 class Navbar extends Component {
   get_items() {

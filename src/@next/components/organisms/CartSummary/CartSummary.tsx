@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FormattedMessage, useIntl } from "react-intl";
 
 import { Icon } from "@components/atoms";
+import { Icon as RIcon } from "rsuite";
 import { TaxedMoney } from "@components/containers";
 import { CartSummaryRow } from "@components/molecules";
 import { commonMessages } from "@temp/intl";
@@ -151,6 +152,7 @@ const CartSummary: React.FC<IProps> = ({
         data-test="cartSummaryTitle"
         onClick={() => setMobileCartOpened(!mobileCartOpened)}
       >
+        <RIcon icon="shopping-bag" size="lg"/>
         <FormattedMessage defaultMessage="Resumen de la Bolsa" />
         <S.ArrowUp mobileCartOpened={mobileCartOpened}>
           <Icon name="arrow_up" size={24} />
