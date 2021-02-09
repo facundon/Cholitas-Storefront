@@ -1,8 +1,8 @@
 {
-  "name": "saleor-site",
+  "name": "cholitas-deco-site",
   "version": "2.11.0",
   "private": true,
-  "author": "Mirumee",
+  "author": "Facundon",
   "homepage": "https://getsaleor.com/",
   "main": "dist/index.js",
   "browserslist": "last 2 versions",
