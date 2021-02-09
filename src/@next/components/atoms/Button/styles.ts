@@ -20,16 +20,19 @@ export const Primary = styled.button<{
     props.theme.button.colors[props.color].background};
   padding: ${props => padding[props.size]};
   border: none;
-  transition: 0.3s;
+  border-radius: 40px 0px;
+  transition: 0.3s cubic-bezier(0, 0, 0.32, 1.36);
   outline: none;
   cursor: pointer;
   color: ${props => props.theme.button.colors[props.color].color};
-  width: ${props => (props.fullWidth ? "100%" : "auto")}
+  width: ${props => (props.fullWidth ? "100%" : "auto")};
+  box-shadow: 4px 4px 7px 0px grey;
 
   &:hover {
     background-color: ${props =>
       props.theme.button.colors[props.color].hoverBackground};
     color: ${props => props.theme.button.colors[props.color].hoverColor};
+    box-shadow: 2px 2px 4px 0px grey;
   }
 
   &:active {
@@ -44,6 +47,7 @@ export const Primary = styled.button<{
     &,
     &:hover {
       cursor: default;
+      box-shadow: unset;
     }
   }
 
