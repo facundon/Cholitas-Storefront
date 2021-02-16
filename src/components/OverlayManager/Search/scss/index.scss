@@ -118,7 +118,7 @@ $drawer-width: 25rem;
       }
 
       p {
-        color: $gray;
+        color: $blue;
       }
 
       &:hover {
@@ -136,7 +136,7 @@ $drawer-width: 25rem;
       border-top: 1px solid $gray-light;
       text-align: center;
       padding: $spacer 0;
-      background-color: $white;
+      background-color: $cholitas-base-dark;
       width: 100vw;
 
       @media (min-width: $medium-screen) {
