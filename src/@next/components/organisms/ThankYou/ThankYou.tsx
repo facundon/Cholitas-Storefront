@@ -75,6 +75,9 @@ const ThankYou: React.FC<IProps> = ({
             <FormattedMessage defaultMessage="Te enviamos un email con el detalle de tu compra. Te avisaremos cuando tu orden se encuentre en camino!" />
           </S.Paragraph>
         )}
+        <S.Paragraph>
+          <FormattedMessage defaultMessage="No te olvides de contactarnos para coordinar el envío!" />
+        </S.Paragraph>
         <S.Buttons>
           <Button
             testingContext="continueShoppingButton"
