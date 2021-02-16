@@ -13,7 +13,7 @@ import {
 import "./scss/index.scss";
 
 interface CarouselType extends CarouselProps {
-  children: React.ReactNode;
+  children: React.ReactNode[];
 }
 
 const Carousel: React.FC<CarouselType> = ({ children, ...rest }) => {
@@ -69,7 +69,7 @@ const Carousel: React.FC<CarouselType> = ({ children, ...rest }) => {
         onClose={() => {
           setVisible(false);
         }}
-        images={children?.map(img => ({
+        images={children?.map((img: any) => ({
           src: img?.props.url,
           alt: img?.props.url,
         }))}

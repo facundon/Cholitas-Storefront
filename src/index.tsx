@@ -1,4 +1,4 @@
-import { Integrations as ApmIntegrations } from "@sentry/apm";
+import { Integrations } from "@sentry/tracing";
 import * as Sentry from "@sentry/browser";
 import * as React from "react";
 import { positions, Provider as AlertProvider } from "react-alert";
@@ -37,7 +37,7 @@ const startApp = async () => {
   if (sentryDsn !== undefined) {
     Sentry.init({
       dsn: sentryDsn,
-      integrations: [new ApmIntegrations.Tracing()],
+      integrations: [new Integrations.BrowserTracing()],
       tracesSampleRate: sentrySampleRate,
     });
   }

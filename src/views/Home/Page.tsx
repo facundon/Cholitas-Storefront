@@ -11,7 +11,7 @@ import SlicedImages, {
 import SewingMachine from "../../images/sewing-machine.svg";
 import AutoSlider from "../../components/AutoSlider/AutoSlider";
 import CardSet from "../../components/CardSet/CardSet";
-import { SOCIAL_MEDIA } from "../../core/config";
+import { SOCIAL_MEDIA, DESTACADO_META } from "../../core/config";
 
 import {
   ProductsList_products,
@@ -42,8 +42,8 @@ const Page: React.FC<{
 
   const getProductsImg = () => {
     const product_list = products?.edges.map(producto =>
-      producto.node.metadata?.filter(pair => pair.key === "destacado").length >
-      0
+      producto.node.metadata?.filter(pair => pair.key === DESTACADO_META)
+        .length > 0
         ? {
             header: producto.node.name,
             src: producto.node.thumbnail.url,

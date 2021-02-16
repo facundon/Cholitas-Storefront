@@ -57,8 +57,7 @@ const MainMenu: React.FC = () => {
   );
 
   useEffect(() => {
-    element.current &&
-      observer.observe(element.current);
+    element.current && observer.observe(element.current);
     return () => {
       observer.disconnect;
     };

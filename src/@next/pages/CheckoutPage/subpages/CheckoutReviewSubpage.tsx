@@ -10,6 +10,14 @@ import { CheckoutReview } from "@components/organisms";
 import { statuses as dummyStatuses } from "@components/organisms/DummyPaymentGateway";
 import { useCheckout } from "@saleor/sdk";
 import { IFormError } from "@types";
+import {
+  ICheckout,
+  CompleteCheckoutInput,
+  IPayment,
+  DataErrorCheckoutTypes,
+  FunctionErrorCheckoutTypes,
+} from "@saleor/sdk/lib/api/Checkout/types";
+import { PromiseRunResponse } from "@saleor/sdk/lib/api/types";
 
 export interface ISubmitCheckoutData {
   id: string;
@@ -22,6 +30,10 @@ export interface ISubmitCheckoutData {
 
 export interface ICheckoutReviewSubpageHandles {
   complete: () => void;
+}
+
+interface IModifiedPayment extends IPayment {
+  creditCard?: any;
 }
 
 interface IProps extends RouteComponentProps<any> {
@@ -44,7 +56,17 @@ const CheckoutReviewSubpageWithRef: RefForwardingComponent<
   }: IProps,
   ref
 ) => {
-  const { checkout, payment, completeCheckout } = useCheckout();
+  const {
+    checkout,
+    payment,
+    completeCheckout,
+  }: {
+    checkout?: ICheckout | undefined;
+    payment?: IModifiedPayment;
+    completeCheckout: (
+      input?: CompleteCheckoutInput | undefined
+    ) => PromiseRunResponse<DataErrorCheckoutTypes, FunctionErrorCheckoutTypes>;
+  } = useCheckout();
 
   const [errors, setErrors] = useState<IFormError[]>([]);
 

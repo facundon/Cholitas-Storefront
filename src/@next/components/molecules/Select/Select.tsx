@@ -7,12 +7,14 @@ import { IProps } from "./types";
 export const Select: React.FC<IProps> = ({
   errors,
   helpText,
-  ...rest
+  value,
+  name,
+  id,
 }: IProps) => {
   return (
     <>
       <S.Select>
-        <select {...rest} />
+        <select value={value} name={name} id={id} aria-label={name} />
         <S.ErrorMessages>
           <ErrorMessage errors={errors} />
           {helpText && <S.HelpText>{helpText}</S.HelpText>}

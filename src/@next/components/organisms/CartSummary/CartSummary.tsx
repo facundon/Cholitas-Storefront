@@ -152,7 +152,7 @@ const CartSummary: React.FC<IProps> = ({
         data-test="cartSummaryTitle"
         onClick={() => setMobileCartOpened(!mobileCartOpened)}
       >
-        <RIcon icon="shopping-bag" size="lg"/>
+        <RIcon icon="shopping-bag" size="lg" />
         <FormattedMessage defaultMessage="Resumen de la Bolsa" />
         <S.ArrowUp mobileCartOpened={mobileCartOpened}>
           <Icon name="arrow_up" size={24} />

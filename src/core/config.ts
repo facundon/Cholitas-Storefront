@@ -5,6 +5,8 @@ import { generatePageUrl } from "./utils";
 export const BASE_URL = "/";
 export const PRODUCTS_PER_PAGE = 9;
 export const SUPPORT_EMAIL = "cholitas.deco@gmail.com";
+export const TRANSFERENCIA_PROMOCODE = "391F65D3F6E9";
+export const DESTACADO_META = "destacado";
 export const PROVIDERS = {
   TRANSFERENCIA: {
     label: "Transferencia Bancaria",
@@ -242,4 +244,3 @@ export const INFORMATION = [
   },
 ];
 
-export const TRANSFERENCIA_PROMOCODE = "391F65D3F6E9";

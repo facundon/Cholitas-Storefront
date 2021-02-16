@@ -21,7 +21,7 @@ export const AccountMenu: React.FC<IProps> = ({ links, active }: IProps) => {
           .split(" ")
           .map(s => s.charAt(0).toUpperCase() + s.substring(1))
           .join(" ");
-        let menuItemTrans = menuItem;
+        let menuItemTrans: any = menuItem;
         /* eslint-disable default-case */
         switch (menuItem) {
           case "Account":

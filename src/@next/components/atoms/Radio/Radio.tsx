@@ -12,7 +12,7 @@ const Radio: React.FC<IProps> = ({
   customLabel = false,
   ...props
 }: IProps) => {
-  const StyledInput = customLabel ? S.Input : S.LabeledInput;
+  const StyledInput: any = customLabel ? S.Input : S.LabeledInput;
 
   return (
     <StyledInput checked={checked || false}>

@@ -11,8 +11,8 @@
     "@lhci/cli": "^0.7.0",
     "@rsuite/responsive-nav": "0.0.10",
     "@saleor/sdk": "^0.1.5",
-    "@sentry/apm": "^5.27.1",
-    "@sentry/browser": "^5.30.0",
+    "@sentry/browser": "^6.1.0",
+    "@sentry/tracing": "^6.1.0",
     "@stripe/react-stripe-js": "^1.2.2",
     "@stripe/stripe-js": "^1.12.1",
     "@testing-library/cypress": "^5.3.1",
@@ -178,16 +178,16 @@
     "test-data-bot": "^0.8.0",
     "ts-loader": "^4.4.2",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
-    "typescript": "^3.9.7",
+    "typescript": "^3.8.2",
     "webapp-webpack-plugin": "^2.7.1",
-    "webpack": "^4.46.0",
+    "webpack": "^4.42.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.2",
     "webpack-merge": "^4.2.2",
     "workbox-webpack-plugin": "^4.3.1"
   },
   "engines": {
-    "node": ">=10.0.0 <11"
+    "node": ">=10.0.0 <=11"
   },
   "lint-staged": {
     "*.{jsx?,tsx?}": [

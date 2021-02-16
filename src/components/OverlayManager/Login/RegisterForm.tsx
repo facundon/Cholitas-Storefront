@@ -26,7 +26,7 @@ const showSuccessNotification = (
       {
         title: data.accountRegister.requiresConfirmation
           ? intl.formatMessage({
-              defaultMessage: "Revisa tu Email para y sigue las instrucciones",
+              defaultMessage: "Revisa tu Email y sigue las instrucciones",
             })
           : intl.formatMessage({ defaultMessage: "Nuevo usuario creado" }),
       },
