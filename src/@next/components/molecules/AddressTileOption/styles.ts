@@ -7,7 +7,7 @@ export const Label = styled.label<{ checked: boolean }>`
   background-color: ${props => props.theme.colors.light};
   padding: 30px;
   padding: ${props => (props.checked ? `28px` : `30px`)};
-  ${props => props.checked && `border: 2px solid #21125E;`}
+  ${props => props.checked && `border: 2px solid #8f8c88;`}
   font-size: ${props => props.theme.typography.smallFontSize};
   cursor: pointer;
 

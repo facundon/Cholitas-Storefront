@@ -4,7 +4,6 @@ export const Wrapper = styled.div`
   background: ${props => props.theme.colors.baseOverlay};
   padding: 1rem 2rem 1.6rem 2rem;
   text-align: center;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   box-shadow: 10px 10px 13px -12px;
   border-radius: 10px;
   display: inline-grid;
@@ -13,9 +12,10 @@ export const Wrapper = styled.div`
   grid-gap: 0.5rem;
 
   :hover {
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     background-color: ${props => props.theme.colors.baseOverlayDark};
     box-shadow: 9px 9px 6px -12px ${props => props.theme.colors.dark};
-    color: ${props => props.theme.colors.secondaryDark};
+    color: ${props => props.theme.colors.dark};
   }
 
   ${media.largeScreen`

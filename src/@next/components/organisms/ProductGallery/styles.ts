@@ -15,7 +15,7 @@ export const Thumbnail = styled.div<{ activeThumbnail: boolean }>`
   border-style: solid;
   border-color: ${props =>
     props.activeThumbnail === true
-      ? props.theme.colors.thumbnailBorder
+      ? props.theme.colors.secondaryDark
       : "transparent"};
   justify-content: center;
   height: 100px;

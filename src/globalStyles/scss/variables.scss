@@ -1,18 +1,25 @@
 // colors
-$cholitas-base: #eee4d5;
-$cholitas-base-dark: #e2d0b4;
+$base: (
+  200: #e3e0dc,
+  400: #c7c0b9,
+  600: #f9efdf,
+  800: #d7d2cb,
+);
+
+$cholitas-base: #ffffff;
+$cholitas-base-dark: #d7d2cb;
 $base-font-color: #333232;
-$black: #000;
-$blue-dark: #526a83;
-$blue: #7494b3;
+$black: #333232;
+$blue-dark: map-get($base, 800);
+$blue: #8f8c88;
 $gray-dark: #7d7d7d;
 $gray-light: #f6f6f6;
 $gray: #c4c4c4;
 $green: #3ed256;
-$rose: #cc844b;
-$turquoise-dark: #126357;
-$turquoise-light: #bce4dd;
-$turquoise: #8bb8b1f5;
+$rose: #c22d74;
+$vison-dark: #8f8c88;
+$vison-light: #bce4dd;
+$vison: #b1ada8;
 $white: #fff;
 $blue-overlay: rgba($blue, 0.15);
 $autofillColor: rgb(250, 255, 189);
@@ -64,7 +71,7 @@ $message-right-position: $spacer;
 $message-botttom-position: $spacer;
 $message-success-color: $green;
 $message-error-color: $rose;
-$message-neutral-color: $turquoise-dark;
+$message-neutral-color: $vison-dark;
 $message-border-left: 0.3rem solid $message-neutral-color;
 $message-title-transform: uppercase;
 $message-title-weight: $bold-font-weight;

@@ -85,7 +85,7 @@
       }
     }
     span {
-      color: $rose;
+      color: $vison-dark;
     }
 
     .rs-sidebar {
@@ -101,7 +101,7 @@
       .icon {
         height: 60px;
         width: 60px;
-        fill: $rose;
+        fill: $vison-dark;
 
         @media (max-width: $small-screen) {
           height: 30px;
@@ -124,6 +124,24 @@
     justify-content: center;
     padding: 15px 0 15px 0;
     margin: 15px auto 15px auto;
+    a {
+      span {
+        color: $blue-dark;
+        transition: all 0.2s ease-out;
+      }
+      svg * {
+        transition: all 0.2s ease-out;
+        fill: $blue-dark;
+      }
+      &:hover {
+        span {
+          color: $blue;
+        }
+        svg * {
+          fill: $blue;
+        }
+      }
+    }
   }
 
   &__destacados {
@@ -184,7 +202,7 @@
         margin-bottom: 1rem;
 
         &--no-photo {
-          background-color: $turquoise-light;
+          background-color: $vison-light;
           background-repeat: no-repeat;
           background-size: contain;
         }

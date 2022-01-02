@@ -12,14 +12,19 @@
 
 .navbar {
   text-align: center;
-  background-color: $blue-dark;
+  background-color: $vison;
   line-height: 20px;
   z-index: 0;
-
-  a {
+  .rs-nav-item > .rs-nav-item-content,
+  .rs-dropdown-menu + a.rs-btn {
+    font-size: 16px;
+  }
+  a,
+  .rs-dropdown-item-content {
+    font-size: 16px;
     color: $white !important;
     &:hover {
-      background-color: $blue !important;
+      background-color: $vison-dark !important;
     }
     &:focus {
       background-color: inherit !important;
@@ -27,25 +32,23 @@
   }
 
   .rs-dropdown-menu {
-    background-color: $blue-dark !important;
+    background-color: $vison !important;
   }
 }
 
 .main-menu {
   align-items: center;
   align-items: stretch;
-  background-color: $cholitas-base;
+  background: rgb(143, 140, 136);
+  background: $white;
   display: flex;
   flex-direction: row;
   height: 5rem;
   position: relative;
-  background-image: url("./images/background.svg");
-  background-size: 7920px 150px;
 
   &-sticky {
     align-items: stretch;
     background-color: $cholitas-base;
-    background-image: url("./images/background.svg");
     background-size: 7920px 150px;
     display: flex;
     flex-direction: row;
@@ -109,9 +112,6 @@
     svg {
       fill-opacity: 1;
       transform: scale(1.7);
-      border-radius: 1000px;
-      background-color: rgba($cholitas-base, 0.65);
-      box-shadow: 0 0 4px 1px $cholitas-base;
     }
 
     &-sticky {
@@ -140,7 +140,7 @@
       transition: 0.3s;
 
       &:hover {
-        color: $turquoise;
+        color: $vison;
       }
     }
   }
@@ -188,7 +188,7 @@
 
     &:hover {
       svg * {
-        fill: $turquoise;
+        fill: $vison;
       }
     }
 
@@ -227,10 +227,12 @@
   &__dropdown {
     text-transform: uppercase;
     font-weight: $bold-font-weight;
-    border-left: 1px solid $turquoise-light;
     li {
       cursor: pointer;
       margin: 0 auto;
+      > a {
+        color: inherit;
+      }
 
       .rs-icon {
         padding-right: 10px;
@@ -266,8 +268,6 @@
     transition: 0.3s;
     display: inherit;
     align-items: center;
-    background-color: rgba($cholitas-base, 0.65);
-    box-shadow: 0 0 10px 10px $cholitas-base;
 
     @media (min-width: $medium-screen) {
       border-left: 1px solid $blue;
@@ -278,7 +278,7 @@
     }
 
     &:hover {
-      color: $blue-dark;
+      color: $vison;
       svg * {
         fill: $blue;
       }
@@ -303,7 +303,7 @@
     padding: 0 1.5rem;
 
     &--active {
-      background-color: $turquoise-light;
+      background-color: $vison;
     }
 
     & > li:first-child {
@@ -350,7 +350,7 @@
           position: relative;
 
           &:before {
-            background-color: $turquoise-light;
+            background-color: $vison-light;
             content: "";
             height: 1px;
             left: 0;

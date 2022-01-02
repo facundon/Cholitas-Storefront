@@ -5,22 +5,20 @@ export const baseFontColor = "#323232";
 export const baseFontColorSemiTransparent = "rgba(50,50,50,0.6)";
 export const baseFontColorTransparent = "rgba(50,50,50,0.1)";
 export const black = "#323232";
-export const blue = "rgb(116,148,179)";
-export const blueDark = "#526a83";
+export const blue = "#b1ada8";
+export const blueDark = "#8f8c88";
 export const blueLight = "#513CA3";
 export const blueOverlay = `rgba(116,148,179,0.2)`;
 export const blueOverlayDark = `rgba(82,106,131,0.2)`;
-export const gray = "#7d7d7d";
+export const gray = "#d3cece";
 export const grayMedium = "#c4c4c4";
 export const grayDark = "#323232";
-export const grayLight = "#f1f5f5";
+export const grayLight = "#ffffff";
 export const green = "#3ed256";
 export const overlayColor = "rgba(199, 207, 207, 0.8)";
 export const rose = "#c22d74";
-// export const turquoise = "rgb(116,148,179)";
 export const turquoise = blue;
-// export const turquoiseDark = "#526a83";
-export const turquoiseDark = blue;
+export const turquoiseDark = "#aaa";
 export const turquoiseLight = "rgba(6, 132, 123, 0.25)";
 export const turquoiseTransparent = "rgba(6, 132, 123, 0.1)";
 export const white = "#fff";
@@ -29,12 +27,12 @@ export const darkGreen = "#06847B";
 export const secondaryGrey = "#EBF1F6";
 export const secondaryGreyDark = "#9D9FB1";
 export const secondaryBlue = "#036DFF";
-export const baseOverlay = "rgba(238, 228, 213, 0.3)";
-export const baseOverlayDark = "rgba(238, 228, 213, 0.6)";
+export const baseOverlay = "#eeeeee";
+export const baseOverlayDark = "#cccccc";
 
 // theme colors
 export const theme = {
-  activeMenuOption: darkGreen,
+  activeMenuOption: blue,
   autofill: autofillColor,
   autofillSelected: autofillColorSelected,
   bannerBackground: secondaryGrey,
@@ -54,17 +52,17 @@ export const theme = {
   listAttributeName: baseFontColorSemiTransparent,
   listBullet: darkGreen,
   overlay: overlayColor,
-  primary: blueDark,
-  primaryDark: turquoiseDark,
-  primaryLight: turquoiseLight,
-  primaryTransparent: turquoiseTransparent,
+  primary: black,
+  primaryDark: black,
+  primaryLight: gray,
+  primaryTransparent: baseOverlay,
   secondary: blue,
   secondaryDark: blueDark,
   secondaryLight: blueLight,
   secondaryOverlay: blueOverlay,
   secondaryOverlayDark: blueOverlayDark,
   success: green,
-  tabTitle: darkGreen,
+  tabTitle: blue,
   tableDivider: tabelGray,
   tabsBorder: baseFontColorTransparent,
   thumbnailBorder: darkGreen,

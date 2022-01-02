@@ -74,7 +74,7 @@ $drawer-width: 25rem;
   }
 
   &__products {
-    background: $cholitas-base-dark;
+    background: $gray-light;
     overflow: auto;
     padding: $spacer / 2 0;
     position: relative;
@@ -118,7 +118,7 @@ $drawer-width: 25rem;
       }
 
       p {
-        color: $blue;
+        color: $vison;
       }
 
       &:hover {
@@ -136,7 +136,7 @@ $drawer-width: 25rem;
       border-top: 1px solid $gray-light;
       text-align: center;
       padding: $spacer 0;
-      background-color: $cholitas-base-dark;
+      background-color: $gray-light;
       width: 100vw;
 
       @media (min-width: $medium-screen) {

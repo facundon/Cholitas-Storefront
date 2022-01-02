@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
 `;
 
 export const HeaderContent = styled.div`
-  color: ${props => props.theme.colors.lightFont};
+  color: ${props => props.theme.colors.secondary};
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;

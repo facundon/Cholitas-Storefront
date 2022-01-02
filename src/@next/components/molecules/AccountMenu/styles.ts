@@ -21,7 +21,9 @@ export const MenuItem = styled.div<{
   cursor: pointer;
   padding-bottom: 1.5rem;
   color: ${props => (props.active ? props.theme.colors.activeMenuOption : "")};
-
+  &:hover {
+    color: ${props => props.theme.colors.dark};
+  }
   .text-icon-wrapper {
     justify-content: start;
   }

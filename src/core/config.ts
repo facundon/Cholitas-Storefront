@@ -176,24 +176,6 @@ export const INFORMATION = [
     ],
   },
   {
-    header: "Nosotros",
-    icon: {
-      icon: "group",
-      size: "3x",
-      flip: false,
-    },
-    data: [
-      {
-        info: "Email: $cholitas.deco@gmail.com$",
-        icon: "info",
-      },
-      {
-        info: "Ig: $#cholitas.deco$",
-        icon: "info",
-      },
-    ],
-  },
-  {
     header: "Como Comprar",
     icon: {
       icon: "question",
@@ -243,4 +225,3 @@ export const INFORMATION = [
     ],
   },
 ];
-

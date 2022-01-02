@@ -127,6 +127,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
     setOtherErrors(INITIAL_OTROS_MEDIOS_ERROR_STATE);
     if (formData) {
       if (method === "card") {
+        window.Mercadopago.clearSession();
         await window.Mercadopago.createToken(
           formData,
           (status: any, response: any) => {
@@ -160,7 +161,11 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
               const formatedResponse: any = response.cause.map(
                 (error: any) => MpErrors[error.code]
               );
-              setCardErrorsHelper(formatedResponse);
+              if (!formatedResponse[0]) {
+                setSubmitErrors([response]);
+                return;
+              }
+              setSubmitErrors([{ message: formatedResponse[0] }]);
             }
           }
         );
@@ -195,7 +200,7 @@ const MercadoPagoPaymentGateway: React.FC<IProps> = ({
             processPayment("111111111", checkoutForm);
           })
           .catch(err => {
-            setCardErrorsHelper([err]);
+            setSubmitErrors([err]);
           });
       }
     } else {

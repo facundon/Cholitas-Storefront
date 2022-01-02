@@ -16,7 +16,7 @@ export const Row = styled.div`
 `;
 
 export const HeaderRow = styled(Row)`
-  color: ${props => props.theme.colors.lightFont};
+  color: ${props => props.theme.colors.secondary};
   cursor: default;
 `;
 

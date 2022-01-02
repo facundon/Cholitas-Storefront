@@ -38,3 +38,22 @@ export const TextSummary = styled.p`
 export const ErrorMessages = styled.div`
   margin-top: 30px;
 `;
+
+export const ErrorLink = styled.h6`
+  text-decoration: underline;
+  color: ${props => props.theme.colors.primaryDark};
+  font-weight: ${props => props.theme.typography.boldFontWeight};
+  margin-left: 5px;
+  &:hover {
+    color: ${props => props.theme.colors.primary};
+  }
+`;
+
+export const Paragraph = styled.p`
+  font-size: ${props => props.theme.typography.h4FontSize};
+  margin: 0;
+  padding: 0;
+  line-height: 170%;
+  display: flex;
+  align-items: center;
+`;

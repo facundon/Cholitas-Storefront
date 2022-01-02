@@ -61,7 +61,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   handleChange,
   handleRechargeInstallment,
   values,
-  items,
   total,
 }: PropsWithFormik) => {
   const basicInputProps = useCallback(getInputProps(disabled, handleChange), [
@@ -146,7 +145,8 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
   useEffect(() => {
     if (installmentsOptions) {
       const current_installment: any = installmentsOptions.find(
-        (option: any) => option.installments === values.installments
+        (option: any) =>
+          option.installments.toString() === values.installments.toString()
       );
       setTotalAmount(
         current_installment?.total_amount
@@ -231,6 +231,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     setFocus(mapped_focus);
   };
 
+  useEffect(() => {
+    values.paymentMethodId = paymentMethodId;
+    values.transactionAmount = totalAmount;
+  }, [paymentMethodId, totalAmount]);
+
   // eslint-disable-next-line no-return-assign
   return (
     <S.PaymentForm
@@ -241,7 +246,6 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
     >
       <h4>Detalles del Comprador</h4>
       <br />
-
       <S.PaymentInput>
         <TextField
           autoFocus
@@ -259,9 +263,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
             id="docType"
             name="docType"
             data-checkout="docType"
-            value={values.docType}
-            onChange={handleChange}
-            errors={compact([cardTipoDocError])}
+            {...basicInputProps(
+              ccTipoDocText,
+              [cardTipoDocError],
+              values.docType
+            )}
             style={
               compact([cardTipoDocError]).length ? errorStyle : selectStyle
             }
@@ -368,12 +374,14 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
       <S.Grid>
         <S.PaymentInput>
           <Select
-            value={values.installments}
-            onChange={handleChange}
-            errors={compact([cardCuotasError])}
             id="installments"
             name="installments"
             style={compact([cardCuotasError]).length ? errorStyle : selectStyle}
+            {...basicInputProps(
+              ccCuotasText,
+              [cardCuotasError],
+              values.installments
+            )}
           >
             <option id="cuotas" hidden>
               {ccCuotasText}
@@ -392,9 +400,11 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
 
         <S.PaymentInput>
           <Select
-            value={values.issuer}
-            onChange={handleChange}
-            errors={compact([cardBancoEmisorError])}
+            {...basicInputProps(
+              ccBancoText,
+              [cardBancoEmisorError],
+              values.issuer
+            )}
             id="issuer"
             name="issuer"
             data-checkout="issuer"
@@ -426,21 +436,21 @@ export const MercadoPagoCreditCardFormContent: React.FC<PropsWithFormik> = ({
         type="hidden"
         name="transactionAmount"
         id="transactionAmount"
-        value={(values.transactionAmount = totalAmount)}
+        value={values.transactionAmount}
       />
 
       <input
         type="hidden"
         name="paymentMethodId"
         id="paymentMethodId"
-        value={(values.paymentMethodId = paymentMethodId)}
+        value={values.paymentMethodId}
       />
 
       <input
         type="hidden"
         name="description"
         id="description"
-        value={(values.description = items[0].variant.product.name)}
+        value={values.description}
       />
       <ErrorMessage errors={submitErrors} />
     </S.PaymentForm>

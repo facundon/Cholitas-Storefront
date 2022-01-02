@@ -125,7 +125,7 @@ export const AddressFormContent: React.FC<PropsWithFormik> = ({
             defaultValue={defaultValue}
             label={intl.formatMessage({ defaultMessage: "Pais" })}
             name="country"
-            options={countriesOptions}
+            options={[{ country: "Argentina", code: "AR" }]}
             value={
               values!.country &&
               countriesOptions &&

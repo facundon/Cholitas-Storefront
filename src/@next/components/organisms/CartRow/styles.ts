@@ -36,6 +36,9 @@ export const QuantityButtons = styled.div`
   svg {
     cursor: pointer;
     justify-self: center;
+    * {
+      fill: ${props => props.theme.colors.secondaryDark};
+    }
   }
 `;
 

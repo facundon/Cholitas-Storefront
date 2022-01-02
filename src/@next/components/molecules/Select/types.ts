@@ -3,7 +3,7 @@ interface IFormError {
   field?: string;
 }
 
-export interface IProps extends React.SelectHTMLAttributes<HTMLInputElement> {
+export interface IProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   errors?: IFormError[];
   helpText?: string;
   label?: string;

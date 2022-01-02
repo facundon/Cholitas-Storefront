@@ -2,8 +2,8 @@
 
 .side-nav {
   $item-height: 3.7rem;
-  // max-width: calc(100vw - 5rem);
-  // width: 30rem;
+  max-width: calc(100vw - 5rem);
+  width: 30rem;
 
   &__menu-item {
     border-bottom: 1px solid $blue;
@@ -179,11 +179,12 @@ Note: Beware of modifying this element as it can break the animations - you shou
   background: none;
   padding: 1.5em 0.5em 0;
   font-size: 1.15em;
+  width: 95%;
 }
 
 /* Morph shape necessary with bubble or elastic */
 .bm-morph-shape {
-  fill: $cholitas-base;
+  fill: $gray-light;
 }
 
 /* Wrapper for item list */

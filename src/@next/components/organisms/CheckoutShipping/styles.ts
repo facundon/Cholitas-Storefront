@@ -14,7 +14,7 @@ export const Tile = styled.label<{ checked: boolean }>`
   display: block;
   background-color: ${props => props.theme.colors.light};
   padding: 20px;
-  ${props => props.checked && `border: 2px solid #21125E;`}
+  ${props => props.checked && `border: 2px solid #8f8c88;`}
   cursor: pointer;
 `;
 
@@ -23,5 +23,5 @@ export const TileTitle = styled.span`
 `;
 
 export const Price = styled.span`
-  color: #21125e;
+  color: #8f8c88;
 `;

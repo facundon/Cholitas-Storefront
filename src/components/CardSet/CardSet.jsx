@@ -9,7 +9,7 @@ import { Redirect } from "react-router-dom";
 const Card = ({ src, selected }) => (
   <div className={`menu-item ${selected ? "active" : ""}`}>
     <Panel className="menu-item-panel" shaded bordered bodyFill>
-      <img src={src} />
+      <img alt={src} src={src} />
       {/* <Panel header={header}>
         <p>
           <small>{header}</small>
@@ -43,6 +43,7 @@ class CardSet extends Component {
     // call it again if items count changes
     this.menuItems = Menu(this.props.children, selected);
   }
+
   state = { selected, redirect: false };
 
   onSelect = key => {
@@ -55,7 +56,7 @@ class CardSet extends Component {
     const menu = this.menuItems;
     const selected_obj = this.menuItems.find(item => item.key === selected);
     return (
-      <React.Fragment>
+      <>
         {this.state.redirect ? (
           <Redirect push to={selected_obj.props.url} />
         ) : null}
@@ -75,7 +76,7 @@ class CardSet extends Component {
             wheel={false}
           />
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }

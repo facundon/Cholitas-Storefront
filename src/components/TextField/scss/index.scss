@@ -46,12 +46,12 @@
       &:focus,
       &:not([value=""]) {
         & + .input__label {
-          background-color: $turquoise-light;
+          background-color: $vison-light;
         }
       }
       &:-webkit-autofill {
         & + .input__label {
-          background-color: $turquoise-light;
+          background-color: $vison-light;
         }
       }
     }
@@ -99,7 +99,7 @@
     left: 0.8rem;
     transform: translate(0, -50%);
     padding: 0 6px;
-    z-index: 1;
+    z-index: 0;
     pointer-events: none;
     transition: all 0.4s ease;
     &--focus {

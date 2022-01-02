@@ -11,31 +11,15 @@ a {
   padding-bottom: $spacer / 2;
   display: inline-block;
   vertical-align: middle;
-
-  svg * {
-    fill: $blue-dark;
-    transition: 0.4s;
-  }
-
-  &:hover {
-    svg * {
-      fill: $blue;
-    }
-  }
 }
 
 .brand {
-  color: $blue-dark;
+  color: inherit;
   padding: $spacer 0;
   vertical-align: middle;
   align-self: center;
   font-size: 2rem;
-  font-weight: 600;
-  transition: 0.4s;
-
-  &:hover {
-    color: $blue;
-  }
+  font-weight: 200;
 
   @media (max-width: $small-screen) {
     font-size: 1.3rem;

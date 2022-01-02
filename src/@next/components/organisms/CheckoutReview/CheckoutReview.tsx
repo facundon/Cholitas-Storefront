@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
 
 import { ErrorMessage } from "@components/atoms";
 import { AddressSummary } from "@components/molecules";
 import { checkoutMessages } from "@temp/intl";
+import { CHECKOUT_STEPS } from "@temp/core/config";
 
 import * as S from "./styles";
 import { IProps } from "./types";
@@ -60,6 +62,14 @@ const CheckoutReview: React.FC<IProps> = ({
       </S.Grid>
       <S.ErrorMessages>
         <ErrorMessage errors={errors} />
+        {!!errors?.length && (
+          <S.Paragraph>
+            Puede modificar los datos del pago
+            <Link to={CHECKOUT_STEPS[2].link}>
+              <S.ErrorLink>aquí</S.ErrorLink>
+            </Link>
+          </S.Paragraph>
+        )}
       </S.ErrorMessages>
     </S.Wrapper>
   );
